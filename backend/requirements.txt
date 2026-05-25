@@ -140,3 +140,8 @@ zope.event==6.2
 zope.interface==8.4
 zopfli==0.4.1
 zstandard==0.25.0
+Django
+gunicorn
+whitenoise
+djangorestframework
+psycopg2-binary
