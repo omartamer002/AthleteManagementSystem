@@ -1,0 +1,1976 @@
+[
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "athletes",
+    "model": "athleteinfo"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "athletes",
+    "model": "basketball"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "athletes",
+    "model": "crossfit"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "athletes",
+    "model": "fitness"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "athletes",
+    "model": "football"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "athletes",
+    "model": "owner"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "athletes",
+    "model": "swimming"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "athletes",
+    "model": "attendancerecord"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "athletes",
+    "model": "injuryrecord"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "athletes",
+    "model": "painlog"
+  }
+},
+{
+  "model": "athletes.athleteinfo",
+  "pk": 4,
+  "fields": {
+    "name": "Omar Tamer",
+    "age": 23,
+    "gender": "M",
+    "height": "181.00",
+    "weight": "77.00",
+    "body_type": "Mesomorph",
+    "date_of_birth": null,
+    "academy_since": "2026-04-28",
+    "strengths": "Fast backstroke",
+    "weaknesses": "Turns and finishes",
+    "is_subscribed": true,
+    "subscription_fee": "3500.00",
+    "subscription_start_date": "2026-04-24",
+    "subscription_end_date": "2026-05-24",
+    "created_at": "2026-04-18T13:34:29.877Z",
+    "updated_at": "2026-05-24T12:36:24.323Z"
+  }
+},
+{
+  "model": "athletes.athleteinfo",
+  "pk": 5,
+  "fields": {
+    "name": "Omar Tamer",
+    "age": 23,
+    "gender": "M",
+    "height": "181.00",
+    "weight": "77.00",
+    "body_type": "Mesomorph",
+    "date_of_birth": null,
+    "academy_since": "2026-04-28",
+    "strengths": "Fast backstroke",
+    "weaknesses": "Turns and finishes",
+    "is_subscribed": false,
+    "subscription_fee": "0.00",
+    "subscription_start_date": null,
+    "subscription_end_date": null,
+    "created_at": "2026-04-18T13:34:29.878Z",
+    "updated_at": "2026-04-18T13:34:29.878Z"
+  }
+},
+{
+  "model": "athletes.athleteinfo",
+  "pk": 6,
+  "fields": {
+    "name": "Ahmed Mostafa",
+    "age": 19,
+    "gender": "M",
+    "height": "173.00",
+    "weight": "72.00",
+    "body_type": "Mesomorph",
+    "date_of_birth": "2007-03-07",
+    "academy_since": "2026-05-04",
+    "strengths": "Fast finishes",
+    "weaknesses": "Slow turns",
+    "is_subscribed": true,
+    "subscription_fee": "3500.00",
+    "subscription_start_date": "2026-05-05",
+    "subscription_end_date": "2026-06-05",
+    "created_at": "2026-05-04T22:18:46.114Z",
+    "updated_at": "2026-05-04T22:37:55.077Z"
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 4,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-04-18",
+    "attended": true,
+    "performance_rating": 7,
+    "coach_notes": "Great today",
+    "hrv": null,
+    "resting_heart_rate": null,
+    "sleep_hours": null,
+    "fatigue_score": null,
+    "muscle_soreness": null,
+    "workout_completed": false
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 5,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-04-19",
+    "attended": false,
+    "performance_rating": 8,
+    "coach_notes": "",
+    "hrv": null,
+    "resting_heart_rate": null,
+    "sleep_hours": null,
+    "fatigue_score": null,
+    "muscle_soreness": null,
+    "workout_completed": false
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 6,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-04-21",
+    "attended": true,
+    "performance_rating": 6,
+    "coach_notes": "",
+    "hrv": null,
+    "resting_heart_rate": null,
+    "sleep_hours": null,
+    "fatigue_score": null,
+    "muscle_soreness": null,
+    "workout_completed": false
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 8,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-04-22",
+    "attended": true,
+    "performance_rating": 8,
+    "coach_notes": "",
+    "hrv": null,
+    "resting_heart_rate": null,
+    "sleep_hours": null,
+    "fatigue_score": null,
+    "muscle_soreness": null,
+    "workout_completed": false
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 9,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-04-24",
+    "attended": true,
+    "performance_rating": 7,
+    "coach_notes": "",
+    "hrv": null,
+    "resting_heart_rate": null,
+    "sleep_hours": null,
+    "fatigue_score": null,
+    "muscle_soreness": null,
+    "workout_completed": false
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 10,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-04-25",
+    "attended": true,
+    "performance_rating": 9,
+    "coach_notes": "",
+    "hrv": null,
+    "resting_heart_rate": null,
+    "sleep_hours": null,
+    "fatigue_score": null,
+    "muscle_soreness": null,
+    "workout_completed": false
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 11,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-04-26",
+    "attended": true,
+    "performance_rating": null,
+    "coach_notes": null,
+    "hrv": null,
+    "resting_heart_rate": null,
+    "sleep_hours": null,
+    "fatigue_score": null,
+    "muscle_soreness": null,
+    "workout_completed": false
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 12,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-04-29",
+    "attended": true,
+    "performance_rating": 3,
+    "coach_notes": "",
+    "hrv": null,
+    "resting_heart_rate": null,
+    "sleep_hours": null,
+    "fatigue_score": null,
+    "muscle_soreness": null,
+    "workout_completed": false
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 13,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-05-01",
+    "attended": true,
+    "performance_rating": 6,
+    "coach_notes": "",
+    "hrv": 65,
+    "resting_heart_rate": 58,
+    "sleep_hours": "8.0",
+    "fatigue_score": 4,
+    "muscle_soreness": 7,
+    "workout_completed": true
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 14,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-05-02",
+    "attended": false,
+    "performance_rating": 7,
+    "coach_notes": "",
+    "hrv": 43,
+    "resting_heart_rate": 51,
+    "sleep_hours": "7.0",
+    "fatigue_score": 3,
+    "muscle_soreness": 8,
+    "workout_completed": false
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 15,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-05-03",
+    "attended": false,
+    "performance_rating": null,
+    "coach_notes": null,
+    "hrv": null,
+    "resting_heart_rate": null,
+    "sleep_hours": null,
+    "fatigue_score": null,
+    "muscle_soreness": null,
+    "workout_completed": false
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 16,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-05-04",
+    "attended": true,
+    "performance_rating": 10,
+    "coach_notes": "",
+    "hrv": null,
+    "resting_heart_rate": null,
+    "sleep_hours": null,
+    "fatigue_score": null,
+    "muscle_soreness": null,
+    "workout_completed": false
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 17,
+  "fields": {
+    "athlete": 6,
+    "date": "2026-05-05",
+    "attended": true,
+    "performance_rating": 8,
+    "coach_notes": "",
+    "hrv": 65,
+    "resting_heart_rate": 59,
+    "sleep_hours": "6.0",
+    "fatigue_score": 3,
+    "muscle_soreness": 7,
+    "workout_completed": true
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 18,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-05-19",
+    "attended": true,
+    "performance_rating": null,
+    "coach_notes": null,
+    "hrv": null,
+    "resting_heart_rate": null,
+    "sleep_hours": null,
+    "fatigue_score": null,
+    "muscle_soreness": null,
+    "workout_completed": false
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 19,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-05-24",
+    "attended": true,
+    "performance_rating": 10,
+    "coach_notes": "",
+    "hrv": null,
+    "resting_heart_rate": null,
+    "sleep_hours": null,
+    "fatigue_score": null,
+    "muscle_soreness": null,
+    "workout_completed": false
+  }
+},
+{
+  "model": "athletes.attendancerecord",
+  "pk": 20,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-05-25",
+    "attended": true,
+    "performance_rating": 5,
+    "coach_notes": "",
+    "hrv": null,
+    "resting_heart_rate": null,
+    "sleep_hours": null,
+    "fatigue_score": null,
+    "muscle_soreness": null,
+    "workout_completed": true
+  }
+},
+{
+  "model": "athletes.injuryrecord",
+  "pk": 1,
+  "fields": {
+    "athlete": 4,
+    "is_active": false,
+    "injury_type": "Dislocated Shoulder",
+    "severity": "Moderate",
+    "start_date": "2026-04-02",
+    "expected_recovery_time": null,
+    "estimated_return_date": null,
+    "medical_notes": "immediate medical reduction (repositioning) in an emergency room, followed by 1–6 weeks of immobilization in a sling, ice/heat application, and pain medication (NSAIDs).",
+    "rehab_phase": "Acute",
+    "cleared_to_train": true,
+    "cleared_by": null,
+    "returned_before_recovery": false,
+    "recorded_at": "2026-05-02T14:39:27.371Z",
+    "updated_at": "2026-05-02T14:41:46.157Z"
+  }
+},
+{
+  "model": "athletes.injuryrecord",
+  "pk": 2,
+  "fields": {
+    "athlete": 4,
+    "is_active": false,
+    "injury_type": "Ankle Sprain",
+    "severity": "Moderate",
+    "start_date": "2026-03-02",
+    "expected_recovery_time": null,
+    "estimated_return_date": null,
+    "medical_notes": "immediate medical reduction (repositioning) in an emergency room, followed by 1–6 weeks of immobilization in a sling, ice/heat application, and pain medication (NSAIDs).",
+    "rehab_phase": "Acute",
+    "cleared_to_train": true,
+    "cleared_by": null,
+    "returned_before_recovery": false,
+    "recorded_at": "2026-05-02T14:39:55.664Z",
+    "updated_at": "2026-05-02T14:42:50.550Z"
+  }
+},
+{
+  "model": "athletes.injuryrecord",
+  "pk": 3,
+  "fields": {
+    "athlete": 4,
+    "is_active": false,
+    "injury_type": "Ankle Sprain",
+    "severity": "Moderate",
+    "start_date": "2025-04-27",
+    "expected_recovery_time": null,
+    "estimated_return_date": null,
+    "medical_notes": "Ankle sprains, caused by overstretched or torn ligaments, result in pain, swelling, bruising, and instability. Initial treatment involves the RICE method (Rest, Ice, Compression, Elevation) for 48-72 hours, alongside pain relief. Recovery typically takes 4–12 weeks, with rehabilitation exercises recommended to prevent re-injury.",
+    "rehab_phase": "Cleared",
+    "cleared_to_train": true,
+    "cleared_by": null,
+    "returned_before_recovery": false,
+    "recorded_at": "2026-05-03T01:13:40.491Z",
+    "updated_at": "2026-05-03T01:15:30.741Z"
+  }
+},
+{
+  "model": "athletes.injuryrecord",
+  "pk": 4,
+  "fields": {
+    "athlete": 4,
+    "is_active": false,
+    "injury_type": "Quadriceps Strain",
+    "severity": "Severe",
+    "start_date": "2026-05-03",
+    "expected_recovery_time": null,
+    "estimated_return_date": null,
+    "medical_notes": "Daily Lower-Body Mobility & Static Stretching",
+    "rehab_phase": "Cleared",
+    "cleared_to_train": true,
+    "cleared_by": null,
+    "returned_before_recovery": false,
+    "recorded_at": "2026-05-03T19:13:40.599Z",
+    "updated_at": "2026-05-03T19:14:18.827Z"
+  }
+},
+{
+  "model": "athletes.injuryrecord",
+  "pk": 5,
+  "fields": {
+    "athlete": 6,
+    "is_active": true,
+    "injury_type": "Sprained Ankle",
+    "severity": "Severe",
+    "start_date": "2024-05-01",
+    "expected_recovery_time": "6 Months",
+    "estimated_return_date": null,
+    "medical_notes": "A sprained ankle occurs when ligaments overstretch or tear, typically causing pain, swelling, bruising, and instability. Caused by inversion (inward rolling) or eversion (outward turning), it commonly affects lateral ligaments (ATFL). Treatment involves rest, ice, compression, elevation (RICE), along with physical therapy to restore range of motion.",
+    "rehab_phase": "Acute",
+    "cleared_to_train": false,
+    "cleared_by": "Dr. Ashraf Desouky",
+    "returned_before_recovery": false,
+    "recorded_at": "2026-05-04T22:18:46.171Z",
+    "updated_at": "2026-05-04T22:18:46.171Z"
+  }
+},
+{
+  "model": "athletes.painlog",
+  "pk": 1,
+  "fields": {
+    "athlete": 4,
+    "date": "2026-05-04",
+    "body_part": "Left Knee",
+    "pain_level": 5,
+    "pain_type": "Aching",
+    "notes": "test",
+    "created_at": "2026-05-04T21:58:59.534Z"
+  }
+},
+{
+  "model": "athletes.fitness",
+  "pk": 4,
+  "fields": {
+    "athlete": 5,
+    "workout_plan": "Beginner Full-Body Routine (3 Days/Week):\r\nSquats/Lunges: 3 sets of 10-12 reps.\r\nPush-ups: 3 sets of 8-12 reps (use knee push-ups if necessary).\r\nDumbbell Rows: 3 sets of 10-12 reps.\r\nPlank: Hold for 20-30 seconds.\r\nCardio: 15 minutes of uphill walking (5-8% incline).",
+    "workout_type": "Hypertrophy",
+    "sessions_per_week": 3,
+    "previous_fitness_tests": {},
+    "current_fitness_tests": {
+      "Bench press": 80,
+      "notes": "None"
+    },
+    "expected_fitness_results": {
+      "Bench press": 84.0,
+      "notes": "None"
+    },
+    "feedback": null,
+    "nutrition_plan": "Plate Structure: Fill half your plate with veggies/fruits, one-quarter with lean protein (chicken, fish, beans), and one-quarter with whole grains (brown rice, whole-wheat bread).\r\nMacronutrients:\r\nProteins: Include at every meal for muscle support (eggs, lean meat, fish, legumes).\r\nFats: Choose healthy fats (avocado, nuts, olive oil) and limit saturated fats.\r\nCarbs: Focus on high-fiber, complex carbs (whole grains, veggies) rather than processed foods.\r\nHydration: Drink 6-8 glasses of water daily; limit sugary drinks.",
+    "fitness_goal": "Higher body mass",
+    "inbody_file": "",
+    "updated_at": "2026-04-18T13:34:29.905Z"
+  }
+},
+{
+  "model": "athletes.fitness",
+  "pk": 5,
+  "fields": {
+    "athlete": 4,
+    "workout_plan": "Beginner Full-Body Routine (3 Days/Week):\r\nSquats/Lunges: 3 sets of 10-12 reps.\r\nPush-ups: 3 sets of 8-12 reps (use knee push-ups if necessary).\r\nDumbbell Rows: 3 sets of 10-12 reps.\r\nPlank: Hold for 20-30 seconds.\r\nCardio: 15 minutes of uphill walking (5-8% incline).",
+    "workout_type": "Hypertrophy",
+    "sessions_per_week": 3,
+    "previous_fitness_tests": {
+      "Bench press": {
+        "value": 85,
+        "reps": 13,
+        "unit": "kg"
+      },
+      "Lat pulldowns": {
+        "value": 60,
+        "reps": 8,
+        "unit": "kg"
+      },
+      "Row": {
+        "value": 70,
+        "reps": 7,
+        "unit": "kg"
+      },
+      "Pushups": {
+        "value": 47,
+        "reps": null,
+        "unit": "reps",
+        "measure": "rep_count"
+      },
+      "Treadmill Max Speed": {
+        "value": 29.2,
+        "reps": null,
+        "unit": "km/h",
+        "measure": "machine_metric",
+        "group": "Treadmill Running Test"
+      },
+      "Treadmill Heart Rate": {
+        "value": 198,
+        "reps": null,
+        "unit": "BPM",
+        "measure": "machine_metric",
+        "group": "Treadmill Running Test"
+      },
+      "Treadmill Time": {
+        "value": 1546,
+        "reps": null,
+        "unit": "sec",
+        "measure": "time_seconds",
+        "group": "Treadmill Running Test"
+      },
+      "notes": "None",
+      "mobility__fms_score": 17,
+      "mobility__prone_shoulder_flex_deg": 176,
+      "mobility__hip_rom_deg": 85,
+      "plyometric__squat_jump_cm": 38,
+      "plyometric__cmj_cm": 42,
+      "plyometric__depth_jump_cm": 36,
+      "plyometric__anaerobic_power_w": 720,
+      "strength__1rm_back_squat_kg": 110,
+      "strength__1rm_bench_press_kg": 80,
+      "strength__1rm_pull_up_kg": 85,
+      "strength__snatch_pct_bw": 86,
+      "strength__clean_pct_bw": 107,
+      "_epley_bench_weight_kg": 90,
+      "_epley_bench_reps": 4,
+      "endurance__6test_battery_score": 27,
+      "endurance__mcgill_back_ext_s": 135,
+      "endurance__mcgill_flexor_hold_s": 130,
+      "endurance__mcgill_side_plank_s": 75,
+      "aerobic__mas_kmh": 16.5,
+      "aerobic__vo2max_ml_kg_min": 50,
+      "aerobic__yoyo_level": 15,
+      "aerobic__hrr_bpm_drop": 22,
+      "speed__10m_sprint_s": 1.79,
+      "speed__20m_sprint_s": 2.95,
+      "speed__wingate_peak_power_w": 780,
+      "speed__fatigue_index_pct": 18
+    },
+    "current_fitness_tests": {
+      "Bench press": {
+        "value": 85,
+        "reps": 13,
+        "unit": "kg"
+      },
+      "Lat pulldowns": {
+        "value": 60,
+        "reps": 8,
+        "unit": "kg"
+      },
+      "Row": {
+        "value": 70,
+        "reps": 7,
+        "unit": "kg"
+      },
+      "Pushups": {
+        "value": 47,
+        "reps": null,
+        "unit": "reps",
+        "measure": "rep_count"
+      },
+      "Treadmill Max Speed": {
+        "value": 29.2,
+        "reps": null,
+        "unit": "km/h",
+        "measure": "machine_metric",
+        "group": "Treadmill Running Test"
+      },
+      "Treadmill Heart Rate": {
+        "value": 198,
+        "reps": null,
+        "unit": "BPM",
+        "measure": "machine_metric",
+        "group": "Treadmill Running Test"
+      },
+      "Elliptical Distance": {
+        "value": 7.8,
+        "reps": null,
+        "unit": "km",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Elliptical Speed": {
+        "value": 12,
+        "reps": null,
+        "unit": "km/h",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Elliptical Stride Rate": {
+        "value": 160,
+        "reps": null,
+        "unit": "SPM",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Elliptical Calories": {
+        "value": 467,
+        "reps": null,
+        "unit": "kcal",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Elliptical Heart Rate": {
+        "value": 178,
+        "reps": null,
+        "unit": "BPM",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Elliptical Resistance Level": {
+        "value": 11,
+        "reps": null,
+        "unit": "level",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Elliptical Incline": {
+        "value": 4,
+        "reps": null,
+        "unit": "deg",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Treadmill Time": {
+        "value": 1546,
+        "reps": null,
+        "unit": "sec",
+        "measure": "time_seconds",
+        "group": "Treadmill Running Test"
+      },
+      "Elliptical Time": {
+        "value": 1812,
+        "reps": null,
+        "unit": "sec",
+        "measure": "time_seconds",
+        "group": "Elliptical Test"
+      },
+      "notes": "None",
+      "mobility__fms_score": 17,
+      "mobility__prone_shoulder_flex_deg": 176,
+      "mobility__hip_rom_deg": 85,
+      "plyometric__squat_jump_cm": 38,
+      "plyometric__cmj_cm": 42,
+      "plyometric__depth_jump_cm": 36,
+      "plyometric__anaerobic_power_w": 720,
+      "strength__1rm_back_squat_kg": 110,
+      "strength__1rm_bench_press_kg": 80,
+      "strength__1rm_pull_up_kg": 85,
+      "strength__snatch_pct_bw": 86,
+      "strength__clean_pct_bw": 107,
+      "_epley_bench_weight_kg": 90,
+      "_epley_bench_reps": 4,
+      "endurance__6test_battery_score": 27,
+      "endurance__mcgill_back_ext_s": 135,
+      "endurance__mcgill_flexor_hold_s": 130,
+      "endurance__mcgill_side_plank_s": 75,
+      "aerobic__mas_kmh": 16.5,
+      "aerobic__vo2max_ml_kg_min": 50,
+      "aerobic__yoyo_level": 15,
+      "aerobic__hrr_bpm_drop": 22,
+      "speed__10m_sprint_s": 1.79,
+      "speed__20m_sprint_s": 2.95,
+      "speed__wingate_peak_power_w": 780,
+      "speed__fatigue_index_pct": 18
+    },
+    "expected_fitness_results": {
+      "Bench press": {
+        "value": 85.0,
+        "reps": 13,
+        "unit": "kg"
+      },
+      "Lat pulldowns": {
+        "value": 60.0,
+        "reps": 8,
+        "unit": "kg"
+      },
+      "Row": {
+        "value": 70.0,
+        "reps": 7,
+        "unit": "kg"
+      },
+      "Pushups": {
+        "value": 47,
+        "reps": null,
+        "unit": "reps",
+        "measure": "rep_count"
+      },
+      "Treadmill Max Speed": {
+        "value": 29.2,
+        "reps": null,
+        "unit": "km/h",
+        "measure": "machine_metric",
+        "group": "Treadmill Running Test"
+      },
+      "Treadmill Heart Rate": {
+        "value": 198.0,
+        "reps": null,
+        "unit": "BPM",
+        "measure": "machine_metric",
+        "group": "Treadmill Running Test"
+      },
+      "Elliptical Distance": {
+        "value": 8.11,
+        "reps": null,
+        "unit": "km",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Elliptical Speed": {
+        "value": 12.47,
+        "reps": null,
+        "unit": "km/h",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Elliptical Stride Rate": {
+        "value": 166.29,
+        "reps": null,
+        "unit": "SPM",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Elliptical Calories": {
+        "value": 485.35,
+        "reps": null,
+        "unit": "kcal",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Elliptical Heart Rate": {
+        "value": 184.99,
+        "reps": null,
+        "unit": "BPM",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Elliptical Resistance Level": {
+        "value": 11.43,
+        "reps": null,
+        "unit": "level",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Elliptical Incline": {
+        "value": 4.16,
+        "reps": null,
+        "unit": "deg",
+        "measure": "machine_metric",
+        "group": "Elliptical Test"
+      },
+      "Treadmill Time": {
+        "value": 1546,
+        "reps": null,
+        "unit": "sec",
+        "measure": "time_seconds",
+        "group": "Treadmill Running Test"
+      },
+      "Elliptical Time": {
+        "value": 1741,
+        "reps": null,
+        "unit": "sec",
+        "measure": "time_seconds",
+        "group": "Elliptical Test"
+      },
+      "notes": "None",
+      "mobility__fms_score": 17.0,
+      "mobility__prone_shoulder_flex_deg": 176.0,
+      "mobility__hip_rom_deg": 85.0,
+      "plyometric__squat_jump_cm": 38.0,
+      "plyometric__cmj_cm": 42.0,
+      "plyometric__depth_jump_cm": 36.0,
+      "plyometric__anaerobic_power_w": 720.0,
+      "strength__1rm_back_squat_kg": 110.0,
+      "strength__1rm_bench_press_kg": 80.0,
+      "strength__1rm_pull_up_kg": 85.0,
+      "strength__snatch_pct_bw": 86.0,
+      "strength__clean_pct_bw": 107.0,
+      "_epley_bench_weight_kg": 90.0,
+      "_epley_bench_reps": 4.0,
+      "endurance__6test_battery_score": 27.0,
+      "endurance__mcgill_back_ext_s": 135.0,
+      "endurance__mcgill_flexor_hold_s": 130.0,
+      "endurance__mcgill_side_plank_s": 75.0,
+      "aerobic__mas_kmh": 16.5,
+      "aerobic__vo2max_ml_kg_min": 50.0,
+      "aerobic__yoyo_level": 15.0,
+      "aerobic__hrr_bpm_drop": 22.0,
+      "speed__10m_sprint_s": 1.79,
+      "speed__20m_sprint_s": 2.95,
+      "speed__wingate_peak_power_w": 780.0,
+      "speed__fatigue_index_pct": 18.0
+    },
+    "feedback": null,
+    "nutrition_plan": "Plate Structure: Fill half your plate with veggies/fruits, one-quarter with lean protein (chicken, fish, beans), and one-quarter with whole grains (brown rice, whole-wheat bread).\r\nMacronutrients:\r\nProteins: Include at every meal for muscle support (eggs, lean meat, fish, legumes).\r\nFats: Choose healthy fats (avocado, nuts, olive oil) and limit saturated fats.\r\nCarbs: Focus on high-fiber, complex carbs (whole grains, veggies) rather than processed foods.\r\nHydration: Drink 6-8 glasses of water daily; limit sugary drinks.",
+    "fitness_goal": "Higher body mass",
+    "inbody_file": "inbody/Result-Sheets-InBody970-scaled.jpg.webp",
+    "updated_at": "2026-05-24T12:36:24.334Z"
+  }
+},
+{
+  "model": "athletes.fitness",
+  "pk": 6,
+  "fields": {
+    "athlete": 6,
+    "workout_plan": "Strength FocusSquats & Romanian Deadlifts: 4 sets of 5 reps to build a solid power foundation.Superset (Push/Pull): Incline Dumbbell Press & Wide-Grip Pull-Ups (4 sets of 5–8 reps).Conditioning: Finish with 8 sprint intervals (all-out effort) with 1-minute rest between.\r\n\r\n---\r\n\r\nHypertrophy & enduranceOverhead Press & Rear Delt Pulls: 4 sets of 10–15 reps to build muscle volume.Single-Leg Work: Bulgarian Split Squats (4 sets of 10 per leg).Conditioning: Sled pulls, drags, or Farmer's walks for 3 lengths to build functional stamina.\r\n\r\n---\r\n\r\nPower & ExplosivenessClean and Press: 3 sets of 5–8 reps focusing on moving the weight quickly.Plyometrics: Box jumps or jump squats (4 sets of 10) to improve force development.Conditioning: Another round of sprint intervals or agility drills.\r\n\r\n---\r\n\r\nStrength FocusSquats & Romanian Deadlifts: 4 sets of 5 reps to build a solid power foundation.Superset (Push/Pull): Incline Dumbbell Press & Wide-Grip Pull-Ups (4 sets of 5–8 reps).Conditioning: Finish with 8 sprint intervals (all-out effort) with 1-minute rest between.\r\n\r\n\r\n---\r\n\r\nStrength FocusSquats & Romanian Deadlifts: 4 sets of 5 reps to build a solid power foundation.Superset (Push/Pull): Incline Dumbbell Press & Wide-Grip Pull-Ups (4 sets of 5–8 reps).Conditioning: Finish with 8 sprint intervals (all-out effort) with 1-minute rest between.",
+    "workout_type": "Strength & Conditioning",
+    "sessions_per_week": 3,
+    "previous_fitness_tests": {
+      "Bench Press": {
+        "value": 45,
+        "reps": 11,
+        "unit": "kg"
+      },
+      "Lat Pulldown": {
+        "value": 75,
+        "reps": 8,
+        "unit": "kg"
+      },
+      "Row Pull": {
+        "value": 60,
+        "reps": 14,
+        "unit": "kg"
+      },
+      "notes": "improve jumps",
+      "mobility__fms_score": 16,
+      "mobility__prone_shoulder_flex_deg": 168,
+      "mobility__hip_rom_deg": 85,
+      "plyometric__squat_jump_cm": 42,
+      "plyometric__cmj_cm": 39,
+      "plyometric__depth_jump_cm": 35,
+      "plyometric__anaerobic_power_w": 699,
+      "strength__1rm_back_squat_kg": 110,
+      "strength__1rm_bench_press_kg": 80,
+      "strength__1rm_pull_up_kg": 85,
+      "strength__snatch_pct_bw": 83,
+      "strength__clean_pct_bw": 104,
+      "_epley_bench_weight_kg": 45,
+      "_epley_bench_reps": 14,
+      "endurance__6test_battery_score": 22,
+      "endurance__mcgill_back_ext_s": 135,
+      "endurance__mcgill_flexor_hold_s": 130,
+      "endurance__mcgill_side_plank_s": 78,
+      "aerobic__mas_kmh": 18.3,
+      "aerobic__vo2max_ml_kg_min": 55,
+      "aerobic__yoyo_level": 14,
+      "aerobic__hrr_bpm_drop": 24,
+      "speed__10m_sprint_s": 1.79,
+      "speed__20m_sprint_s": 2.95,
+      "speed__wingate_peak_power_w": 780,
+      "speed__fatigue_index_pct": 18
+    },
+    "current_fitness_tests": {
+      "Bench Press": {
+        "value": 45,
+        "reps": 11,
+        "unit": "kg"
+      },
+      "Lat Pulldown": {
+        "value": 75,
+        "reps": 8,
+        "unit": "kg"
+      },
+      "Row Pull": {
+        "value": 60,
+        "reps": 14,
+        "unit": "kg"
+      },
+      "notes": "improve jumps",
+      "mobility__fms_score": 16,
+      "mobility__prone_shoulder_flex_deg": 168,
+      "mobility__hip_rom_deg": 85,
+      "plyometric__squat_jump_cm": 42,
+      "plyometric__cmj_cm": 39,
+      "plyometric__depth_jump_cm": 35,
+      "plyometric__anaerobic_power_w": 699,
+      "strength__1rm_back_squat_kg": 110,
+      "strength__1rm_bench_press_kg": 80,
+      "strength__1rm_pull_up_kg": 85,
+      "strength__snatch_pct_bw": 83,
+      "strength__clean_pct_bw": 104,
+      "_epley_bench_weight_kg": 45,
+      "_epley_bench_reps": 14,
+      "endurance__6test_battery_score": 22,
+      "endurance__mcgill_back_ext_s": 135,
+      "endurance__mcgill_flexor_hold_s": 130,
+      "endurance__mcgill_side_plank_s": 78,
+      "aerobic__mas_kmh": 18.3,
+      "aerobic__vo2max_ml_kg_min": 55,
+      "aerobic__yoyo_level": 14,
+      "aerobic__hrr_bpm_drop": 24,
+      "speed__10m_sprint_s": 1.79,
+      "speed__20m_sprint_s": 2.95,
+      "speed__wingate_peak_power_w": 780,
+      "speed__fatigue_index_pct": 18
+    },
+    "expected_fitness_results": {
+      "Bench Press": {
+        "value": 45.0,
+        "reps": 11,
+        "unit": "kg"
+      },
+      "Lat Pulldown": {
+        "value": 75.0,
+        "reps": 8,
+        "unit": "kg"
+      },
+      "Row Pull": {
+        "value": 60.0,
+        "reps": 14,
+        "unit": "kg"
+      },
+      "notes": "improve jumps",
+      "mobility__fms_score": 16.0,
+      "mobility__prone_shoulder_flex_deg": 168.0,
+      "mobility__hip_rom_deg": 85.0,
+      "plyometric__squat_jump_cm": 42.0,
+      "plyometric__cmj_cm": 39.0,
+      "plyometric__depth_jump_cm": 35.0,
+      "plyometric__anaerobic_power_w": 699.0,
+      "strength__1rm_back_squat_kg": 110.0,
+      "strength__1rm_bench_press_kg": 80.0,
+      "strength__1rm_pull_up_kg": 85.0,
+      "strength__snatch_pct_bw": 83.0,
+      "strength__clean_pct_bw": 104.0,
+      "_epley_bench_weight_kg": 45.0,
+      "_epley_bench_reps": 14.0,
+      "endurance__6test_battery_score": 22.0,
+      "endurance__mcgill_back_ext_s": 135.0,
+      "endurance__mcgill_flexor_hold_s": 130.0,
+      "endurance__mcgill_side_plank_s": 78.0,
+      "aerobic__mas_kmh": 18.3,
+      "aerobic__vo2max_ml_kg_min": 55.0,
+      "aerobic__yoyo_level": 14.0,
+      "aerobic__hrr_bpm_drop": 24.0,
+      "speed__10m_sprint_s": 1.79,
+      "speed__20m_sprint_s": 2.95,
+      "speed__wingate_peak_power_w": 780.0,
+      "speed__fatigue_index_pct": 18.0
+    },
+    "feedback": null,
+    "nutrition_plan": "Strategic Meal TimingTiming your nutrients around your \"training window\" can significantly impact performance and recovery.Pre-Workout (1–3 hours before): Focus on complex carbs and moderate protein to sustain energy.Example: Oatmeal with a banana or Greek yogurt with berries.Intra-Workout (During): For sessions over 60–90 minutes, sip a sports drink or consume 30–60g of fast-acting carbs.Post-Workout (Within 1–2 hours): Combine high-quality protein (20–40g) with fast-digesting carbs to jumpstart muscle repair and glycogen replenishment.Example: Whey protein shake with a banana or chicken with white rice.",
+    "fitness_goal": "Increase explosive power",
+    "inbody_file": "inbody/Example-Result-Sheet_270S-Body-Composition-ENG_240731_out-2.pdf",
+    "updated_at": "2026-05-04T22:28:18.920Z"
+  }
+},
+{
+  "model": "athletes.swimming",
+  "pk": 2,
+  "fields": {
+    "athlete": 5,
+    "stroke": "Freestyle",
+    "events": "50m",
+    "current_record": "00:00:30",
+    "previous_record": null,
+    "expected_record": "00:00:29.400000",
+    "swimming_goal": "faster turns and precise finishes",
+    "total_laps": 1,
+    "lap_distance": null,
+    "splits_data": [],
+    "recorded_at": "2026-04-18T13:34:29.912Z"
+  }
+},
+{
+  "model": "athletes.swimming",
+  "pk": 33,
+  "fields": {
+    "athlete": 6,
+    "stroke": "Freestyle",
+    "events": "100m",
+    "current_record": "00:51:59",
+    "previous_record": "00:52:29",
+    "expected_record": "00:50:56.620000",
+    "swimming_goal": "Fast finishes",
+    "total_laps": 2,
+    "lap_distance": "50m",
+    "splits_data": [
+      {
+        "lap_number": 1,
+        "previous": "23.95",
+        "current": "22.80",
+        "expected": "22.75"
+      },
+      {
+        "lap_number": 2,
+        "previous": "27.95",
+        "current": "28.80",
+        "expected": "26.55"
+      }
+    ],
+    "recorded_at": "2026-05-04T22:28:18.932Z"
+  }
+},
+{
+  "model": "athletes.swimming",
+  "pk": 44,
+  "fields": {
+    "athlete": 4,
+    "stroke": "Freestyle",
+    "events": "50m",
+    "current_record": "00:00:29",
+    "previous_record": "00:00:29",
+    "expected_record": "00:00:28.544286",
+    "swimming_goal": "faster turns and precise finishes",
+    "total_laps": 2,
+    "lap_distance": "25",
+    "splits_data": [
+      {
+        "lap_number": 1,
+        "previous": "12.23",
+        "current": "12.23",
+        "expected": "11.62"
+      },
+      {
+        "lap_number": 2,
+        "previous": "15.77",
+        "current": "15.77",
+        "expected": "14.98"
+      }
+    ],
+    "recorded_at": "2026-05-24T12:36:24.344Z"
+  }
+},
+{
+  "model": "athletes.swimming",
+  "pk": 45,
+  "fields": {
+    "athlete": 4,
+    "stroke": "Backstroke",
+    "events": "100m",
+    "current_record": "00:01:02.870000",
+    "previous_record": "00:01:02.870000",
+    "expected_record": "00:01:01.882043",
+    "swimming_goal": "faster turns and precise finishes",
+    "total_laps": 1,
+    "lap_distance": "null",
+    "splits_data": [],
+    "recorded_at": "2026-05-24T12:36:24.350Z"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add athlete info",
+    "content_type": [
+      "athletes",
+      "athleteinfo"
+    ],
+    "codename": "add_athleteinfo"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change athlete info",
+    "content_type": [
+      "athletes",
+      "athleteinfo"
+    ],
+    "codename": "change_athleteinfo"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete athlete info",
+    "content_type": [
+      "athletes",
+      "athleteinfo"
+    ],
+    "codename": "delete_athleteinfo"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view athlete info",
+    "content_type": [
+      "athletes",
+      "athleteinfo"
+    ],
+    "codename": "view_athleteinfo"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add owner",
+    "content_type": [
+      "athletes",
+      "owner"
+    ],
+    "codename": "add_owner"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change owner",
+    "content_type": [
+      "athletes",
+      "owner"
+    ],
+    "codename": "change_owner"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete owner",
+    "content_type": [
+      "athletes",
+      "owner"
+    ],
+    "codename": "delete_owner"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view owner",
+    "content_type": [
+      "athletes",
+      "owner"
+    ],
+    "codename": "view_owner"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add basketball",
+    "content_type": [
+      "athletes",
+      "basketball"
+    ],
+    "codename": "add_basketball"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change basketball",
+    "content_type": [
+      "athletes",
+      "basketball"
+    ],
+    "codename": "change_basketball"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete basketball",
+    "content_type": [
+      "athletes",
+      "basketball"
+    ],
+    "codename": "delete_basketball"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view basketball",
+    "content_type": [
+      "athletes",
+      "basketball"
+    ],
+    "codename": "view_basketball"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add cross fit",
+    "content_type": [
+      "athletes",
+      "crossfit"
+    ],
+    "codename": "add_crossfit"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change cross fit",
+    "content_type": [
+      "athletes",
+      "crossfit"
+    ],
+    "codename": "change_crossfit"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete cross fit",
+    "content_type": [
+      "athletes",
+      "crossfit"
+    ],
+    "codename": "delete_crossfit"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view cross fit",
+    "content_type": [
+      "athletes",
+      "crossfit"
+    ],
+    "codename": "view_crossfit"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add fitness",
+    "content_type": [
+      "athletes",
+      "fitness"
+    ],
+    "codename": "add_fitness"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change fitness",
+    "content_type": [
+      "athletes",
+      "fitness"
+    ],
+    "codename": "change_fitness"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete fitness",
+    "content_type": [
+      "athletes",
+      "fitness"
+    ],
+    "codename": "delete_fitness"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view fitness",
+    "content_type": [
+      "athletes",
+      "fitness"
+    ],
+    "codename": "view_fitness"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add football",
+    "content_type": [
+      "athletes",
+      "football"
+    ],
+    "codename": "add_football"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change football",
+    "content_type": [
+      "athletes",
+      "football"
+    ],
+    "codename": "change_football"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete football",
+    "content_type": [
+      "athletes",
+      "football"
+    ],
+    "codename": "delete_football"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view football",
+    "content_type": [
+      "athletes",
+      "football"
+    ],
+    "codename": "view_football"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add swimming",
+    "content_type": [
+      "athletes",
+      "swimming"
+    ],
+    "codename": "add_swimming"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change swimming",
+    "content_type": [
+      "athletes",
+      "swimming"
+    ],
+    "codename": "change_swimming"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete swimming",
+    "content_type": [
+      "athletes",
+      "swimming"
+    ],
+    "codename": "delete_swimming"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view swimming",
+    "content_type": [
+      "athletes",
+      "swimming"
+    ],
+    "codename": "view_swimming"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add attendance record",
+    "content_type": [
+      "athletes",
+      "attendancerecord"
+    ],
+    "codename": "add_attendancerecord"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change attendance record",
+    "content_type": [
+      "athletes",
+      "attendancerecord"
+    ],
+    "codename": "change_attendancerecord"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete attendance record",
+    "content_type": [
+      "athletes",
+      "attendancerecord"
+    ],
+    "codename": "delete_attendancerecord"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view attendance record",
+    "content_type": [
+      "athletes",
+      "attendancerecord"
+    ],
+    "codename": "view_attendancerecord"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add injury record",
+    "content_type": [
+      "athletes",
+      "injuryrecord"
+    ],
+    "codename": "add_injuryrecord"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change injury record",
+    "content_type": [
+      "athletes",
+      "injuryrecord"
+    ],
+    "codename": "change_injuryrecord"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete injury record",
+    "content_type": [
+      "athletes",
+      "injuryrecord"
+    ],
+    "codename": "delete_injuryrecord"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view injury record",
+    "content_type": [
+      "athletes",
+      "injuryrecord"
+    ],
+    "codename": "view_injuryrecord"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add pain log",
+    "content_type": [
+      "athletes",
+      "painlog"
+    ],
+    "codename": "add_painlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change pain log",
+    "content_type": [
+      "athletes",
+      "painlog"
+    ],
+    "codename": "change_painlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete pain log",
+    "content_type": [
+      "athletes",
+      "painlog"
+    ],
+    "codename": "delete_painlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view pain log",
+    "content_type": [
+      "athletes",
+      "painlog"
+    ],
+    "codename": "view_painlog"
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$3yZtW4r6jBRso2Q9HLHghC$64qUIxwmcsGYM7KY6uJOvugP3H3Du6Wop3x7lOzhz6I=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user_def1362d",
+    "first_name": "",
+    "last_name": "",
+    "email": "user_def1362d@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-29T01:08:37.051Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$CcWmt6qVpz0wlx8qPHh5FP$khEqMLwxBUVmUVbJvSaldep2xrbidLhqxNQrA0GUanE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "test",
+    "first_name": "",
+    "last_name": "",
+    "email": "test@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-29T13:09:05.520Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$u2XMiEvvStZnILIhNjzFgt$9opiYLzRcYdJbqROAnorrepqCcJBZG/d3Qqg9jFxLCc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Omar Tamer",
+    "first_name": "",
+    "last_name": "",
+    "email": "omarscareer002@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-29T13:11:06.268Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$dUFc5LOvMDPoxDpxYB3p3c$wxgAcWt14LRuBtgzEkjaP+2zxfMMMmlQljbw68Em/zs=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "tester",
+    "first_name": "",
+    "last_name": "",
+    "email": "tester@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-02T11:00:37.852Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$SAX1rkVKts9GQ2cdMp8LWy$RJTqZ/rDQ1ZoqslztxEMqP9VK1im7oE6UAM3Ah40TVE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Abdallah Yasser",
+    "first_name": "",
+    "last_name": "",
+    "email": "dr.abdallahyasser@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-03T18:46:41.169Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$YqSbyrEa6P5KwLgcvmUEiB$654SV1e3jRXLVQvw01Ok5qA9EVRjYJ4CSWMrRAuT+3E=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "abdullahyasser01",
+    "first_name": "",
+    "last_name": "",
+    "email": "abdullahyasser01@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-25T07:00:55.664Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

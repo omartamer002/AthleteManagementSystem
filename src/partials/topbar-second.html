@@ -1,0 +1,188 @@
+<!-- navbar -->
+<div class="navbar-glass navbar navbar-expand-lg px-0 px-lg-4">
+  <div class="container-fluid px-lg-0">
+    <div class="d-flex align-items-center gap-4">
+      <!-- Collapse -->
+      <div class="d-block d-lg-none">
+        <a class="text-inherit" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+          aria-controls="offcanvasExample">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 6l16 0" />
+            <path d="M4 12l16 0" />
+            <path d="M4 18l16 0" />
+          </svg>
+        </a>
+      </div>
+      <div class="d-none d-lg-block">
+        <a class="sidebar-toggle d-flex texttooltip p-3" href="javascript:void(0)" data-template="collapseMessage">
+          <span class="collapse-mini">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-bar-left text-secondary">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M4 12l10 0" />
+              <path d="M4 12l4 4" />
+              <path d="M4 12l4 -4" />
+              <path d="M20 4l0 16" />
+            </svg>
+          </span>
+          <span class="collapse-expanded">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-bar-right text-secondary">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M20 12l-10 0" />
+              <path d="M20 12l-4 4" />
+              <path d="M20 12l-4 -4" />
+              <path d="M4 4l0 16" />
+            </svg>
+            <div id="collapseMessage" class="d-none">
+              <span class="small">Collapse</span>
+            </div>
+          </span>
+        </a>
+      </div>
+      <!-- Logo -->
+      <!-- <div class="d-block d-md-none">
+        <a href="@@webRoot/index.html">
+          <img src="@@webRoot/assets/images/brand/logo/logo-icon.svg" alt="" />
+        </a>
+      </div> -->
+    </div>
+
+    <!-- Navbar nav -->
+    <ul class="list-unstyled d-flex align-items-center mb-0 gap-2">
+      <!-- Pages link -->
+      <li>
+        <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#searchModal">
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="10" cy="10" r="7" />
+              <line x1="21" y1="21" x2="15" y2="15" />
+            </svg>
+          </span>
+        </button>
+        <!-- Modal -->
+      </li>
+      <!-- Light dark mode-->
+      <li>
+        <div class="dropdown">
+          <button class="btn btn-ghost btn-icon rounded-circle d-flex align-items-center" type="button"
+            aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+            <i class="ti theme-icon-active lh-1 fs-5"><i class="ti theme-icon ti-sun"></i></i>
+            <span class="visually-hidden bs-theme-text">Toggle theme</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow">
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light"
+                aria-pressed="true">
+                <i class="ti theme-icon ti ti-sun"></i>
+                <span class="ms-2">Light</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
+                aria-pressed="false">
+                <i class="ti theme-icon ti-moon-stars"></i>
+                <span class="ms-2">Dark</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto"
+                aria-pressed="false">
+                <i class="ti theme-icon ti-circle-half-2"></i>
+                <span class="ms-2">Auto</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- Dropdown -->
+      <li class="ms-3 dropdown">
+        <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="d-flex align-items-center gap-2 text-decoration-none">
+          <img src="@@webRoot/assets/images/brand/logo/tigerfit-logo.png" alt="TIGER FIT" class="avatar avatar-sm rounded-circle" style="object-fit:cover; background:#111;" />
+          <span class="fw-bold d-none d-lg-inline text-body" style="font-family:'Inter',sans-serif; letter-spacing:1px;">TIGER FIT</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end dropdown-menu-md p-0">
+          <div>
+            <div class="d-flex gap-3 align-items-center border-dashed border-bottom px-4 py-4">
+              <img src="@@webRoot/assets/images/brand/logo/tigerfit-logo.png" alt="TIGER FIT" class="avatar avatar-md rounded-circle" style="object-fit:cover; background:#111;" />
+              <div>
+                <h4 class="mb-0 fs-5">TIGER FIT</h4>
+                <p class="mb-0 text-secondary small">Coaching System</p>
+              </div>
+            </div>
+            <div class="p-3 d-flex flex-column gap-1">
+              <!-- Removed Home, Inbox, Chat, Activity, Account Settings per request -->
+            </div>
+            <div class="border-dashed border-top mb-4 pt-4 px-6">
+              <a href="#!" id="logoutBtn" class="text-secondary d-flex align-items-center gap-2">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-login-2">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M9 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" />
+                    <path d="M3 12h13l-3 -3" />
+                    <path d="M13 15l3 -3" />
+                  </svg>
+                </span>
+                <span>Logout</span></a>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <input type="search" class="form-control border-0 rounded-0 ps-0 form-focus-none" id="globalSearchInput"
+          placeholder="Search any player..." aria-label="Search" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-primary btn-sm me-2" id="globalSearchSubmit">Search</button>
+        <button type="button" class="btn btn-white btn-sm" data-bs-dismiss="modal" aria-label="Close">Esc</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function runGlobalSearch() {
+    const input = document.getElementById('globalSearchInput');
+    const query = input?.value.trim();
+    if (query) {
+      window.location.href = `@@webRoot/pages/athletes/revenue.html?search=${encodeURIComponent(query)}`;
+    }
+  }
+
+  document.getElementById('globalSearchInput')?.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      runGlobalSearch();
+    }
+  });
+
+  document.getElementById('globalSearchSubmit')?.addEventListener('click', runGlobalSearch);
+
+  document.getElementById('logoutBtn')?.addEventListener('click', async (e) => {
+    e.preventDefault();
+    try {
+      await fetch('http://localhost:8000/api/auth/logout/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+    localStorage.removeItem('auth_user');
+    window.location.href = '@@webRoot/pages/authentication/sign-in.html';
+  });
+</script>

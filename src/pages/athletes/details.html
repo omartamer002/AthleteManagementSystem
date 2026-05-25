@@ -1,0 +1,2667 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    @@include("../../partials/head/head-meta.html", {"webRoot": "../.."})
+    <title>Athlete Profile | TIGER FIT</title>
+    @@include("../../partials/head/head-links.html", {"webRoot": "../.."})
+  </head>
+
+  <body>
+    <div>
+      @@include("../../partials/sidebar-collapse.html", {"webRoot": "../.."})
+
+      <!-- Main Content -->
+      <div id="content" class="position-relative h-100">
+        @@include("../../partials/topbar-second.html", {"webRoot": "../.."})
+        <div class="custom-container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="mb-5 d-flex justify-content-between align-items-center">
+                  <h1 class="mb-0 h2" id="profileName">Loading Profile...</h1>
+                  <a href="list.html" class="btn btn-outline-secondary">Back to List</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Sidebar Info -->
+            <div class="col-xl-4 col-12 mb-5">
+              <div class="card shadow-sm h-100">
+                <div class="card-body">
+                  <h5 class="card-title text-primary mb-3">Athletic Profile</h5>
+                  <div class="mt-4 border-bottom pb-3">
+                    <p class="mb-1 text-muted">Core Stats</p>
+                    <div class="d-flex justify-content-between mb-2"><strong>Age:</strong> <span id="profAge">-</span></div>
+                    <div class="d-flex justify-content-between mb-2"><strong>Gender:</strong> <span id="profGender">-</span></div>
+                    <div class="d-flex justify-content-between mb-2"><strong>Height:</strong> <span><span id="profHeight">-</span> cm</span></div>
+                    <div class="d-flex justify-content-between mb-2"><strong>Weight:</strong> <span><span id="profWeight">-</span> kg</span></div>
+                    <div class="d-flex justify-content-between mb-2"><strong>BMI:</strong> <span id="profBMI">-</span></div>
+                    <div class="d-flex justify-content-between mb-2"><strong>Est. Maintenance:</strong> <span><span id="profCalories">-</span> kcal</span></div>
+                    <div class="d-flex justify-content-between mb-2"><strong>Body Type:</strong> <span class="badge bg-info-subtle text-info" id="profBodyType">-</span></div>
+                  </div>
+                  
+                  <div class="mt-4 border-bottom pb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <p class="mb-0 text-muted fw-bold">Medical & Assessment</p>
+                        <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#bodyHeatmapModal"><i class="bi bi-person-bounding-box me-1"></i>Pain Log</button>
+                    </div>
+                    <p class="small mb-1"><strong>Active Injuries:</strong></p>
+                    <div id="profInjuries" class="text-danger small fw-bold mb-2">-</div>
+                    <p class="small mb-1"><strong>Strengths:</strong></p>
+                    <div id="profStrengths" class="text-success small mb-2">-</div>
+                    <p class="small mb-1"><strong>Weaknesses:</strong></p>
+                    <div id="profWeaknesses" class="text-warning small">-</div>
+                  </div>
+
+                  <div class="mt-4">
+                    <h6 class="text-primary mb-3">Coach's Session Tool</h6>
+                    <div id="attendanceModule" class="p-3 bg-light rounded border">
+                        <div class="form-check form-switch mb-3">
+                          <input class="form-check-input" type="checkbox" role="switch" id="attendanceToggle">
+                          <label class="form-check-label fw-bold" for="attendanceToggle">Mark Attended</label>
+                        </div>
+                        
+                        <div id="ratingModule" class="d-none">
+                            <label class="form-label small fw-bold mb-1">Session Performance: <span id="ratingVal" class="text-primary">5</span>/10</label>
+                            <input type="range" class="form-range" min="1" max="10" step="1" id="ratingScore" value="5">
+                            
+                            <div class="row g-2 mt-2">
+                                <div class="col-6">
+                                    <label class="form-label x-small fw-bold mb-0">HRV (ms)</label>
+                                    <input type="number" class="form-control form-control-sm" id="bioHRV" placeholder="e.g. 65">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label x-small fw-bold mb-0">RHR (bpm)</label>
+                                    <input type="number" class="form-control form-control-sm" id="bioRHR" placeholder="e.g. 58">
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label x-small fw-bold mb-0">Sleep (h)</label>
+                                    <input type="number" step="0.1" class="form-control form-control-sm" id="bioSleep" placeholder="8.0">
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label x-small fw-bold mb-0">Fatigue (/10)</label>
+                                    <input type="number" min="1" max="10" class="form-control form-control-sm" id="bioFatigue" placeholder="1-10">
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label x-small fw-bold mb-0">Soreness (/10)</label>
+                                    <input type="number" min="1" max="10" class="form-control form-control-sm" id="bioSoreness" placeholder="1-10">
+                                </div>
+                            </div>
+
+                            <div class="form-check mt-3">
+                              <input class="form-check-input" type="checkbox" id="workoutCompletedCheck">
+                              <label class="form-check-label small fw-bold" for="workoutCompletedCheck">Workout Completed ✓</label>
+                            </div>
+
+                            <textarea class="form-control form-control-sm mt-2" id="ratingNotes" rows="2" placeholder="Coach's session notes..."></textarea>
+                            
+                            <button id="saveRatingBtn" class="btn btn-sm btn-primary w-100 mt-3">Save Session Review</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Main Performance Area -->
+            <div class="col-xl-8 col-12">              <!-- ══════ PERFORMANCE INTELLIGENCE CENTER ══════ -->
+              <div class="card shadow-sm mb-5 border-start border-4 border-info overflow-hidden" id="picCard">
+                <div class="card-body p-4">
+                  <!-- Header Row -->
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center">
+                      <i class="bi bi-cpu-fill text-info fs-3 me-2"></i>
+                      <div>
+                        <h5 class="text-info mb-0 fw-bold"> Performance Intelligence Center</h5>
+                        <p class="text-muted mb-0" style="font-size:0.75rem;">All-Signal Composite — Updated every session</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Gauge + Summary Row -->
+                  <div class="row g-3 mb-3">
+                    <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
+                      <div id="picGaugeChart" style="width:180px;"></div>
+                    </div>
+                    <div class="col-md-8">
+                      <!-- Overall PIC score badges -->
+                      <div class="d-flex flex-wrap gap-2 mb-3 mt-2">
+                        <div class="rounded-3 px-3 py-2 bg-body-tertiary border">
+                          <p class="text-muted mb-0" style="font-size:0.7rem;">OVERALL INDEX</p>
+                          <p class="fw-bold mb-0 fs-5" id="picScoreLabel">—</p>
+                        </div>
+                        <div class="rounded-3 px-3 py-2 bg-body-tertiary border">
+                          <p class="text-muted mb-0" style="font-size:0.7rem;">TREND</p>
+                          <p class="fw-bold mb-0 fs-6" id="picTrendLabel">—</p>
+                        </div>
+                        <div class="rounded-3 px-3 py-2 bg-body-tertiary border">
+                          <p class="text-muted mb-0" style="font-size:0.7rem;">30-DAY PREDICTION</p>
+                          <p class="text-info fw-bold mb-0 fs-6" id="picPredLabel">—</p>
+                        </div>
+                      </div>
+                      <!-- Pillar table -->
+                      <div id="picPillarTable" style="font-size:0.78rem;">
+                        <div class="text-muted text-center py-3">Loading pillars…</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Engagement & Rating History Header -->
+              <div class="card shadow-sm mb-5 border-start border-4 border-success overflow-hidden">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-lg-6 border-end">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h5 class="card-title text-success mb-0">Attendance Rate</h5>
+                                <p class="text-muted small mb-0">Engagement percentage over time.</p>
+                            </div>
+                            <h3 class="mb-0 text-success fw-bold" id="overallAttendance">0%</h3>
+                        </div>
+                        <div id="attendanceChart" style="min-height: 250px;"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h5 class="card-title text-primary mb-0">Session Performance Rating</h5>
+                                <p class="text-muted small mb-0">Coach's assessment trend (Avg / 10).</p>
+                            </div>
+                            <h3 class="mb-0 text-primary fw-bold" id="avgRating">0.0</h3>
+                        </div>
+                        <div id="ratingTrendChart" style="min-height: 250px;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Injury Risk & Biometrics Dashboard -->
+              <div class="card shadow-sm mb-5 border-start border-4 border-danger overflow-hidden">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-heart-pulse-fill text-danger fs-3 me-2"></i>
+                        <h5 class="card-title text-danger mb-0">Injury History & AI Risk Indicator</h5>
+                    </div>
+                    <button id="generateRiskBtn" class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-robot me-1"></i>Run AI Risk Analysis
+                    </button>
+                  </div>
+                  
+                  <div class="row g-4">
+                    <!-- AI Risk Summary -->
+                    <div class="col-lg-5">
+                      <div class="bg-light p-3 rounded h-100 border position-relative">
+                        <!-- Loading Overlay -->
+                        <div id="aiRiskLoading" class="position-absolute top-0 start-0 w-100 h-100 bg-white bg-opacity-75 d-flex justify-content-center align-items-center d-none" style="z-index: 10;">
+                          <div class="spinner-border text-danger" role="status"></div>
+                        </div>
+
+                        <h6 class="text-uppercase text-muted x-small fw-bold mb-3">AI Prediction Engine</h6>
+                        <div class="text-center mb-4">
+                          <div class="display-4 fw-bold mb-1" id="aiRiskScore">--</div>
+                          <p class="text-muted small mb-0">Overall Risk Score</p>
+                          <span id="aiRiskBadge" class="badge bg-secondary mt-2 fs-6 px-3 py-2">Unknown Risk</span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <p class="small fw-bold mb-1">Primary Risk Factor:</p>
+                            <p class="small text-muted mb-0" id="aiRiskReason">No analysis generated yet.</p>
+                        </div>
+
+                        <div class="mb-3 row g-0 border-top pt-2 border-bottom pb-2">
+                            <div class="col-6">
+                                <p class="x-small text-muted mb-0">Predicted Potential Injury</p>
+                                <p class="small fw-bold mb-0" id="aiPredictedType">--</p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <p class="x-small text-muted mb-0">Estimated Timeline</p>
+                                <p class="small fw-bold mb-0" id="aiPredictedTime">--</p>
+                            </div>
+                        </div>
+
+                        <div id="aiSmartAlerts" class="mb-3"></div>
+                        
+                        <div>
+                            <p class="small fw-bold mb-1">Recommendations:</p>
+                            <ul class="small text-muted ps-3 mb-0" id="aiRiskRecs">
+                                <li>Run analysis for recommendations.</li>
+                            </ul>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Injury History Table & Biometric Trends -->
+                    <div class="col-lg-7">
+                        <!-- Injury History Table -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="text-uppercase text-muted x-small fw-bold mb-0">HISTORICAL INJURIES</h6>
+                                <button class="btn btn-xs btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addInjuryModal">
+                                    <i class="bi bi-plus-lg me-1"></i>Report Injury
+                                </button>
+                            </div>
+                            <div class="table-responsive" style="max-height: 150px; overflow-y: auto;">
+                                <table class="table table-sm table-hover align-middle mb-0">
+                                    <thead class="table-light sticky-top">
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Severity</th>
+                                            <th>Status</th>
+                                            <th>Phase</th>
+                                            <th>Start</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="profInjuryHistoryTable">
+                                        <tr><td colspan="5" class="text-center text-muted small py-2">No history</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Biometric Trends Chart -->
+                        <div>
+                            <h6 class="text-uppercase text-muted x-small fw-bold mb-2">14-Day Biometric Trends</h6>
+                            <div class="border rounded bg-white p-2">
+                                <div id="biometricTrendsChart" style="min-height: 200px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Fitness & Nutrition Module -->
+              <div id="fitnessContainer" class="d-none">
+                  <div class="card shadow-sm mb-5 overflow-hidden">
+                    <div class="card-body p-0">
+                        <div class="p-4 border-bottom bg-light">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-graph-up-arrow text-primary fs-3 me-2"></i>
+                                <h5 class="card-title text-primary mb-0">Performance Insights & Targets</h5>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-white border rounded shadow-sm">
+                                        <p class="text-muted small mb-1">Standard Sessions</p>
+                                        <h4 class="mb-0" id="fitSessions">-</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="p-3 bg-white border rounded shadow-sm h-100">
+                                        <p class="text-muted small mb-1">Overall Strategy</p>
+                                        <div id="fitGoal" class="small fw-semibold">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4">
+                            <div class="row">
+                                <div class="col-lg-6 mb-4 mb-lg-0">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h6 class="text-uppercase text-muted fw-bold x-small mb-0">Active Workout Plans</h6>
+                                        <div>
+                                            <button id="generateAIPLanBtn" class="btn btn-xs btn-outline-success me-1">
+                                                <i class="bi bi-robot"></i> Generate a Plan
+                                            </button>
+                                            <button class="btn btn-xs btn-outline-primary" data-bs-toggle="modal" data-bs-target="#workoutModal">View Full Plan</button>
+                                        </div>
+                                    </div>
+                                    <div id="fitWorkouts" class="mb-4"></div>
+                                    
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h6 class="text-uppercase text-muted fw-bold x-small mb-0">Nutrition Strategy</h6>
+                                        <div>
+                                            <button id="generateNutritionBtn" class="btn btn-xs btn-outline-success me-1">
+                                                <i class="bi bi-robot"></i> Generate Strategy
+                                            </button>
+                                            <button class="btn btn-xs btn-outline-success" data-bs-toggle="modal" data-bs-target="#nutritionModal">View Details</button>
+                                        </div>
+                                    </div>
+                                    <div id="fitNutrition" class="p-3 bg-light rounded border-start border-4 border-primary small mb-3">-</div>
+                                    <div id="inbodyDownload"></div>
+                                </div>
+	                                <div class="col-lg-6">
+	                                    <h6 class="text-uppercase text-muted fw-bold x-small mb-3">Test Progress vs. Projections</h6>
+	                                    <div class="border rounded bg-light-subtle p-3">
+	                                        <div id="performanceTrendsChart" style="min-height: 280px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+
+	                            <div id="machineTestChartWrap" class="mt-4 d-none">
+	                                <h6 class="text-uppercase text-muted fw-bold x-small mb-3">Machine & Running Test Progress</h6>
+	                                <div class="border rounded bg-light-subtle p-3">
+	                                    <div id="machineTestTrendsChart" style="min-height: 320px;"></div>
+	                                </div>
+	                            </div>
+
+	                            <hr class="my-4">
+                            
+                            <h6 class="text-primary mb-3">Assessment Detailed Table</h6>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Metric</th>
+                                            <th>Previous</th>
+                                            <th>Current</th>
+                                            <th>Projection</th>
+                                            <th>Diff</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="fitnessPredictTable">
+                                        <tr><td colspan="5" class="text-center text-muted">No measurements detected.</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+
+              <!-- Sport Specialization Module -->
+              <div id="sportContainer" class="d-none">
+                  <div class="card shadow-sm mb-5 overflow-hidden border-top border-4 border-warning">
+                    <div class="card-body p-0">
+                        <div class="p-4 bg-light border-bottom">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-trophy-fill text-warning fs-3 me-2"></i>
+                                <h5 class="card-title text-primary mb-0" id="sportHeader">Sport Specialization</h5>
+                            </div>
+                            <div class="p-3 bg-white border rounded small">
+                                <span class="fw-bold text-muted d-block mb-1 text-uppercase x-small">Primary Objective</span>
+                                <div id="sportGoal">-</div>
+                            </div>
+                        </div>
+
+                        <div class="p-4">
+                            <div id="swimmingGraphSection" class="d-none mb-5">
+                                <h6 class="text-primary mb-3">Swimming Record Progression (Secs)</h6>
+                                <div id="swimmingPerformanceChart" style="min-height: 300px;"></div>
+                            </div>
+
+                            <h6 class="text-primary mb-3">Event Performance Tracker</h6>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover align-middle">
+                                    <thead class="table-light">
+                                        <tr id="sportTableHeadRow">
+                                            <th>Event / Detail</th>
+                                            <th>Previous</th>
+                                            <th>Current</th>
+                                            <th>Change %</th>
+                                            <th>Target</th>
+                                            <th>Target Projection %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sportPredictTable">
+                                        <!-- Dynamic rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="swimmingSplitsSection" class="d-none mt-5">
+                                <hr class="my-5">
+                                <h5 class="text-primary fw-bold mb-4"><i class="bi bi-list-columns-reverse me-2"></i>Split Performance Tracker (Laps)</h5>
+                                <div id="swimmingSplitsChartsGrid" class="row g-4 mb-4">
+                                    <!-- Dynamic split charts -->
+                                </div>
+                                <div class="table-responsive shadow-sm rounded border">
+                                    <table class="table table-sm table-hover align-middle mb-0">
+                                        <thead class="bg-primary text-white">
+                                            <tr>
+                                                <th>Event / Lap</th>
+                                                <th>Previous Split</th>
+                                                <th>Current Split</th>
+                                                <th>Change %</th>
+                                                <th>Expected Split</th>
+                                                <th>Expected Projection %</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="swimmingSplitsTable">
+                                            <!-- Dynamic split rows -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- ══════════════════════════════════════════════════════════════════
+               ADVANCED ASSESSMENTS – Charts & Norm Table
+          ══════════════════════════════════════════════════════════════════ -->
+          <div class="row mt-5 mb-3">
+            <div class="col-12">
+              <h4 class="text-primary mb-0"><i class="bi bi-graph-up me-2"></i>Advanced Assessments</h4>
+              <p class="text-muted small mt-1 mb-4">Current vs Previous vs Predicted — with published norm benchmarks. Data updates each time you edit the athlete profile.</p>
+              <!-- Loading / Empty state -->
+              <div id="assessLoadingState" class="text-center py-5">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="text-muted mt-2">Loading assessment data…</p>
+              </div>
+              <div id="assessEmptyState" class="alert alert-info d-none">
+                <i class="bi bi-info-circle me-2"></i>No advanced assessment data found. Add assessment results when editing the athlete profile.
+              </div>
+              <!-- 6 chart cards rendered dynamically -->
+              <div id="assessChartGrid" class="row g-4 d-none"></div>
+              <!-- Norm Summary Table -->
+              <div id="assessNormTableWrap" class="card shadow-sm mt-4 d-none">
+                <div class="card-header d-flex align-items-center gap-2 bg-white">
+                  <i class="bi bi-table text-primary fs-5"></i>
+                  <strong>Assessment Norm Summary</strong>
+                </div>
+                <div class="card-body p-0">
+                  <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                      <thead class="table-light">
+                        <tr>
+                          <th>Category</th>
+                          <th>Metric</th>
+                          <th>Previous</th>
+                          <th>Current</th>
+                          <th>Predicted</th>
+                          <th>Unit</th>
+                          <th>Status</th>
+                          <th class="small">Note</th>
+                        </tr>
+                      </thead>
+                      <tbody id="assessNormTableBody"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weekly Report Section -->
+          <div class="row mt-5 mb-5">
+            <div class="col-12">
+              <div class="card shadow-sm border-top border-4 border-primary">
+                <div class="card-body p-4">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <h5 class="card-title text-primary mb-1">Weekly Performance Reports</h5>
+                      <p class="text-muted small mb-0">Generate a bilingual summary of the athlete's progress over the last 7 days.</p>
+                    </div>
+                    <div class="d-flex gap-2">
+                      <button id="genReportEn" class="btn btn-primary">
+                        <i class="bi bi-file-earmark-pdf me-2"></i>Generate Report (English)
+                      </button>
+                      <button id="genReportAr" class="btn btn-outline-primary">
+                        <i class="bi bi-file-earmark-pdf me-2"></i>إصدار تقرير (بالعربية)
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    @@include("../../partials/scripts.html", {"webRoot": "../.."})
+    <script src="../../node_modules/apexcharts/dist/apexcharts.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const athleteId = urlParams.get('id');
+        const GEMINI_API_KEY = "AIzaSyACHcgD3tE6HhznSob6ByeRkZbdMCE8CPE";
+        let athleteData = null;
+        if (!athleteId) {
+            alert('No athlete ID provided.');
+            window.location.href = 'list.html';
+            return;
+        }
+
+        let attendanceRecords = [];
+        let todayRecordId = null; 
+        let chartInstances = {};
+        const assessmentCharts = {};
+
+        function safeDestroy(key) {
+            if (chartInstances[key]) {
+                chartInstances[key].destroy();
+                chartInstances[key] = null;
+            }
+        }
+
+        function safeDestroyAssessmentChart(key) {
+            if (assessmentCharts[key]) {
+                assessmentCharts[key].destroy();
+                assessmentCharts[key] = null;
+            }
+        }
+
+        const getLocalDateStr = (dateObj) => {
+            const year = dateObj.getFullYear();
+            const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+            const day = String(dateObj.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        };
+
+        const todayStr = getLocalDateStr(new Date());
+
+        // ═══════════════════════════════════════════════════════════════════════
+        //  PERFORMANCE INTELLIGENCE CENTER (PIC)
+        // ═══════════════════════════════════════════════════════════════════════
+        function renderPerformanceIntelligence(athlete, assessmentCategories) {
+            const records = (athlete.attendance_records || []).slice().sort((a,b) => new Date(a.date)-new Date(b.date));
+            const fitness = athlete.fitness_profile || null;
+            const injuries = athlete.injury_records || [];
+
+            // ── Pillar 1: Attendance ──────────────────────────────────────────
+            function pillar1() {
+                if (!records.length) return { score: null, delta: null, label: '—', sparkline: [] };
+                const attended = r => r.attended;
+                const now = new Date();
+                const cut30 = new Date(now - 30*864e5);
+                const cut60 = new Date(now - 60*864e5);
+                const recent   = records.filter(r => new Date(r.date) >= cut30);
+                const previous = records.filter(r => new Date(r.date) >= cut60 && new Date(r.date) < cut30);
+                const rRate = recent.length   ? (recent.filter(attended).length   / recent.length   * 100) : null;
+                const pRate = previous.length ? (previous.filter(attended).length / previous.length * 100) : null;
+                const delta = (rRate !== null && pRate !== null) ? rRate - pRate : null;
+                const score = rRate ?? (records.filter(attended).length / records.length * 100);
+                const sparkline = records.map(r => r.attended ? 100 : 0);
+                return { score, delta, label: `${score.toFixed(0)}%`, sparkline };
+            }
+
+            // ── Pillar 2: Session Performance ─────────────────────────────────
+            function pillar2() {
+                const rated = records.filter(r => r.performance_rating);
+                if (!rated.length) return { score: null, delta: null, label: '—', sparkline: [] };
+                const last5 = rated.slice(-5); const prev5 = rated.slice(-10, -5);
+                const avg = arr => arr.reduce((s,r) => s + r.performance_rating, 0) / arr.length;
+                const cur = avg(last5); const pre = prev5.length ? avg(prev5) : null;
+                const score = (cur / 10) * 100;
+                const delta = pre !== null ? ((cur - pre) / pre * 100) : null;
+                const sparkline = rated.map(r => (r.performance_rating / 10) * 100);
+                return { score, delta, label: `${cur.toFixed(1)}/10`, sparkline };
+            }
+
+            // ── Pillar 3: Biometrics ─────────────────────────────────────────
+            function pillar3() {
+                const now = new Date();
+                const cut14 = new Date(now - 14*864e5);
+                const cut28 = new Date(now - 28*864e5);
+                const bio = records.filter(r => r.hrv || r.resting_heart_rate || r.sleep_hours || r.fatigue_score || r.muscle_soreness);
+                if (!bio.length) return { score: null, delta: null, label: '—', sparkline: [] };
+                const scoreRec = r => {
+                    let pts = 0, cnt = 0;
+                    if (r.hrv)                { pts += Math.min(100, (r.hrv - 20) / 80 * 100); cnt++; }
+                    if (r.resting_heart_rate) { pts += Math.min(100, Math.max(0, (90 - r.resting_heart_rate) / 30 * 100)); cnt++; }
+                    if (r.sleep_hours)        { pts += Math.min(100, parseFloat(r.sleep_hours) / 9 * 100); cnt++; }
+                    if (r.fatigue_score)      { pts += Math.min(100, (11 - r.fatigue_score) / 10 * 100); cnt++; }
+                    if (r.muscle_soreness)    { pts += Math.min(100, (11 - r.muscle_soreness) / 10 * 100); cnt++; }
+                    return cnt ? pts / cnt : null;
+                };
+                const recent14  = bio.filter(r => new Date(r.date) >= cut14).map(scoreRec).filter(v => v !== null);
+                const recent28  = bio.filter(r => new Date(r.date) >= cut28 && new Date(r.date) < cut14).map(scoreRec).filter(v => v !== null);
+                const avg = arr => arr.reduce((a,b) => a+b, 0) / arr.length;
+                const score = recent14.length ? avg(recent14) : avg(bio.map(scoreRec).filter(v => v !== null));
+                const delta = (recent14.length && recent28.length) ? avg(recent14) - avg(recent28) : null;
+                const sparkline = bio.map(scoreRec).filter(v => v !== null);
+                return { score, delta, label: `${score.toFixed(0)}%`, sparkline };
+            }
+
+            // ── Pillar 4: Fitness Tests ───────────────────────────────────────
+            function pillar4() {
+                if (!fitness) return { score: null, delta: null, label: '—', sparkline: [] };
+                const curr = fitness.current_fitness_tests  || {};
+                const prev = fitness.previous_fitness_tests || {};
+                const expected = fitness.expected_fitness_results || {};
+                const isAdvanced = k => k.includes('__') || k.startsWith('_');
+                const getMainVal = v => (typeof v === 'number') ? v : (v && typeof v.value === 'number') ? v.value : null;
+	                const getRepsVal = v => (v && Number.isInteger(v.reps)) ? v.reps : null;
+	                const isRepCount = v => v && (v.measure === 'rep_count' || v.unit === 'reps');
+	                const isTimeMetric = v => v && (v.measure === 'time_seconds' || v.unit === 'sec');
+	                const isMachineMetric = v => v && (v.measure === 'machine_metric' || v.measure === 'time_seconds');
+	                const metrics = [];
+
+                Object.keys(curr).forEach(k => {
+                    if (isAdvanced(k) || k === 'notes') return;
+
+                    const currEntry = curr[k];
+                    const prevEntry = prev[k];
+                    const expectedEntry = expected[k];
+                    const mainCurrent = getMainVal(currEntry);
+
+                    if (mainCurrent !== null) {
+	                        metrics.push({
+	                            current: mainCurrent,
+	                            previous: getMainVal(prevEntry),
+	                            expected: getMainVal(expectedEntry),
+	                            lowerBetter: isTimeMetric(currEntry),
+	                            machineMetric: isMachineMetric(currEntry),
+	                            label: isRepCount(currEntry) ? `${k} reps` : `${k} result`
+	                        });
+                    }
+
+                    if (!isRepCount(currEntry)) {
+                        const repCurrent = getRepsVal(currEntry);
+                        if (repCurrent !== null) {
+                            metrics.push({
+                                current: repCurrent,
+                                previous: getRepsVal(prevEntry),
+                                expected: getRepsVal(expectedEntry),
+                                lowerBetter: false,
+                                label: `${k} reps`
+                            });
+                        }
+                    }
+                });
+
+                if (!metrics.length) return { score: null, delta: null, label: '—', sparkline: [] };
+
+	                let improved = 0;
+	                let recordedOnly = 0;
+	                const deltas = metrics.map(metric => {
+	                    if (metric.previous !== null && metric.previous !== 0) {
+	                        const d = metric.lowerBetter ? (metric.previous - metric.current) / metric.previous * 100 : (metric.current - metric.previous) / metric.previous * 100;
+	                        if (d > 0) improved++;
+	                        return d;
+	                    }
+	                    if (metric.expected !== null && metric.expected !== 0) {
+	                        const progress = metric.lowerBetter ? (metric.expected / metric.current) * 100 : (metric.current / metric.expected) * 100;
+	                        if (progress >= 100) improved++;
+	                        return progress - 100;
+	                    }
+	                    if (metric.machineMetric) {
+	                        recordedOnly++;
+	                        return 0;
+	                    }
+	                    return null;
+	                }).filter(d => d !== null);
+
+	                const score = deltas.length ? Math.max(50, (improved / deltas.length) * 100) : null;
+	                const avgDelta = deltas.length ? deltas.reduce((a,b)=>a+b,0)/deltas.length : null;
+	                const label = score !== null ? `${score.toFixed(0)}% improved${recordedOnly ? ` (${recordedOnly} recorded)` : ''}` : '—';
+	                return { score, delta: avgDelta, label, sparkline: deltas.map(d => Math.max(0, Math.min(100, 50 + d))) };
+	            }
+
+            // ── Pillar 5: Advanced Assessments ────────────────────────────────
+            function pillar5() {
+                if (!assessmentCategories.length) return { score: null, delta: null, label: '—', sparkline: [] };
+                const statusScore = { excellent: 100, good: 75, needs_work: 40, recorded: 50, no_data: null };
+                let total = 0, count = 0;
+                let prevTotal = 0, prevCount = 0;
+                assessmentCategories.forEach(cat => {
+                    (cat.metrics || []).forEach(m => {
+                        const s = statusScore[m.status];
+                        if (s !== null && s !== undefined) { total += s; count++; }
+                        // delta: compare current vs previous
+                        if (m.current !== null && m.previous !== null && m.previous !== 0) {
+                            const hb = m.higher_better !== false;
+                            const d = hb ? (m.current - m.previous) : (m.previous - m.current);
+                            prevTotal += d > 0 ? 1 : 0; prevCount++;
+                        }
+                    });
+                });
+                const score = count ? total / count : null;
+                const delta = prevCount ? (prevTotal / prevCount * 100) - 50 : null; // >0 means majority improved
+                const sparkline = assessmentCategories.map(cat => {
+                    const scores = (cat.metrics||[]).map(m => statusScore[m.status]).filter(s => s !== null && s !== undefined);
+                    return scores.length ? scores.reduce((a,b)=>a+b,0)/scores.length : 50;
+                });
+                return { score, delta, label: score !== null ? `${score.toFixed(0)}% norm` : '—', sparkline };
+            }
+
+            // ── Pillar 6: Workout Compliance ──────────────────────────────────
+            function pillar6() {
+                const attended = records.filter(r => r.attended);
+                if (!attended.length) return { score: null, delta: null, label: '—', sparkline: [] };
+                const completed = attended.filter(r => r.workout_completed).length;
+                const complianceScore = (completed / attended.length) * 100;
+                const types = fitness ? (fitness.workout_type || '').split('|').map(s=>s.trim()).filter(Boolean).length : 0;
+                const planScore = fitness ? (fitness.workout_plan ? 30 : 0) + (fitness.fitness_goal ? 20 : 0) + Math.min(50, (fitness.sessions_per_week || 0) * 10) : 0;
+                const score = (complianceScore * 0.6) + (planScore * 0.4);
+                const now = new Date();
+                const cut30 = new Date(now - 30*864e5); const cut60 = new Date(now - 60*864e5);
+                const r30 = attended.filter(r => new Date(r.date) >= cut30);
+                const p30 = attended.filter(r => new Date(r.date) >= cut60 && new Date(r.date) < cut30);
+                const rate = a => a.length ? a.filter(r=>r.workout_completed).length/a.length*100 : null;
+                const delta = (r30.length && p30.length) ? rate(r30) - rate(p30) : null;
+                const sparkline = attended.map(r => r.workout_completed ? 100 : 0);
+                return {
+                    score,
+                    delta,
+                    label: `${complianceScore.toFixed(0)}% (${completed}/${attended.length} completed)`,
+                    sparkline
+                };
+            }
+
+	            // ── Pillar 7: Sport Records ───────────────────────────────────────
+	            function pillar7() {
+	                let improvements = [], sparkline = [], recordedSwimmingMetrics = 0;
+	                const dts = s => { if (!s||typeof s!=='string') return 0; const p=s.split(':').reverse(); let t=0; if(p[0])t+=parseFloat(p[0]); if(p[1])t+=parseFloat(p[1])*60; if(p[2])t+=parseFloat(p[2])*3600; return t; };
+	                const dist = s => { if(!s||typeof s!=='string') return 0; const m=s.match(/(\d+(?:\.\d+)?)\s*(km|m)?/i); if(!m) return 0; const v=parseFloat(m[1]); return (m[2]||'m').toLowerCase()==='km' ? v*1000 : v; };
+	                const addTimedMetric = (current, previous, expected) => {
+	                    if (!current) return;
+	                    if (previous) {
+	                        const d = (previous - current) / previous * 100;
+	                        improvements.push(d);
+	                        sparkline.push(Math.max(0, Math.min(100, 50 + d * 2)));
+	                    } else if (expected) {
+	                        const d = (current - expected) / current * 100;
+	                        improvements.push(d);
+	                        sparkline.push(Math.max(0, Math.min(100, 50 + d * 2)));
+	                    } else {
+	                        recordedSwimmingMetrics++;
+	                        sparkline.push(50);
+	                    }
+	                };
+	                (athlete.swimming_records||[]).forEach(r => {
+	                    const c=dts(r.current_record), p=dts(r.previous_record), e=dts(r.expected_record);
+	                    addTimedMetric(c, p, e);
+	                    const eventDistance = dist(r.events);
+	                    if (eventDistance && c) sparkline.push(Math.min(100, Math.max(0, (eventDistance / c) * 20)));
+	                    const lapCount = Number(r.total_laps) || 0;
+	                    if (lapCount > 0) { recordedSwimmingMetrics++; sparkline.push(Math.min(100, 40 + lapCount * 5)); }
+	                    const lapDistance = dist(r.lap_distance);
+	                    if (lapDistance > 0 && lapCount > 1) { recordedSwimmingMetrics++; sparkline.push(Math.min(100, (lapDistance * lapCount) / Math.max(eventDistance || lapDistance * lapCount, 1) * 100)); }
+	                    (Array.isArray(r.splits_data) ? r.splits_data : []).forEach(split => {
+	                        addTimedMetric(dts(split.current), dts(split.previous), dts(split.expected));
+	                    });
+	                });
+	                (athlete.basketball_records||[]).forEach(r => {
+	                    if(r.vertical_jump) sparkline.push(Math.min(100,(r.vertical_jump/36)*100));
+	                });
+	                if (!improvements.length && !sparkline.length) return { score: null, delta: null, label: '—', sparkline: [] };
+	                const score = improvements.length ? Math.max(0, Math.min(100, 50 + improvements.reduce((a,b)=>a+b,0)/improvements.length*2)) : 60;
+	                const delta = improvements.length ? improvements.reduce((a,b)=>a+b,0)/improvements.length : null;
+	                const label = delta !== null ? `${delta > 0 ? '+' : ''}${delta.toFixed(1)}% vs swim targets` : (recordedSwimmingMetrics ? `${recordedSwimmingMetrics} swim metrics` : 'Active');
+	                return { score, delta, label, sparkline };
+	            }
+
+            // ── Pillar 8: Injury Modifier ─────────────────────────────────────
+            function pillar8() {
+                const active = injuries.filter(i => i.is_active);
+                if (!active.length) return { modifier: 1.0, label: '✓ Clear', badge: 'success' };
+                let penalty = 0;
+                active.forEach(i => {
+                    if (i.severity === 'Severe')   penalty += 0.30;
+                    else if (i.severity === 'Moderate') penalty += 0.20;
+                    else penalty += 0.10;
+                    if (i.returned_before_recovery) penalty += 0.05;
+                });
+                const modifier = Math.max(0.5, 1 - penalty);
+                return { modifier, label: `${active.length} Active Injury${active.length>1?'s':''}`, badge: 'danger' };
+            }
+
+            // ── Compute PIC ───────────────────────────────────────────────────
+            const p1 = pillar1(), p2 = pillar2(), p3 = pillar3(), p4 = pillar4();
+            const p5 = pillar5(), p6 = pillar6(), p7 = pillar7(), p8 = pillar8();
+
+            const pillars = [
+                { icon: '', name: 'Attendance',          weight: 0.20, data: p1 },
+                { icon: '', name: 'Session Performance', weight: 0.20, data: p2 },
+                { icon: '', name: 'Biometrics',          weight: 0.15, data: p3 },
+                { icon: '', name: 'Fitness Tests',       weight: 0.15, data: p4 },
+                { icon: '', name: 'Advanced Assessments',weight: 0.15, data: p5 },
+                { icon: '', name: 'Workout Compliance',  weight: 0.10, data: p6 },
+                { icon: '', name: 'Sport Records',       weight: 0.05, data: p7 },
+            ];
+
+            // Rebalance weights for missing pillars
+            const active = pillars.filter(p => p.data.score !== null);
+            const totalW = active.reduce((s,p) => s+p.weight, 0);
+            let pic = 0;
+            if (totalW > 0) {
+                active.forEach(p => { pic += (p.data.score / totalW) * p.weight; });
+            }
+            pic = Math.max(0, Math.min(100, pic * p8.modifier));
+
+            // ── Prediction (Linear Trend) ─────────────────────────────────────
+            const ratingHistory = records.filter(r => r.performance_rating && r.attended).map((r,i) => ({ x:i, y:(r.performance_rating/10)*100 }));
+            let predText = 'Insufficient data';
+            if (ratingHistory.length >= 3) {
+                const n = ratingHistory.length;
+                const sumX = ratingHistory.reduce((s,p)=>s+p.x,0);
+                const sumY = ratingHistory.reduce((s,p)=>s+p.y,0);
+                const sumXY = ratingHistory.reduce((s,p)=>s+p.x*p.y,0);
+                const sumX2 = ratingHistory.reduce((s,p)=>s+p.x*p.x,0);
+                const slope = (n*sumXY - sumX*sumY) / (n*sumX2 - sumX*sumX);
+                const intercept = (sumY - slope*sumX) / n;
+                const futureX = n + 30;
+                const predicted = Math.max(0, Math.min(100, intercept + slope*futureX));
+                const residuals = ratingHistory.map(p => Math.abs(p.y - (intercept + slope*p.x)));
+                const stdDev = Math.sqrt(residuals.reduce((s,r)=>s+r*r,0)/residuals.length);
+                const confidence = Math.max(10, Math.min(95, 100 - stdDev*2));
+                const dir = slope > 0.5 ? '▲' : slope < -0.5 ? '▼' : '→';
+                predText = `${dir} ~${predicted.toFixed(0)}%  (${confidence.toFixed(0)}% conf.)`;
+            }
+
+            // ── Trend Label ───────────────────────────────────────────────────
+            const allDeltas = pillars.filter(p=>p.data.delta!==null).map(p=>p.data.delta);
+            const avgDelta = allDeltas.length ? allDeltas.reduce((a,b)=>a+b,0)/allDeltas.length : null;
+            let trendIcon = '→', trendColor = 'text-secondary';
+            if (avgDelta !== null) {
+                if (avgDelta > 2)  { trendIcon = '▲'; trendColor = 'text-success'; }
+                if (avgDelta < -2) { trendIcon = '▼'; trendColor = 'text-danger'; }
+            }
+            const deltaStr = avgDelta !== null ? ` ${avgDelta > 0 ? '+' : ''}${avgDelta.toFixed(1)}%` : '';
+
+            // ── Render Gauge ──────────────────────────────────────────────────
+            safeDestroy('pic-gauge');
+            const gaugeColor = pic >= 70 ? '#22c55e' : pic >= 45 ? '#f59e0b' : '#ef4444';
+            chartInstances['pic-gauge'] = new ApexCharts(document.getElementById('picGaugeChart'), {
+                series: [parseFloat(pic.toFixed(1))],
+                chart: { type: 'radialBar', height: 200, sparkline: { enabled: true } },
+                plotOptions: { radialBar: {
+                    startAngle: -135, endAngle: 135,
+                    hollow: { size: '62%' },
+                    track: { background: '#f1f5f9', strokeWidth: '100%' },
+                    dataLabels: {
+                        name: { show: true, color: '#94a3b8', fontSize: '11px', offsetY: 25, formatter: () => 'PERFORMANCE' },
+                        value: { show: true, color: '#ffffff', fontSize: '24px', fontWeight: 700, offsetY: -10, formatter: v => `${parseFloat(v).toFixed(0)}%` }
+                    }
+                }},
+                colors: [gaugeColor],
+                stroke: { lineCap: 'round' }
+            });
+            chartInstances['pic-gauge'].render();
+
+            // ── Render Labels ─────────────────────────────────────────────────
+            document.getElementById('picScoreLabel').textContent = `${pic.toFixed(1)}%`;
+            const trendEl = document.getElementById('picTrendLabel');
+            trendEl.textContent = `${trendIcon}${deltaStr}`;
+            trendEl.className = `fw-bold mb-0 fs-6 ${trendColor}`;
+            document.getElementById('picPredLabel').textContent = predText;
+
+            // ── Render Pillar Table ───────────────────────────────────────────
+            const table = document.getElementById('picPillarTable');
+            const injRow = `
+              <div class="d-flex justify-content-between align-items-center py-1 border-top">
+                <span class="text-muted">Injury Modifier</span>
+                <span class="badge bg-${p8.badge}-subtle text-${p8.badge}">${p8.label}</span>
+              </div>`;
+
+            table.innerHTML = pillars.map((p, idx) => {
+                const d = p.data;
+                const na = d.score === null;
+                const dStr = d.delta !== null ? `${d.delta>0?'+':''}${d.delta.toFixed(1)}%` : '—';
+                const dColor = d.delta === null ? 'text-secondary' : d.delta > 2 ? 'text-success' : d.delta < -2 ? 'text-danger' : 'text-secondary';
+                const dIcon  = d.delta === null ? '→' : d.delta > 2 ? '▲' : d.delta < -2 ? '▼' : '→';
+                const sparkId = `pic-spark-${idx}`;
+                return `
+                  <div class="d-flex justify-content-between align-items-center py-1 border-top">
+                    <span class="fw-semibold" style="min-width:160px;">${p.name}</span>
+                    <span class="text-muted me-2" style="min-width:90px;font-size:0.73rem;">${na ? 'No data' : d.label}</span>
+                    <span class="${dColor} me-3" style="min-width:65px;font-size:0.73rem;">${dIcon} ${dStr}</span>
+                    <div id="${sparkId}" style="width:80px;height:30px;"></div>
+                  </div>`;
+            }).join('') + injRow;
+
+            // Render sparklines
+            pillars.forEach((p, idx) => {
+                if (!p.data.sparkline.length) return;
+                const el = document.getElementById(`pic-spark-${idx}`);
+                if (!el) return;
+                safeDestroy(`pic-spark-${idx}`);
+                chartInstances[`pic-spark-${idx}`] = new ApexCharts(el, {
+                    series: [{ data: p.data.sparkline }],
+                    chart: { type: 'line', width: 80, height: 30, sparkline: { enabled: true } },
+                    stroke: { width: 2, curve: 'smooth' },
+                    colors: [p.data.delta === null ? '#64748b' : p.data.delta > 0 ? '#22c55e' : '#ef4444'],
+                    tooltip: { enabled: false }
+                });
+                chartInstances[`pic-spark-${idx}`].render();
+            });
+        }
+
+        async function fetchFullProfile() {
+            try {
+                const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/`);
+                if (!res.ok) throw new Error('Athlete not found');
+                const athlete = await res.json();
+                
+                try { renderPersonalInfo(athlete); } catch(e) { console.error("Info Error:", e); }
+                try { renderFitness(athlete.fitness_profile); } catch(e) { console.error("Fitness Error:", e); }
+                try { renderSport(athlete); } catch(e) { console.error("Sport Error:", e); }
+                
+                attendanceRecords = athlete.attendance_records || [];
+                attendanceRecords.sort((a,b) => new Date(a.date) - new Date(b.date));
+                checkTodayAttendance();
+                
+                try { renderAttendanceChart(); } catch(e) { console.error("Attendance Chart Error:", e); }
+                try { renderRatingChart(); } catch(e) { console.error("Rating Chart Error:", e); }
+                try { renderBiometricTrends(); } catch(e) { console.error("Biometric Chart Error:", e); }
+                
+                // Fetch assessment data for PIC and render both
+                let assessmentCategories = [];
+                try {
+                    const assessRes = await fetch(`http://localhost:8000/api/athletes/${athleteId}/assessments/`);
+                    if (assessRes.ok) { const ad = await assessRes.json(); assessmentCategories = ad.categories || []; }
+                } catch(e) { console.warn('Assessment fetch failed for PIC:', e); }
+                
+                try { await renderAdvancedAssessments(assessmentCategories); } catch(e) { console.error("Assessment Insights Error:", e); showAssessmentEmptyState('Could not load advanced assessment insights.'); }
+                try { renderPerformanceIntelligence(athlete, assessmentCategories); } catch(e) { console.error("PIC Error:", e); }
+
+            } catch (err) {
+                console.error("Full Profile Error:", err);
+                alert('Could not load complete profile details. Please try refreshing.');
+            }
+        }
+
+        function getAssessmentStatusBadge(status) {
+            const map = {
+                excellent: 'success',
+                good: 'primary',
+                needs_work: 'warning',
+                recorded: 'secondary',
+                no_data: 'light'
+            };
+            const label = (status || 'recorded').replace('_', ' ');
+            return `<span class="badge bg-${map[status] || 'secondary'}-subtle text-${map[status] || 'secondary'} text-uppercase">${label}</span>`;
+        }
+
+        function formatNumber(value, maxDecimals = 2) {
+            if (value === null || value === undefined || value === '') return '—';
+
+            const numericValue = typeof value === 'number' ? value : Number(value);
+            if (!Number.isFinite(numericValue)) {
+                return String(value);
+            }
+
+            const rounded = Number(numericValue.toFixed(maxDecimals));
+            return Object.is(rounded, -0) ? '0' : String(rounded);
+        }
+
+        function formatAssessmentValue(value, unit = '') {
+            if (value === null || value === undefined || value === '') return '—';
+            const formatted = formatNumber(value);
+            return unit ? `${formatted} ${unit}` : formatted;
+        }
+
+        function showAssessmentEmptyState(message) {
+            document.getElementById('assessLoadingState').classList.add('d-none');
+            document.getElementById('assessChartGrid').classList.add('d-none');
+            document.getElementById('assessNormTableWrap').classList.add('d-none');
+            const emptyState = document.getElementById('assessEmptyState');
+            emptyState.innerHTML = `<i class="bi bi-info-circle me-2"></i>${message}`;
+            emptyState.classList.remove('d-none');
+        }
+
+        async function renderAdvancedAssessments(categories) {
+            const loadingState = document.getElementById('assessLoadingState');
+            const emptyState = document.getElementById('assessEmptyState');
+            const chartGrid = document.getElementById('assessChartGrid');
+            const tableWrap = document.getElementById('assessNormTableWrap');
+            const tableBody = document.getElementById('assessNormTableBody');
+
+            loadingState.classList.remove('d-none');
+            emptyState.classList.add('d-none');
+            chartGrid.classList.add('d-none');
+            tableWrap.classList.add('d-none');
+            chartGrid.innerHTML = '';
+            tableBody.innerHTML = '';
+            Object.keys(assessmentCharts).forEach(safeDestroyAssessmentChart);
+
+            if (!Array.isArray(categories) || !categories.length) {
+                showAssessmentEmptyState('No advanced assessment data found. Add assessment results when editing the athlete profile.');
+                return;
+            }
+
+            categories.forEach((category, index) => {
+                const metrics = Array.isArray(category.metrics) ? category.metrics : [];
+                if (!metrics.length) return;
+
+                const chartId = `assessmentChart-${index}`;
+                const col = document.createElement('div');
+                col.className = 'col-12 col-xl-6';
+                col.innerHTML = `
+                  <div class="card shadow-sm h-100">
+                    <div class="card-header bg-white d-flex align-items-center gap-2">
+                      <i class="bi ${category.icon}" style="color:${category.color}"></i>
+                      <strong>${category.label}</strong>
+                    </div>
+                    <div class="card-body">
+                      <div id="${chartId}" style="min-height: 320px;"></div>
+                    </div>
+                  </div>
+                `;
+                chartGrid.appendChild(col);
+
+                assessmentCharts[chartId] = new ApexCharts(document.querySelector(`#${chartId}`), {
+                    series: [
+                        { name: 'Previous', data: metrics.map(m => m.previous ?? null) },
+                        { name: 'Current', data: metrics.map(m => m.current ?? null) },
+                        { name: 'Predicted', data: metrics.map(m => m.predicted ?? null) }
+                    ],
+                    chart: { type: 'bar', height: 300, toolbar: { show: false } },
+                    plotOptions: { bar: { columnWidth: '52%', borderRadius: 4 } },
+                    dataLabels: { enabled: false },
+                    stroke: { show: true, width: 1, colors: ['transparent'] },
+                    xaxis: { categories: metrics.map(m => m.label) },
+                    legend: { position: 'top', horizontalAlign: 'right' },
+                    fill: { opacity: 1 },
+                    colors: ['#adb5bd', category.color, '#198754'],
+                    tooltip: {
+                        y: {
+                            formatter: (val, opts) => {
+                                const metric = metrics[opts.dataPointIndex];
+                                return formatAssessmentValue(val, metric?.unit || '');
+                            }
+                        }
+                    }
+                });
+                assessmentCharts[chartId].render();
+
+                metrics.forEach(metric => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                      <td class="fw-semibold">${category.label}</td>
+                      <td>${metric.label}</td>
+                      <td class="text-muted">${formatAssessmentValue(metric.previous, metric.unit)}</td>
+                      <td class="fw-bold">${formatAssessmentValue(metric.current, metric.unit)}</td>
+                      <td class="text-primary fw-semibold">${formatAssessmentValue(metric.predicted, metric.unit)}</td>
+                      <td>${metric.unit || '—'}</td>
+                      <td>${getAssessmentStatusBadge(metric.status)}</td>
+                      <td class="small text-muted">${metric.note || '—'}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            });
+
+            if (!chartGrid.children.length) {
+                showAssessmentEmptyState('No advanced assessment data found. Add assessment results when editing the athlete profile.');
+                return;
+            }
+
+            loadingState.classList.add('d-none');
+            chartGrid.classList.remove('d-none');
+            tableWrap.classList.remove('d-none');
+        }
+
+        function renderPersonalInfo(a) {
+            document.getElementById('profileName').innerText = a.name;
+            document.getElementById('profAge').innerText = a.age;
+            document.getElementById('profGender').innerText = a.gender === 'M' ? 'Male' : 'Female';
+            document.getElementById('profHeight').innerText = formatNumber(a.height);
+            document.getElementById('profWeight').innerText = formatNumber(a.weight);
+            document.getElementById('profBodyType').innerText = a.body_type;
+
+            // Calculate BMI
+            if (a.weight && a.height) {
+                const heightM = a.height / 100;
+                const bmi = (a.weight / (heightM * heightM)).toFixed(1);
+                
+                let bmiClass = "text-success";
+                if (bmi < 18.5) bmiClass = "text-warning";
+                else if (bmi >= 25) bmiClass = "text-danger";
+                
+                document.getElementById('profBMI').innerHTML = `<span class="fw-bold ${bmiClass}">${bmi}</span>`;
+            } else {
+                document.getElementById('profBMI').innerText = "-";
+            }
+
+            // Calculate Estimated Calories (Mifflin-St Jeor * Activity Multiplier)
+            if (a.weight && a.height && a.age) {
+                let bmr;
+                if (a.gender === 'M') {
+                    bmr = (10 * a.weight) + (6.25 * a.height) - (5 * a.age) + 5;
+                } else {
+                    bmr = (10 * a.weight) + (6.25 * a.height) - (5 * a.age) - 161;
+                }
+                const activityMultiplier = 1.55; // Moderate activity base
+                const tdee = Math.round(bmr * activityMultiplier);
+                document.getElementById('profCalories').innerText = tdee.toLocaleString();
+            } else {
+                document.getElementById('profCalories').innerText = "-";
+            }
+            
+            let activeInjuries = [];
+            let historyHtml = "";
+            if (a.injury_records && a.injury_records.length > 0) {
+                a.injury_records.forEach(inj => {
+                    if (inj.is_active) activeInjuries.push(inj.injury_type);
+                    
+                    const phaseColors = {
+                        'Acute': 'bg-danger',
+                        'Mobility': 'bg-warning text-dark',
+                        'Load': 'bg-primary',
+                        'Sport': 'bg-info text-dark',
+                        'Cleared': 'bg-success'
+                    };
+                    const phaseIcons = {
+                        'Acute': '<i class="bi bi-exclamation-triangle-fill me-1"></i>',
+                        'Mobility': '<i class="bi bi-arrow-right me-1"></i>',
+                        'Load': '<i class="bi bi-arrow-up-right me-1"></i>',
+                        'Sport': '<i class="bi bi-lightning-fill me-1"></i>',
+                        'Cleared': '<i class="bi bi-check-circle-fill me-1"></i>'
+                    };
+                    const nextPhases = {
+                        'Acute': 'Mobility',
+                        'Mobility': 'Load',
+                        'Load': 'Sport',
+                        'Sport': 'Cleared',
+                        'Cleared': null
+                    };
+
+                    // Create phase progress indicator
+                    const phases = ['Acute', 'Mobility', 'Load', 'Sport', 'Cleared'];
+                    const currentPhaseIndex = phases.indexOf(inj.rehab_phase);
+                    const progressPercentage = ((currentPhaseIndex + 1) / phases.length) * 100;
+
+                    historyHtml += `
+                        <tr>
+                            <td class="small fw-bold">${inj.injury_type}</td>
+                            <td><span class="badge ${inj.severity === 'Severe' ? 'bg-danger' : (inj.severity === 'Moderate' ? 'bg-warning text-dark' : 'bg-secondary')}">${inj.severity}</span></td>
+                            <td><span class="badge ${inj.is_active ? 'bg-danger' : 'bg-success'}">${inj.is_active ? 'Active' : 'Resolved'}</span></td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <div class="flex-grow-1" style="min-width: 100px;">
+                                        <div class="progress" style="height: 6px;">
+                                            <div class="progress-bar ${inj.rehab_phase === 'Cleared' ? 'bg-success' : inj.rehab_phase === 'Sport' ? 'bg-info' : 'bg-primary'}" role="progressbar" style="width: ${progressPercentage}%"></div>
+                                        </div>
+                                        <div style="font-size: 11px; margin-top: 3px; color: #6c757d;">
+                                            Phase ${currentPhaseIndex + 1}/5
+                                        </div>
+                                    </div>
+                                    <span class="badge ${phaseColors[inj.rehab_phase] || 'bg-secondary'} text-nowrap" style="white-space: nowrap;">
+                                        ${phaseIcons[inj.rehab_phase] || ''} ${inj.rehab_phase}
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="small">${inj.start_date}</td>
+                            <td style="white-space: nowrap;">
+                                ${inj.is_active ? `
+                                    ${nextPhases[inj.rehab_phase] ? `<button class="btn btn-xs btn-outline-primary me-1 advance-phase-btn" data-id="${inj.id}" data-next="${nextPhases[inj.rehab_phase]}" title="Advance to next rehabilitation phase"><i class="bi bi-arrow-right-square"></i> Next</button>` : ''}
+                                    <button class="btn btn-xs btn-outline-success resolve-injury-btn" data-id="${inj.id}" title="Mark as fully resolved"><i class="bi bi-check-circle"></i> Clear</button>
+                                ` : '<span class="badge bg-success-subtle text-success"><i class="bi bi-check-circle-fill me-1"></i>Cleared</span>'}
+                            </td>
+                        </tr>
+                    `;
+                });
+                document.getElementById('profInjuryHistoryTable').innerHTML = historyHtml;
+                
+                // Attach event listeners for resolve buttons
+                document.querySelectorAll('.resolve-injury-btn').forEach(btn => {
+                    btn.onclick = async () => {
+                        const injId = btn.dataset.id;
+                        if (confirm('Mark this injury as resolved? This will set it to "Cleared" status.')) {
+                            const res = await fetch(`http://localhost:8000/api/injuries/${injId}/`, {
+                                method: 'PATCH',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ is_active: false, cleared_to_train: true, rehab_phase: 'Cleared' })
+                            });
+                            if (res.ok) {
+                                fetchFullProfile();
+                            } else {
+                                alert('Failed to resolve injury.');
+                            }
+                        }
+                    };
+                });
+
+                // Attach event listeners for advance phase buttons
+                document.querySelectorAll('.advance-phase-btn').forEach(btn => {
+                    btn.onclick = async () => {
+                        const injId = btn.dataset.id;
+                        const nextPhase = btn.dataset.next;
+                        if (confirm(`Advance this injury to ${nextPhase} phase? This indicates progress in rehabilitation.`)) {
+                            const payload = { rehab_phase: nextPhase };
+                            if (nextPhase === 'Cleared') {
+                                payload.is_active = false;
+                                payload.cleared_to_train = true;
+                            }
+                            const res = await fetch(`http://localhost:8000/api/injuries/${injId}/`, {
+                                method: 'PATCH',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(payload)
+                            });
+                            if (res.ok) {
+                                fetchFullProfile();
+                            } else {
+                                alert('Failed to advance phase.');
+                            }
+                        }
+                    };
+                });
+            }
+            
+            document.getElementById('profInjuries').innerText = activeInjuries.length ? activeInjuries.join(', ') : "None active";
+            document.getElementById('profStrengths').innerText = a.strengths || "None recorded";
+            document.getElementById('profWeaknesses').innerText = a.weaknesses || "None recorded";
+        }
+
+        function renderFitness(f) {
+            if (!f) return;
+            document.getElementById('fitnessContainer').classList.remove('d-none');
+            document.getElementById('fitGoal').innerText = f.fitness_goal || "No specific goal set";
+            document.getElementById('fitNutrition').innerText = "View full strategy below";
+            document.getElementById('fullNutritionBody').innerText = f.nutrition_plan || "No specific nutrition plan provided.";
+            document.getElementById('fitSessions').innerText = f.sessions_per_week ? `${f.sessions_per_week} / week` : "-";
+            
+            // Format summaries
+            const workoutTypes = (f.workout_type || "").split(' | ');
+            const workoutPlans = (f.workout_plan || "").split('\n\n---\n\n');
+            let workoutHtml = "";
+            let fullWorkoutHtml = "";
+            workoutTypes.forEach((type, idx) => {
+                if(type.trim()) {
+                    workoutHtml += `<div class="mb-1 small"><span class="badge bg-primary-subtle text-primary me-2">${type}</span></div>`;
+                    fullWorkoutHtml += `
+                        <div class="mb-4 p-3 border rounded bg-light">
+                            <h6 class="text-primary fw-bold mb-2">${type}</h6>
+                            <div class="text-muted" style="white-space: pre-wrap;">${workoutPlans[idx] || "No details provided."}</div>
+                        </div>
+                    `;
+                }
+            });
+            document.getElementById('fitWorkouts').innerHTML = workoutHtml || "No active plans.";
+            document.getElementById('fullWorkoutBody').innerHTML = fullWorkoutHtml || "No plan data found.";
+
+            if (f.inbody_file) {
+                document.getElementById('inbodyDownload').innerHTML = `<a href="${f.inbody_file}" target="_blank" class="btn btn-sm btn-outline-info w-100 mt-2">Download InBody Analysis</a>`;
+            }
+
+            // Predictions and Charting
+            const prevTests = f.previous_fitness_tests || {};
+            const currentTests = f.current_fitness_tests || {};
+            const expectedTests = f.expected_fitness_results || {};
+            const table = document.getElementById('fitnessPredictTable');
+            table.innerHTML = "";
+
+            const isAdvancedAssessmentKey = (key) => typeof key === 'string' && (key.includes('__') || key.startsWith('_'));
+
+            const normalizeTestEntry = (entry) => {
+                if (typeof entry === 'number') {
+                    return { value: entry, reps: null, unit: null };
+                }
+                if (typeof entry === 'object' && entry !== null && entry.value !== undefined) {
+                    return {
+                        value: typeof entry.value === 'number' ? entry.value : null,
+	                        reps: Number.isInteger(entry.reps) ? entry.reps : null,
+	                        unit: entry.unit || null,
+	                        measure: entry.measure || null,
+	                        group: entry.group || null
+	                    };
+	                }
+	                return null;
+		            };
+
+		            const isTimeEntry = (entry) => entry && (entry.measure === 'time_seconds' || entry.unit === 'sec');
+		            const isRepEntry = (entry) => entry && (entry.measure === 'rep_count' || entry.unit === 'reps');
+		            const isMachineEntry = (entry) => entry && (entry.measure === 'machine_metric' || entry.measure === 'time_seconds');
+		            const formatSeconds = (value) => {
+	                const total = Math.max(0, Math.round(Number(value) || 0));
+	                const hours = Math.floor(total / 3600);
+	                const minutes = Math.floor((total % 3600) / 60);
+	                const seconds = total % 60;
+	                if (hours > 0) return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+	                return `${minutes}:${String(seconds).padStart(2, '0')}`;
+	            };
+	            const formatChartValue = (val, meta) => {
+	                if (val === null || val === undefined) return '—';
+	                if (meta?.measure === 'time_seconds' || meta?.unit === 'sec') return formatSeconds(val);
+	                if (meta?.measure === 'rep_count' || meta?.unit === 'reps') return formatNumber(val, 0);
+	                return formatNumber(val);
+	            };
+
+	            const formatTestDisplay = (entry) => {
+	                if (!entry || entry.value === null) return '—';
+	                if (isTimeEntry(entry)) {
+	                    return formatSeconds(entry.value);
+	                }
+	                if (isRepEntry(entry)) {
+	                    return `${formatNumber(entry.value, 0)} reps`;
+	                }
+	                const weight = `${formatNumber(entry.value)}${entry.unit ? ` ${entry.unit}` : ''}`;
+	                return entry.reps !== null ? `${weight} x ${entry.reps} reps` : weight;
+	            };
+
+            const formatDiffDisplay = (prevEntry, currEntry) => {
+                if (!currEntry || currEntry.value === null) return '—';
+                const parts = [];
+	                if (prevEntry && prevEntry.value !== null) {
+	                    const weightDelta = currEntry.value - prevEntry.value;
+	                    const isRepCount = isRepEntry(currEntry);
+	                    const isTime = isTimeEntry(currEntry);
+	                    const weightUnit = isRepCount ? ' reps' : (isTime ? ' sec' : (currEntry.unit ? ` ${currEntry.unit}` : ''));
+	                    parts.push(`${weightDelta >= 0 ? '+' : ''}${formatNumber(weightDelta, isRepCount || isTime ? 0 : 2)}${weightUnit}`);
+	                }
+                if (prevEntry && prevEntry.reps !== null && currEntry.reps !== null) {
+                    const repsDelta = currEntry.reps - prevEntry.reps;
+                    parts.push(`${repsDelta >= 0 ? '+' : ''}${repsDelta} reps`);
+                }
+                return parts.length ? parts.join(' | ') : '—';
+            };
+
+            const numericalKeys = Object.keys(currentTests).filter(k => {
+              if (isAdvancedAssessmentKey(k) || k === 'notes') return false;
+              const val = normalizeTestEntry(currentTests[k]);
+              return val && val.value !== null;
+            });
+
+            if (numericalKeys.length === 0) {
+                table.innerHTML = "<tr><td colspan='6' class='text-center text-muted'>No quantitative tests available.</td></tr>";
+	            } else {
+		                const chartCategories = [];
+		                const chartMeta = [];
+		                const prevSeries = [];
+		                const currSeries = [];
+		                const projectedSeries = [];
+		                const machineChartCategories = [];
+		                const machineChartMeta = [];
+		                const machinePrevSeries = [];
+		                const machineCurrSeries = [];
+		                const machineProjectedSeries = [];
+
+		                const pushChartMetric = (target, label, meta, previous, current, projected) => {
+		                    target.categories.push(label);
+		                    target.meta.push(meta);
+		                    target.previous.push(previous);
+		                    target.current.push(current);
+		                    target.projected.push(projected);
+		                };
+		                const standardTarget = {
+		                    categories: chartCategories,
+		                    meta: chartMeta,
+		                    previous: prevSeries,
+		                    current: currSeries,
+		                    projected: projectedSeries
+		                };
+		                const machineTarget = {
+		                    categories: machineChartCategories,
+		                    meta: machineChartMeta,
+		                    previous: machinePrevSeries,
+		                    current: machineCurrSeries,
+		                    projected: machineProjectedSeries
+		                };
+
+	                numericalKeys.forEach(k => {
+	                    const row = document.createElement('tr');
+	                    const currentEntry = normalizeTestEntry(currentTests[k]);
+	                    const prevEntry = normalizeTestEntry(prevTests[k]);
+	                    const expectedEntry = normalizeTestEntry(expectedTests[k]) || currentEntry;
+	                    const lowerBetter = isTimeEntry(currentEntry);
+	                    const diffClass = prevEntry && prevEntry.value !== null ? (((lowerBetter && currentEntry.value <= prevEntry.value) || (!lowerBetter && currentEntry.value >= prevEntry.value)) ? 'text-success' : 'text-danger') : 'text-muted';
+
+		                    const chartLabel = isRepEntry(currentEntry) ? `${k} Reps` : (isTimeEntry(currentEntry) ? `${k} Time` : `${k} Result`);
+		                    const target = isMachineEntry(currentEntry) ? machineTarget : standardTarget;
+		                    pushChartMetric(
+		                        target,
+		                        chartLabel,
+		                        { measure: currentEntry.measure, unit: currentEntry.unit },
+		                        prevEntry?.value ?? null,
+		                        currentEntry?.value ?? null,
+		                        isRepEntry(currentEntry) || isTimeEntry(currentEntry) ? Math.round(expectedEntry?.value ?? currentEntry?.value ?? 0) : (expectedEntry?.value ?? currentEntry?.value ?? null)
+		                    );
+
+		                    if (!isMachineEntry(currentEntry) && !isRepEntry(currentEntry) && !isTimeEntry(currentEntry) && (currentEntry?.reps !== null || prevEntry?.reps !== null || expectedEntry?.reps !== null)) {
+		                        pushChartMetric(
+		                            standardTarget,
+		                            `${k} Reps`,
+		                            { measure: 'rep_count', unit: 'reps' },
+		                            prevEntry?.reps ?? null,
+		                            currentEntry?.reps ?? null,
+		                            expectedEntry?.reps ?? currentEntry?.reps ?? null
+		                        );
+		                    }
+
+	                    row.innerHTML = `
+	                        <td class="small fw-bold">${currentEntry.group ? `<span class="d-block text-muted fw-normal">${currentEntry.group}</span>` : ''}${k}</td>
+	                        <td class="text-muted">${formatTestDisplay(prevEntry)}</td>
+		                        <td class="fw-bold" style="color:#0d6efd;">${formatTestDisplay(currentEntry)}</td>
+                        <td class="text-primary fw-bold"><i class="bi bi-stars me-1"></i>${formatTestDisplay(expectedEntry)}</td>
+                        <td class="${diffClass} small">${formatDiffDisplay(prevEntry, currentEntry)}</td>
+                    `;
+                    table.appendChild(row);
+                });
+
+	                const renderProgressChart = (key, selector, categories, meta, previous, current, projected, emptyMessage) => {
+	                    safeDestroy(key);
+	                    const el = document.querySelector(selector);
+	                    if (!el) return;
+	                    if (!categories.length) {
+	                        el.innerHTML = `<p class="text-muted text-center py-5 mb-0">${emptyMessage}</p>`;
+	                        return;
+	                    }
+	                    el.innerHTML = '';
+	                    const chartHeight = Math.max(320, categories.length * 44);
+	                    chartInstances[key] = new ApexCharts(el, {
+	                        series: [
+	                            { name: "Previous", data: previous },
+	                            { name: "Current", data: current },
+	                            { name: "Target", data: projected }
+	                        ],
+	                        chart: { type: 'bar', height: chartHeight, toolbar: { show: false } },
+	                        plotOptions: { bar: { horizontal: true, barHeight: '58%', borderRadius: 4 } },
+	                        dataLabels: { enabled: false },
+	                        stroke: { show: true, width: 2, colors: ['transparent'] },
+	                        xaxis: {
+	                            categories,
+	                            labels: {
+	                                formatter: (val, opts) => formatChartValue(val, meta[opts?.dataPointIndex])
+	                            }
+	                        },
+	                        yaxis: {
+	                            labels: {
+	                                maxWidth: 220,
+	                                style: {
+	                                    fontSize: '12px',
+	                                    fontWeight: 600
+	                                }
+	                            }
+	                        },
+	                        grid: {
+	                            borderColor: '#e9ecef',
+	                            strokeDashArray: 4
+	                        },
+	                        fill: { opacity: 1 },
+	                        colors: ['#adb5bd', '#0d6efd', '#198754'],
+	                        tooltip: { y: { formatter: (val, opts) => formatChartValue(val, meta[opts?.dataPointIndex]) } },
+	                        legend: { position: 'top', horizontalAlign: 'right' }
+	                    });
+	                    chartInstances[key].render();
+	                };
+
+	                renderProgressChart('f-trends', '#performanceTrendsChart', chartCategories, chartMeta, prevSeries, currSeries, projectedSeries, 'No strength or rep benchmarks available.');
+
+	                const machineWrap = document.getElementById('machineTestChartWrap');
+	                if (machineWrap) machineWrap.classList.toggle('d-none', machineChartCategories.length === 0);
+	                if (machineChartCategories.length) {
+	                    renderProgressChart('machine-tests', '#machineTestTrendsChart', machineChartCategories, machineChartMeta, machinePrevSeries, machineCurrSeries, machineProjectedSeries, 'No machine or running test data available.');
+	                } else {
+	                    safeDestroy('machine-tests');
+	                }
+	            }
+	        }
+
+        function extractDistance(str) {
+            if (!str) return 0;
+            const match = str.match(/(\d+(?:\.\d+)?)\s*m/i);
+            return match ? parseFloat(match[1]) : 0;
+        }
+
+        function durationToSeconds(d) {
+            if (!d || typeof d !== 'string') return 0;
+            // Handle formats: "HH:MM:SS" or "MM:SS" or "SS"
+            const parts = d.split(':').reverse();
+            let seconds = 0;
+            if (parts[0]) seconds += parseFloat(parts[0]);
+            if (parts[1]) seconds += parseFloat(parts[1]) * 60;
+            if (parts[2]) seconds += parseFloat(parts[2]) * 3600;
+            return seconds;
+        }
+
+        function formatSwimDuration(totalSeconds, eventName = '') {
+            if (totalSeconds === null || totalSeconds === undefined || totalSeconds === '' || Number.isNaN(Number(totalSeconds))) {
+                return '—';
+            }
+
+            const seconds = Math.max(0, Number(totalSeconds));
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const remaining = seconds % 60;
+            const wholeSeconds = Math.floor(remaining);
+            const hundredths = Math.round((remaining - wholeSeconds) * 100);
+            const secondText = `${String(wholeSeconds).padStart(2, '0')}.${String(hundredths).padStart(2, '0')}`;
+
+            if (['5km', '10km', '25km'].includes(eventName)) {
+                return `${hours}:${String(minutes).padStart(2, '0')}:${secondText}`;
+            }
+            if (['100m', '200m', '400m', '800m', '1500m'].includes(eventName)) {
+                const totalMinutes = Math.floor(seconds / 60);
+                return `${totalMinutes}:${secondText}`;
+            }
+            return `${Number(seconds.toFixed(2))}s`;
+        }
+
+        function renderSport(a) {
+            let records = [];
+            let sportName = "";
+            let goal = "";
+
+            if (a.swimming_records?.length) {
+                records = a.swimming_records;
+                sportName = "Swimming";
+                goal = records[0].swimming_goal;
+            } else if (a.basketball_records?.length) {
+                records = a.basketball_records;
+                sportName = "Basketball";
+            } else if (a.football_records?.length) {
+                records = a.football_records;
+                sportName = "Football";
+            } else if (a.crossfit_records?.length) {
+                records = a.crossfit_records;
+                sportName = "CrossFit";
+            }
+
+            if (!sportName) return;
+
+            document.getElementById('sportContainer').classList.remove('d-none');
+            document.getElementById('sportHeader').innerText = `${sportName} Specialization`;
+            document.getElementById('sportGoal').innerText = goal || "No specialized goal set";
+
+            const table = document.getElementById('sportPredictTable');
+            const headRow = document.getElementById('sportTableHeadRow');
+            table.innerHTML = "";
+
+            if (sportName === "Swimming") {
+                // Set headers for Swimming
+                headRow.innerHTML = `
+                    <th>Event / Detail</th>
+                    <th>Previous</th>
+                    <th>Current</th>
+                    <th>Change %</th>
+                    <th>Target</th>
+                    <th>Target Projection %</th>
+                `;
+
+                document.getElementById('swimmingGraphSection').classList.remove('d-none');
+                const categories = [];
+                const prevSeries = [];
+                const currSeries = [];
+                const targetSeries = [];
+
+                records.forEach(r => {
+                    const row = document.createElement('tr');
+                    const prevSecs = durationToSeconds(r.previous_record);
+                    const currSecs = durationToSeconds(r.current_record);
+                    const expSecs = durationToSeconds(r.expected_record);
+
+                    // Calculations (Lower is better in swimming)
+                    let changePct = "—";
+                    if (prevSecs && currSecs) {
+                        const diff = ((prevSecs - currSecs) / prevSecs) * 100;
+                        const icon = diff > 0 ? '▲' : (diff < 0 ? '▼' : '→');
+                        const color = diff > 0 ? 'text-success' : (diff < 0 ? 'text-danger' : 'text-muted');
+                        changePct = `<span class="${color} fw-bold">${icon} ${Math.abs(diff).toFixed(1)}%</span>`;
+                    }
+
+                    let projectionPct = "—";
+                    if (currSecs && expSecs) {
+                        const diff = ((currSecs - expSecs) / currSecs) * 100;
+                        if (diff > 0) {
+                            projectionPct = `<span class="text-primary fw-bold">${diff.toFixed(1)}% to go</span>`;
+                        } else {
+                            projectionPct = `<span class="text-success fw-bold">Target Reached!</span>`;
+                        }
+                    }
+
+                    const dist = extractDistance(r.events);
+                    let currSpeedHtml = "";
+                    let prevSpeedHtml = "";
+                    let expSpeedHtml = "";
+                    let speedPctHtml = "";
+
+                    if (dist > 0) {
+	                        if (currSecs) currSpeedHtml = `<br><small style="color:#ffc107;">${(dist / currSecs).toFixed(2)} m/s</small>`;
+                        if (prevSecs) prevSpeedHtml = `<br><small class="text-muted">${(dist / prevSecs).toFixed(2)} m/s</small>`;
+                        if (expSecs) expSpeedHtml = `<br><small class="text-muted">${(dist / expSecs).toFixed(2)} m/s</small>`;
+
+                        if (currSecs && prevSecs) {
+                            const pct = ((prevSecs / currSecs) * 100).toFixed(1);
+                            speedPctHtml = `<br><span class="badge bg-light text-dark border mt-1" title="Speed relative to previous record">Speed: ${pct}% of Prev</span>`;
+                        }
+                    }
+
+                    categories.push(`${r.stroke} - ${r.events}`);
+                    prevSeries.push(prevSecs || 0);
+                    currSeries.push(currSecs);
+                    targetSeries.push(expSecs || currSecs);
+
+                    row.innerHTML = `
+                        <td class="small fw-bold">${r.stroke} - ${r.events}</td>
+                        <td class="text-muted font-monospace">${r.previous_record || 'N/A'}${prevSpeedHtml}</td>
+	                        <td class="fw-bold font-monospace" style="color:#ffc107;">${r.current_record}${currSpeedHtml}${speedPctHtml}</td>
+                        <td class="font-monospace">${changePct}</td>
+                        <td class="text-muted font-monospace">${r.expected_record || '...'}${expSpeedHtml}</td>
+                        <td class="font-monospace small">${projectionPct}</td>
+                    `;
+                    table.appendChild(row);
+                });
+
+                safeDestroy('swim-v');
+                chartInstances['swim-v'] = new ApexCharts(document.querySelector("#swimmingPerformanceChart"), {
+                    series: [
+                        { name: "Previous", data: prevSeries },
+                        { name: "Current", data: currSeries },
+                        { name: "Target", data: targetSeries }
+                    ],
+                    chart: { type: 'bar', height: 300, toolbar: { show: false } },
+                    plotOptions: { bar: { horizontal: true, barHeight: '70%', borderRadius: 4 } },
+                    colors: ['#adb5bd', '#ffc107', '#198754'],
+                    dataLabels: {
+                        enabled: true,
+                        formatter: (val, opts) => formatSwimDuration(val, records[opts.dataPointIndex]?.events),
+                        offsetX: 8,
+                        style: {
+                            fontSize: '11px',
+                            fontWeight: 600,
+                            colors: ['#6c757d', '#8a6d00', '#198754']
+                        }
+                    },
+                    xaxis: { categories: categories },
+                    legend: { position: 'top' },
+                    tooltip: { y: { formatter: (val, opts) => formatSwimDuration(val, records[opts.dataPointIndex]?.events) } }
+                });
+                chartInstances['swim-v'].render();
+
+                // --- Split Logic ---
+                const splitsSection = document.getElementById('swimmingSplitsSection');
+                const splitsTable = document.getElementById('swimmingSplitsTable');
+                const splitsGrid = document.getElementById('swimmingSplitsChartsGrid');
+                splitsTable.innerHTML = "";
+                splitsGrid.innerHTML = "";
+                splitsSection.classList.add('d-none');
+
+                let hasSplits = false;
+                records.forEach((r, idx) => {
+                    if (r.splits_data && Array.isArray(r.splits_data) && r.splits_data.length > 0) {
+                        hasSplits = true;
+                        splitsSection.classList.remove('d-none');
+
+                        // Table Rows
+                        r.splits_data.forEach(s => {
+                            const row = document.createElement('tr');
+                            const prev = durationToSeconds(s.previous);
+                            const curr = durationToSeconds(s.current);
+                            let target = durationToSeconds(s.expected);
+
+                            // Fallback calculation if expected is missing in data
+                            if (curr && !target) {
+                                if (prev && prev > curr) {
+                                    target = curr - (prev - curr);
+                                } else {
+                                    target = curr * 0.95;
+                                }
+                            }
+
+                            let changePct = "—";
+                            if (prev && curr) {
+                                const diff = ((prev - curr) / prev) * 100;
+                                const icon = diff > 0 ? '▲' : (diff < 0 ? '▼' : '→');
+                                const color = diff > 0 ? 'text-success' : (diff < 0 ? 'text-danger' : 'text-muted');
+                                changePct = `<span class="${color} fw-bold">${icon} ${Math.abs(diff).toFixed(1)}%</span>`;
+                            }
+
+                            let projectionPct = "—";
+                            if (curr && target) {
+                                const diff = ((curr - target) / curr) * 100;
+                                if (diff > 0) {
+                                    projectionPct = `<span class="text-primary fw-bold">${diff.toFixed(1)}% to go</span>`;
+                                } else {
+                                    projectionPct = `<span class="text-success fw-bold">Target Reached!</span>`;
+                                }
+                            }
+
+                            let lapDist = extractDistance(r.lap_distance);
+                            if (!lapDist) {
+                                const eventDist = extractDistance(r.events);
+                                const totalLaps = r.total_laps || r.splits_data.length;
+                                if (eventDist > 0 && totalLaps > 0) {
+                                    lapDist = eventDist / totalLaps;
+                                }
+                            }
+                            let currSpeedHtml = "";
+                            let prevSpeedHtml = "";
+                            let expSpeedHtml = "";
+                            let speedPctHtml = "";
+
+                            if (lapDist > 0) {
+                                if (curr) currSpeedHtml = `<br><small class="text-primary">${(lapDist / curr).toFixed(2)} m/s</small>`;
+                                if (prev) prevSpeedHtml = `<br><small class="text-muted">${(lapDist / prev).toFixed(2)} m/s</small>`;
+                                if (target) expSpeedHtml = `<br><small class="text-muted">${(lapDist / target).toFixed(2)} m/s</small>`;
+
+                                if (curr && prev) {
+                                    const pct = ((prev / curr) * 100).toFixed(1);
+                                    speedPctHtml = `<br><span class="badge bg-light text-dark border mt-1" title="Speed relative to previous lap split">Speed: ${pct}% of Prev</span>`;
+                                }
+                            }
+
+                            row.innerHTML = `
+                                <td class="small fw-bold">${r.stroke} ${r.events} - Lap ${s.lap_number}</td>
+                                <td class="text-muted font-monospace">${s.previous || 'N/A'}${prevSpeedHtml}</td>
+	                                <td class="fw-bold font-monospace font-monospace" style="color:#0d6efd;">${s.current || 'N/A'}${currSpeedHtml}${speedPctHtml}</td>
+                                <td class="font-monospace">${changePct}</td>
+                                <td class="text-muted font-monospace">${s.expected || (target ? formatSwimDuration(target) : '...')}${expSpeedHtml}</td>
+                                <td class="font-monospace small">${projectionPct}</td>
+                            `;
+                            splitsTable.appendChild(row);
+                        });
+
+                        // Calculate Fatigue Analysis
+                        const validTimes = r.splits_data.map(s => durationToSeconds(s.current)).filter(t => t > 0);
+                        let fatigueBadge = "";
+                        if (validTimes.length > 1) {
+                            const fastest = Math.min(...validTimes);
+                            const slowest = Math.max(...validTimes);
+                            const fatigueIdx = ((slowest - fastest) / fastest) * 100;
+                            const status = fatigueIdx > 15 ? 'High' : (fatigueIdx > 7 ? 'Moderate' : 'Low');
+                            const color = fatigueIdx > 15 ? 'bg-danger' : (fatigueIdx > 7 ? 'bg-warning text-dark' : 'bg-success');
+                            fatigueBadge = `<span class="badge ${color} border ms-2" title="Drop-off: ${fatigueIdx.toFixed(1)}%"><i class="bi bi-person-dash me-1"></i>${status} Fatigue</span>`;
+                        }
+
+                        let fatigueStatement = "";
+                        if (validTimes.length > 1) {
+                            const fastest = Math.min(...validTimes);
+                            const slowest = Math.max(...validTimes);
+                            const fatigueIdx = ((slowest - fastest) / fastest) * 100;
+                            const status = fatigueIdx > 15 ? 'High' : (fatigueIdx > 7 ? 'Moderate' : 'Low');
+                            fatigueStatement = `<div class="mt-3 p-2 bg-secondary bg-opacity-10 rounded-2 border-start border-4 ${fatigueIdx > 15 ? 'border-danger' : (fatigueIdx > 7 ? 'border-warning' : 'border-success')}">
+                                <p class="small mb-0"><strong>Coach's Insight:</strong> The swimmer shows a <strong>${fatigueIdx.toFixed(1)}%</strong> drop-off from their fastest lap. This indicates <strong>${status} Fatigue</strong> during this event.</p>
+                            </div>`;
+                        }
+
+                        // Chart
+                        const chartCol = document.createElement('div');
+                        chartCol.className = "col-lg-6";
+                        const chartId = `splitChart-${idx}`;
+                        chartCol.innerHTML = `
+                            <div class="card border shadow-none h-100">
+                                <div class="card-header bg-white py-3">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <h6 class="mb-0 fw-bold text-primary"><i class="bi bi-graph-up me-2"></i>${r.stroke} ${r.events}</h6>
+                                        ${fatigueBadge}
+                                    </div>
+                                    <div class="small text-muted mt-2">
+                                        <span class="badge bg-light text-dark border me-2"><i class="bi bi-arrow-repeat me-1"></i>Total Laps: ${r.total_laps || r.splits_data.length}</span>
+                                        <span class="badge bg-light text-dark border"><i class="bi bi-rulers me-1"></i>Lap Distance: ${r.lap_distance || 'N/A'}</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="${chartId}" style="min-height: 250px;"></div>
+                                    ${fatigueStatement}
+                                </div>
+                            </div>
+                        `;
+                        splitsGrid.appendChild(chartCol);
+
+                        const lapLabels = r.splits_data.map(s => `Lap ${s.lap_number}`);
+                        const sPrev = r.splits_data.map(s => durationToSeconds(s.previous) || null);
+                        const sCurr = r.splits_data.map(s => durationToSeconds(s.current) || null);
+                        const sTarget = r.splits_data.map(s => {
+                            let t = durationToSeconds(s.expected);
+                            if (!t) {
+                                const c = durationToSeconds(s.current);
+                                const p = durationToSeconds(s.previous);
+                                if (c) {
+                                    t = (p && p > c) ? (c - (p - c)) : (c * 0.95);
+                                }
+                            }
+                            return t || null;
+                        });
+
+                        safeDestroy(`split-${idx}`);
+                        chartInstances[`split-${idx}`] = new ApexCharts(document.querySelector(`#${chartId}`), {
+                            series: [
+                                { name: "Previous", data: sPrev },
+                                { name: "Current", data: sCurr },
+                                { name: "Expected", data: sTarget }
+                            ],
+                            chart: { type: 'line', height: 280, toolbar: { show: false }, zoom: { enabled: false } },
+                            stroke: { curve: 'smooth', width: [3, 4, 3], dashArray: [4, 0, 4] },
+                            markers: { size: 5, hover: { size: 7 } },
+                            colors: ['#adb5bd', '#0d6efd', '#198754'],
+                            xaxis: { categories: lapLabels, title: { text: 'Lap Number', style: { fontSize: '12px', fontWeight: 600, color: '#6c757d' } } },
+                            yaxis: { title: { text: 'Lap Time', style: { fontSize: '12px', fontWeight: 600, color: '#6c757d' } }, labels: { formatter: (val) => formatSwimDuration(val) } },
+                            tooltip: { y: { formatter: (val) => formatSwimDuration(val) } },
+                            grid: { borderColor: '#f1f1f1', strokeDashArray: 4 },
+                            legend: { position: 'top', horizontalAlign: 'right' }
+                        });
+                        chartInstances[`split-${idx}`].render();
+                    }
+                });
+            } else {
+                // Set headers for Other Sports
+                headRow.innerHTML = `
+                    <th>Event / Detail</th>
+                    <th>Current Data</th>
+                    <th>Expected</th>
+                    <th colspan="3">Target Projection</th>
+                `;
+
+                document.getElementById('swimmingGraphSection').classList.add('d-none');
+                document.getElementById('swimmingSplitsSection').classList.add('d-none');
+
+                records.forEach(r => {
+                    const row = document.createElement('tr');
+                    let detail = "";
+                    let current = "";
+                    let expected = "";
+                    
+                    if (sportName === 'Basketball') {
+                        detail = `Position: ${r.position}`;
+                        current = `Vertical: ${r.vertical_jump}cm | Game High: ${r.current_game_high}`;
+                        expected = "—";
+                    } else if (sportName === 'Football') {
+                        detail = `Position: ${r.position}`;
+                        current = "Recorded";
+                        expected = "—";
+                    } else if (sportName === 'CrossFit') {
+                        detail = `Level: ${r.level}`;
+                        current = "Recorded";
+                        expected = "—";
+                    }
+
+                    row.innerHTML = `
+                        <td class="small fw-bold">${detail}</td>
+	                        <td class="fw-bold" style="color:#0d6efd;">${current}</td>
+                        <td class="text-muted">${expected}</td>
+                        <td colspan="3" class="text-center text-muted small italic">Standard progression tracking</td>
+                    `;
+                    table.appendChild(row);
+                });
+            }
+        }
+
+        function checkTodayAttendance() {
+            const todayRec = attendanceRecords.find(r => r.date === todayStr);
+            const toggle = document.getElementById('attendanceToggle');
+            const ratingModule = document.getElementById('ratingModule');
+            
+            if (todayRec) {
+                todayRecordId = todayRec.id;
+                toggle.checked = todayRec.attended;
+                if (todayRec.attended) {
+                    ratingModule.classList.remove('d-none');
+                    document.getElementById('ratingScore').value = todayRec.performance_rating || 5;
+                    document.getElementById('ratingVal').innerText = todayRec.performance_rating || 5;
+                    document.getElementById('ratingNotes').value = todayRec.coach_notes || "";
+                    
+                    document.getElementById('bioHRV').value = todayRec.hrv || "";
+                    document.getElementById('bioRHR').value = todayRec.resting_heart_rate || "";
+                    document.getElementById('bioSleep').value = todayRec.sleep_hours || "";
+                    document.getElementById('bioFatigue').value = todayRec.fatigue_score || "";
+                    document.getElementById('bioSoreness').value = todayRec.muscle_soreness || "";
+                    document.getElementById('workoutCompletedCheck').checked = todayRec.workout_completed || false;
+                } else {
+                    ratingModule.classList.add('d-none');
+                }
+            } else {
+                todayRecordId = null;
+                toggle.checked = false;
+                ratingModule.classList.add('d-none');
+            }
+        }
+
+        function renderAttendanceChart() {
+            const chartDiv = document.querySelector("#attendanceChart");
+            chartDiv.innerHTML = "";
+            const total = attendanceRecords.length;
+            if (total === 0) {
+                chartDiv.innerHTML = "<p class='text-muted text-center pt-5'>No attendance history yet.</p>";
+                document.getElementById('overallAttendance').innerText = "0%";
+                return;
+            }
+
+            const attendedCount = attendanceRecords.filter(r => r.attended).length;
+            const rate = ((attendedCount / total) * 100).toFixed(0);
+            document.getElementById('overallAttendance').innerText = `${rate}%`;
+
+            const categories = attendanceRecords.map(r => r.date);
+            let runningAttended = 0;
+            const cumulativeData = attendanceRecords.map((r, idx) => {
+                if (r.attended) runningAttended++;
+                return ((runningAttended / (idx + 1)) * 100).toFixed(1);
+            });
+
+            safeDestroy('att-c');
+            chartInstances['att-c'] = new ApexCharts(chartDiv, {
+                series: [{ name: "Rate (%)", data: cumulativeData }],
+                chart: { height: 250, type: 'area', toolbar: { show: false } },
+                stroke: { curve: 'smooth', width: 3 },
+                xaxis: { categories: categories, type: 'datetime' },
+                yaxis: { min: 0, max: 100 },
+                colors: ['#28a745'],
+                fill: { type: 'gradient', gradient: { opacityFrom: 0.4, opacityTo: 0.05 } }
+            });
+            chartInstances['att-c'].render();
+        }
+
+        function renderRatingChart() {
+            const chartDiv = document.querySelector("#ratingTrendChart");
+            chartDiv.innerHTML = "";
+            
+            const ratedSessions = attendanceRecords.filter(r => r.performance_rating);
+            if (ratedSessions.length === 0) {
+                chartDiv.innerHTML = "<p class='text-muted text-center pt-5'>No performance ratings yet.</p>";
+                return;
+            }
+
+            const totalRating = ratedSessions.reduce((sum, r) => sum + r.performance_rating, 0);
+            const avgRating = (totalRating / ratedSessions.length).toFixed(1);
+            document.getElementById('avgRating').innerText = avgRating;
+
+            const categories = ratedSessions.map(r => r.date);
+            const ratingData = ratedSessions.map(r => r.performance_rating);
+
+            safeDestroy('rating-t');
+            chartInstances['rating-t'] = new ApexCharts(chartDiv, {
+                series: [{ name: "Rating", data: ratingData }],
+                chart: { height: 250, type: 'line', toolbar: { show: false } },
+                stroke: { curve: 'smooth', width: 4 },
+                xaxis: { categories: categories, type: 'datetime' },
+                yaxis: { min: 0, max: 10 },
+                colors: ['#0d6efd'],
+                markers: { size: 5, colors: ["#0d6efd"], strokeColors: "#fff", strokeWidth: 2 }
+            });
+            chartInstances['rating-t'].render();
+        }
+
+        document.getElementById('ratingScore').addEventListener('input', (e) => {
+            document.getElementById('ratingVal').innerText = e.target.value;
+        });
+
+        document.getElementById('attendanceToggle').addEventListener('change', async (e) => {
+            const isAttended = e.target.checked;
+            const ratingModule = document.getElementById('ratingModule');
+            
+            try {
+                let res;
+                const payload = { athlete: athleteId, attended: isAttended, date: todayStr };
+                
+                if (todayRecordId) {
+                    res = await fetch(`http://localhost:8000/api/attendance/${todayRecordId}/`, {
+                        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                } else {
+                    res = await fetch(`http://localhost:8000/api/attendance/`, {
+                        method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                }
+                
+                if (!res.ok) throw new Error("Sync failed");
+                const saved = await res.json();
+                todayRecordId = saved.id;
+                
+                if (isAttended) {
+                    ratingModule.classList.remove('d-none');
+                } else {
+                    ratingModule.classList.add('d-none');
+                }
+                
+                // Immediate Refresh for Graph
+                await fetchFullProfile();
+            } catch (err) {
+                console.error(err);
+                alert("Attendance sync failed!");
+                e.target.checked = !isAttended;
+            }
+        });
+
+        document.getElementById('saveRatingBtn').addEventListener('click', async () => {
+            const score = parseInt(document.getElementById('ratingScore').value);
+            const notes = document.getElementById('ratingNotes').value;
+            const hrv = parseInt(document.getElementById('bioHRV').value) || null;
+            const rhr = parseInt(document.getElementById('bioRHR').value) || null;
+            const sleep = parseFloat(document.getElementById('bioSleep').value) || null;
+            const fatigue = parseInt(document.getElementById('bioFatigue').value) || null;
+            const soreness = parseInt(document.getElementById('bioSoreness').value) || null;
+
+            if (!todayRecordId) {
+                alert("Please mark attendance first.");
+                return;
+            }
+
+            try {
+                const res = await fetch(`http://localhost:8000/api/attendance/${todayRecordId}/`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        performance_rating: score, 
+                        coach_notes: notes,
+                        hrv: hrv,
+                        resting_heart_rate: rhr,
+                        sleep_hours: sleep,
+                        fatigue_score: fatigue,
+                        muscle_soreness: soreness,
+                        workout_completed: document.getElementById('workoutCompletedCheck').checked
+                    })
+                });
+
+                if (!res.ok) throw new Error("Rating update failed");
+                await fetchFullProfile();
+            } catch (err) {
+                console.error(err);
+                alert("Review failed!");
+            }
+        });
+
+        // Report Generation Logic
+        const downloadReport = (lang) => {
+            const url = `http://localhost:8000/api/athletes/${athleteId}/generate_report/?lang=${lang}`;
+            window.open(url, '_blank');
+        };
+
+        document.getElementById('genReportEn').addEventListener('click', () => downloadReport('en'));
+        document.getElementById('genReportAr').addEventListener('click', () => downloadReport('ar'));
+
+        await fetchFullProfile();
+
+        // AI Plan Generation Logic
+        document.getElementById('generateAIPLanBtn').addEventListener('click', async () => {
+            const modalElement = document.getElementById('aiPlanModal');
+            const aiModal = new bootstrap.Modal(modalElement);
+            const loadingState = document.getElementById('aiPlanLoadingState');
+            const contentDiv = document.getElementById('aiPlanContent');
+            
+            loadingState.classList.remove('d-none');
+            contentDiv.classList.add('d-none');
+            contentDiv.innerHTML = '';
+            
+            // Show loading indicator with readiness context
+            loadingState.innerHTML = `
+                <div class="spinner-border text-success mb-3" role="status"></div>
+                <p class="text-muted mt-2 fw-bold">Analyzing Readiness Metrics...</p>
+                <div class="mt-3 p-3 bg-light rounded" style="max-width: 400px; margin: 0 auto;">
+                    <h6 class="text-success mb-3"><i class="bi bi-activity me-2"></i>Readiness Context</h6>
+                    <div id="readinessMetricsDisplay" class="small">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Gathering readiness data...</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            aiModal.show();
+
+            try {
+                // First, get the latest readiness metrics
+                const latestRecord = attendanceRecords[attendanceRecords.length - 1];
+                let readinessDisplay = '<div class="d-flex justify-content-between mb-2"><span>Fatigue:</span> <span class="badge bg-secondary">—</span></div>';
+                
+                if (latestRecord) {
+                    const fatigue = latestRecord.fatigue_score || '—';
+                    const sleep = latestRecord.sleep_hours || '—';
+                    const hrv = latestRecord.hrv || '—';
+                    const rhr = latestRecord.resting_heart_rate || '—';
+                    const soreness = latestRecord.muscle_soreness || '—';
+                    
+                    const fatigueColor = fatigue !== '—' ? (fatigue >= 7 ? 'danger' : fatigue >= 4 ? 'warning' : 'success') : 'secondary';
+                    const sleepColor = sleep !== '—' ? (sleep >= 7 ? 'success' : sleep >= 6 ? 'warning' : 'danger') : 'secondary';
+                    
+                    readinessDisplay = `
+                        <div class="d-flex justify-content-between mb-2">
+                            <span><i class="bi bi-lightning-fill text-warning me-1"></i>Fatigue:</span> 
+                            <span class="badge bg-${fatigueColor}">${fatigue}/10</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span><i class="bi bi-moon-stars me-1"></i>Sleep:</span> 
+                            <span class="badge bg-${sleepColor}">${sleep}h</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span><i class="bi bi-heart-pulse me-1"></i>HRV:</span> 
+                            <span class="badge bg-info">${hrv}ms</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span><i class="bi bi-speedometer me-1"></i>Resting HR:</span> 
+                            <span class="badge bg-info">${rhr}bpm</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span><i class="bi bi-exclamation-circle me-1"></i>Soreness:</span> 
+                            <span class="badge bg-warning">${soreness}/10</span>
+                        </div>
+                    `;
+                }
+                
+                document.getElementById('readinessMetricsDisplay').innerHTML = readinessDisplay;
+                
+                const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/generate_workout_plan/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ api_key: GEMINI_API_KEY })
+                });
+                const data = await res.json();
+                
+                if (res.ok && data.status === 'success') {
+                    // Add readiness context header to the plan
+                    const planWithContext = `
+                        <div class="alert alert-info alert-sm mb-3">
+                            <h6 class="mb-2"><i class="bi bi-info-circle me-2"></i>Generated with Readiness Context:</h6>
+                            <div id="planReadinessContext" class="small">
+                                ${readinessDisplay}
+                            </div>
+                        </div>
+                        ${data.plan_html}
+                    `;
+                    contentDiv.innerHTML = planWithContext;
+                } else {
+                    contentDiv.innerHTML = `<div class="alert alert-danger">Error: ${data.message || 'Unknown error occurred'}</div>`;
+                }
+            } catch (err) {
+                contentDiv.innerHTML = `<div class="alert alert-danger">Failed to connect to the server.</div>`;
+            } finally {
+                loadingState.classList.add('d-none');
+                contentDiv.classList.remove('d-none');
+            }
+        });
+
+        // AI Nutrition Strategy Logic
+        document.getElementById('generateNutritionBtn').addEventListener('click', async () => {
+            const modalElement = document.getElementById('aiNutritionModal');
+            const aiModal = new bootstrap.Modal(modalElement);
+            const loadingState = document.getElementById('aiNutritionLoadingState');
+            const contentDiv = document.getElementById('aiNutritionContent');
+            
+            loadingState.classList.remove('d-none');
+            contentDiv.classList.add('d-none');
+            contentDiv.innerHTML = '';
+            aiModal.show();
+
+            try {
+                const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/generate_nutrition_strategy/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ api_key: GEMINI_API_KEY })
+                });
+                const data = await res.json();
+                
+                if (res.ok && data.status === 'success') {
+                    contentDiv.innerHTML = data.strategy_html;
+                } else {
+                    contentDiv.innerHTML = `<div class="alert alert-danger">Error: ${data.message || 'Unknown error occurred'}</div>`;
+                }
+            } catch (err) {
+                contentDiv.innerHTML = `<div class="alert alert-danger">Failed to connect to the server.</div>`;
+            } finally {
+                loadingState.classList.add('d-none');
+                contentDiv.classList.remove('d-none');
+            }
+        });
+        // Injury Risk AI & Biometrics
+        document.getElementById('generateRiskBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('generateRiskBtn');
+            const loading = document.getElementById('aiRiskLoading');
+            
+            // Visual reset
+            document.getElementById('aiRiskScore').innerText = "--";
+            document.getElementById('aiRiskBadge').innerText = "Analyzing...";
+            document.getElementById('aiPredictedType').innerText = "Calculating...";
+            document.getElementById('aiPredictedTime').innerText = "Calculating...";
+            
+            btn.disabled = true;
+            loading.classList.remove('d-none');
+            
+            try {
+                const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/generate_injury_prediction/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ api_key: GEMINI_API_KEY })
+                });
+                const data = await res.json();
+                
+                if (data.status === 'success' && data.prediction) {
+                    const pred = data.prediction;
+                    document.getElementById('aiRiskScore').innerText = pred.overall_risk_score;
+                    const badge = document.getElementById('aiRiskBadge');
+                    badge.innerText = pred.risk_status;
+                    badge.className = `badge fs-6 px-3 py-2 mt-2 ${pred.risk_status === 'High' ? 'bg-danger' : (pred.risk_status === 'Medium' ? 'bg-warning' : 'bg-success')}`;
+                    
+                    document.getElementById('aiRiskReason').innerText = pred.why_risk_high || "No reason provided.";
+                    document.getElementById('aiPredictedType').innerText = pred.predicted_injury_type || "None Detected";
+                    document.getElementById('aiPredictedTime').innerText = pred.predicted_injury_time || "N/A";
+                    
+                    if (pred.smart_alerts && pred.smart_alerts.length) {
+                        document.getElementById('aiSmartAlerts').innerHTML = pred.smart_alerts.map(a => `
+                            <div class="alert alert-${a.urgency === 'High' ? 'danger' : 'warning'} py-1 px-2 mb-1 x-small d-flex align-items-center">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                <span><strong>${a.urgency}:</strong> ${a.reason}</span>
+                            </div>
+                        `).join('');
+                    } else {
+                        document.getElementById('aiSmartAlerts').innerHTML = "";
+                    }
+                    
+                    if (pred.recommendations && pred.recommendations.length) {
+                        document.getElementById('aiRiskRecs').innerHTML = pred.recommendations.map(r => `<li>${r}</li>`).join('');
+                    }
+                } else {
+                    alert('Failed to generate AI Risk Analysis: ' + (data.message || 'Unknown error'));
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Error connecting to AI service.');
+            } finally {
+                btn.disabled = false;
+                loading.classList.add('d-none');
+            }
+        });
+
+        // Add Injury Logic
+        document.getElementById('saveInjuryBtn').addEventListener('click', async () => {
+            const type = document.getElementById('modalInjuryType').value;
+            const severity = document.getElementById('modalSeverity').value;
+            const startDate = document.getElementById('modalStartDate').value;
+            const notes = document.getElementById('modalNotes').value;
+
+            if (!type || !startDate) {
+                alert("Please fill in Injury Type and Start Date.");
+                return;
+            }
+
+            const btn = document.getElementById('saveInjuryBtn');
+            const originalText = btn.innerText;
+            btn.disabled = true;
+            btn.innerText = "Saving...";
+
+            try {
+                const res = await fetch('http://localhost:8000/api/injuries/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        athlete: parseInt(athleteId, 10),
+                        injury_type: type,
+                        severity: severity,
+                        start_date: startDate,
+                        medical_notes: notes,
+                        is_active: true,
+                        cleared_to_train: false
+                    })
+                });
+
+                if (res.ok) {
+                    const modalElement = document.getElementById('addInjuryModal');
+                    const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+                    modal.hide();
+                    document.getElementById('addInjuryForm').reset();
+                    // Refresh data
+                    fetchFullProfile();
+                } else {
+                    const errorData = await res.json();
+                    let errMsg = "Failed to save injury:\n";
+                    for (const [field, errors] of Object.entries(errorData)) {
+                        errMsg += `- ${field}: ${errors.join(', ')}\n`;
+                    }
+                    alert(errMsg);
+                }
+            } catch (err) {
+                console.error("Save Injury Error:", err);
+                alert("An error occurred: " + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = originalText;
+            }
+        });
+
+        // Body Heatmap Logic
+        let selectedBodyPart = null;
+        document.querySelectorAll('.body-part').forEach(part => {
+            part.addEventListener('click', function() {
+                document.querySelectorAll('.body-part').forEach(p => p.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedBodyPart = this.getAttribute('data-part');
+                
+                document.getElementById('painFormContainer').classList.remove('d-none');
+                document.getElementById('savePainBtn').classList.remove('d-none');
+                document.getElementById('selectedBodyPartText').innerText = selectedBodyPart;
+                
+                // Reset form on new body part selection
+                document.getElementById('modalPainLevel').value = 5;
+                document.getElementById('painLevelDisplay').innerText = '5';
+                document.getElementById('modalPainType').value = 'Aching';
+                document.getElementById('modalPainNotes').value = '';
+            });
+        });
+
+        // Update pain level display on slider change
+        document.getElementById('modalPainLevel').addEventListener('input', (e) => {
+            const level = e.target.value;
+            document.getElementById('painLevelDisplay').innerText = level;
+            
+            // Change color based on pain level
+            const badge = document.getElementById('painLevelDisplay');
+            if (level <= 3) {
+                badge.className = 'badge bg-success';
+            } else if (level <= 6) {
+                badge.className = 'badge bg-warning';
+            } else {
+                badge.className = 'badge bg-danger';
+            }
+        });
+
+        document.getElementById('savePainBtn').addEventListener('click', async () => {
+            if (!selectedBodyPart) {
+                alert('Please select a body part before saving a pain log.');
+                return;
+            }
+
+            const level = parseInt(document.getElementById('modalPainLevel').value, 10) || 0;
+            const type = (document.getElementById('modalPainType').value || '').trim();
+            const notes = (document.getElementById('modalPainNotes').value || '').trim();
+
+            // Basic client-side validation
+            const textPattern = /^[\w\s\-.,()]{1,100}$/; // allow letters, numbers, spaces, hyphen and basic punctuation
+            if (!Number.isInteger(level) || level < 1 || level > 10) {
+                alert('Please enter a valid Pain Level between 1 and 10.');
+                return;
+            }
+            if (!textPattern.test(selectedBodyPart)) {
+                alert('Invalid body part value. Please choose a different body area.');
+                return;
+            }
+            if (!textPattern.test(type)) {
+                alert('Invalid pain type. Use a short label like "Aching", "Sharp", etc.');
+                return;
+            }
+
+            const btn = document.getElementById('savePainBtn');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Saving...';
+
+            try {
+                const payload = {
+                    athlete: parseInt(athleteId, 10),
+                    body_part: selectedBodyPart,
+                    pain_level: level,
+                    pain_type: type,
+                    notes: notes
+                };
+
+                const res = await fetch('http://localhost:8000/api/painlogs/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (res.ok) {
+                    const modalElement = document.getElementById('bodyHeatmapModal');
+                    const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+                    modal.hide();
+                    document.getElementById('addPainForm').reset();
+                    document.getElementById('painFormContainer').classList.add('d-none');
+                    document.getElementById('savePainBtn').classList.add('d-none');
+                    document.querySelectorAll('.body-part').forEach(p => p.classList.remove('selected'));
+                    selectedBodyPart = null;
+                    alert('✓ Pain Log saved successfully! The AI will account for this area in the next generated workout.');
+                } else {
+                    // Try to parse JSON error, otherwise fall back to text
+                    let errorText = '';
+                    try {
+                        const errorData = await res.json();
+                        errorText = JSON.stringify(errorData);
+                    } catch (parseErr) {
+                        try {
+                            errorText = await res.text();
+                        } catch (txtErr) {
+                            errorText = 'Unknown server error';
+                        }
+                    }
+                    alert('Failed to save pain log: ' + errorText);
+                }
+            } catch (err) {
+                // Log full error and present a clearer message to the user
+                console.error('Save Pain Log Error:', err);
+                const msg = (err && err.message) ? err.message : String(err);
+                alert('An error occurred: ' + msg);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        });
+
+        function renderBiometricTrends() {
+            if (!attendanceRecords || !attendanceRecords.length) {
+                document.getElementById('biometricTrendsChart').innerHTML = "<div class='text-center text-muted small py-4'>No attendance/biometric data recorded.</div>";
+                return;
+            }
+            
+            const recent = attendanceRecords.slice(-14);
+            const dates = recent.map(r => r.date);
+            const hrvData = recent.map(r => r.hrv || 0);
+            const fatigueData = recent.map(r => r.fatigue_score || 0);
+            const sorenessData = recent.map(r => r.muscle_soreness || 0);
+            
+            safeDestroy('biometricTrends');
+            chartInstances['biometricTrends'] = new ApexCharts(document.querySelector("#biometricTrendsChart"), {
+                series: [
+                    { name: "HRV (ms)", type: 'line', data: hrvData },
+                    { name: "Fatigue (/10)", type: 'column', data: fatigueData },
+                    { name: "Soreness (/10)", type: 'column', data: sorenessData }
+                ],
+                chart: { height: 250, type: 'line', toolbar: { show: false } },
+                stroke: { width: [3, 0, 0], curve: 'smooth' },
+                colors: ['#0d6efd', '#dc3545', '#ffc107'],
+                labels: dates,
+                xaxis: { type: 'category' },
+                yaxis: [
+                    { title: { text: "HRV" } },
+                    { opposite: true, title: { text: "Score (/10)" }, min: 0, max: 10 }
+                ],
+                legend: { position: 'top', horizontalAlign: 'right' },
+                tooltip: { shared: true, intersect: false }
+            });
+            chartInstances['biometricTrends'].render();
+        }
+
+      });
+    </script>
+
+    <!-- Workout Modal -->
+    <div class="modal fade" id="workoutModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Complete Workout Strategy</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="fullWorkoutBody"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nutrition Modal -->
+    <div class="modal fade" id="nutritionModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Nutrition & Macro Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="fullNutritionBody" class="text-muted" style="white-space: pre-wrap;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Plan Modal -->
+    <div class="modal fade" id="aiPlanModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title"><i class="bi bi-robot me-2"></i>AI Generated Workout Plan</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center py-5" id="aiPlanLoadingState">
+              <div class="spinner-border text-success" role="status"></div>
+              <p class="text-muted mt-2">Analyzing profile and generating plan...</p>
+            </div>
+            <div id="aiPlanContent" class="d-none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Nutrition Modal -->
+    <div class="modal fade" id="aiNutritionModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title"><i class="bi bi-robot me-2"></i>AI Generated Nutrition Strategy</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center py-5" id="aiNutritionLoadingState">
+              <div class="spinner-border text-success" role="status"></div>
+              <p class="text-muted mt-2">Analyzing InBody and generating strategy...</p>
+            </div>
+            <div id="aiNutritionContent" class="d-none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Injury Modal -->
+    <div class="modal fade" id="addInjuryModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content border-0 shadow">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title">Report New Injury</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="addInjuryForm">
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Injury Type</label>
+                <input type="text" class="form-control" id="modalInjuryType" placeholder="e.g. Ankle Sprain" required>
+              </div>
+              <div class="row mb-3">
+                <div class="col-6">
+                  <label class="form-label small fw-bold">Severity</label>
+                  <select class="form-select" id="modalSeverity">
+                    <option value="Mild">Mild</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Severe">Severe</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <label class="form-label small fw-bold">Start Date</label>
+                  <input type="date" class="form-control" id="modalStartDate" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Medical Notes</label>
+                <textarea class="form-control" id="modalNotes" rows="3" placeholder="Symptoms, treatment plan..."></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer bg-light">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" id="saveInjuryBtn">Save Injury</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body Heatmap Modal -->
+    <div class="modal fade" id="bodyHeatmapModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+        <div class="modal-content border-0 shadow-lg">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title"><i class="bi bi-person-bounding-box me-2"></i>Interactive Body Pain Map</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-4">
+            <div class="alert alert-info alert-sm mb-3" role="alert">
+              <small><i class="bi bi-info-circle me-2"></i>Click on any body area to report pain. Your pain logs will inform AI workout adjustments.</small>
+            </div>
+            
+            <div class="svg-heatmap-container mx-auto" style="width: 220px; height: 340px; position: relative;">
+                <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg" id="bodySvgMap" class="w-100 h-100" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">
+                    <defs>
+                        <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#e9ecef;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#dee2e6;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <style>
+                        .body-part { fill: url(#bodyGradient); stroke: #adb5bd; stroke-width: 0.8; cursor: pointer; transition: all 0.3s ease; }
+                        .body-part:hover { fill: #ffeaec; stroke: #dc3545; stroke-width: 1.2; filter: drop-shadow(0 2px 6px rgba(220, 53, 69, 0.3)); }
+                        .body-part.selected { fill: #f8d7da; stroke: #dc3545; stroke-width: 1.5; animation: pulse 0.6s ease-out; }
+                        @keyframes pulse { 0% { r: 0; } 100% { r: 3; } }
+                        .body-label { font-size: 7px; fill: #495057; font-weight: 500; text-anchor: middle; pointer-events: none; }
+                    </style>
+                    
+                    <!-- Head -->
+                    <circle cx="50" cy="18" r="12" class="body-part" data-part="Head" title="Click to log head pain" />
+                    <text x="50" y="20" class="body-label">Head</text>
+                    
+                    <!-- Neck -->
+                    <rect x="46" y="31" width="8" height="6" rx="2" class="body-part" data-part="Neck" title="Click to log neck pain" />
+                    
+                    <!-- Torso/Chest -->
+                    <rect x="35" y="38" width="30" height="35" rx="5" class="body-part" data-part="Torso" title="Click to log torso/chest pain" />
+                    <text x="50" y="57" class="body-label">Torso</text>
+                    
+                    <!-- Left Arm -->
+                    <rect x="12" y="40" width="18" height="8" rx="4" class="body-part" data-part="Left Shoulder" title="Click to log left shoulder pain" />
+                    <rect x="10" y="50" width="12" height="25" rx="5" class="body-part" data-part="Left Arm" title="Click to log left arm pain" />
+                    <circle cx="16" cy="80" r="5" class="body-part" data-part="Left Elbow" title="Click to log left elbow pain" />
+                    <circle cx="15" cy="90" r="4" class="body-part" data-part="Left Wrist" title="Click to log left wrist pain" />
+                    
+                    <!-- Right Arm -->
+                    <rect x="70" y="40" width="18" height="8" rx="4" class="body-part" data-part="Right Shoulder" title="Click to log right shoulder pain" />
+                    <rect x="78" y="50" width="12" height="25" rx="5" class="body-part" data-part="Right Arm" title="Click to log right arm pain" />
+                    <circle cx="84" cy="80" r="5" class="body-part" data-part="Right Elbow" title="Click to log right elbow pain" />
+                    <circle cx="85" cy="90" r="4" class="body-part" data-part="Right Wrist" title="Click to log right wrist pain" />
+                    
+                    <!-- Left Leg -->
+                    <rect x="35" y="75" width="11" height="8" rx="2" class="body-part" data-part="Left Hip" title="Click to log left hip pain" />
+                    <rect x="35" y="85" width="11" height="30" rx="5" class="body-part" data-part="Left Leg" title="Click to log left leg pain" />
+                    <circle cx="40" cy="105" r="6" class="body-part" data-part="Left Knee" title="Click to log left knee pain" />
+                    <rect x="35" y="115" width="11" height="28" rx="4" class="body-part" data-part="Left Calf" title="Click to log left calf pain" />
+                    <circle cx="40" cy="148" r="5" class="body-part" data-part="Left Ankle/Foot" title="Click to log left ankle/foot pain" />
+                    
+                    <!-- Right Leg -->
+                    <rect x="54" y="75" width="11" height="8" rx="2" class="body-part" data-part="Right Hip" title="Click to log right hip pain" />
+                    <rect x="54" y="85" width="11" height="30" rx="5" class="body-part" data-part="Right Leg" title="Click to log right leg pain" />
+                    <circle cx="59" cy="105" r="6" class="body-part" data-part="Right Knee" title="Click to log right knee pain" />
+                    <rect x="54" y="115" width="11" height="28" rx="4" class="body-part" data-part="Right Calf" title="Click to log right calf pain" />
+                    <circle cx="59" cy="148" r="5" class="body-part" data-part="Right Ankle/Foot" title="Click to log right ankle/foot pain" />
+                    
+                    <!-- Low Back -->
+                    <rect x="42" y="73" width="16" height="12" rx="3" class="body-part" data-part="Lower Back" title="Click to log lower back pain" />
+                </svg>
+            </div>
+
+            <div id="painFormContainer" class="d-none mt-4 text-start">
+                <div class="border-top pt-3">
+                  <h6 class="text-danger fw-bold mb-3">
+                    <i class="bi bi-exclamation-circle me-2"></i>Pain Log for: <span id="selectedBodyPartText" class="text-primary"></span>
+                  </h6>
+                  <form id="addPainForm">
+                      <div class="row mb-3">
+                          <div class="col-6">
+                              <label class="form-label small fw-bold">Pain Level (1-10)</label>
+                              <div class="d-flex align-items-center">
+                                <input type="range" class="form-range" id="modalPainLevel" min="1" max="10" value="5" style="margin-right: 10px;">
+                                <span id="painLevelDisplay" class="badge bg-danger">5</span>
+                              </div>
+                          </div>
+                          <div class="col-6">
+                              <label class="form-label small fw-bold">Pain Type</label>
+                              <select class="form-select form-select-sm" id="modalPainType">
+                                  <option value="Aching">Aching (Dull)</option>
+                                  <option value="Sharp">Sharp (Shooting)</option>
+                                  <option value="Throbbing">Throbbing</option>
+                                  <option value="Stiffness">Stiffness/Tight</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="mb-2">
+                          <label class="form-label small fw-bold">Additional Notes</label>
+                          <input type="text" class="form-control form-control-sm" id="modalPainNotes" placeholder="e.g. Worse in the morning, improves with rest...">
+                      </div>
+                  </form>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer bg-light">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger btn-sm d-none" id="savePainBtn"><i class="bi bi-check2-circle me-1"></i>Save Pain Log</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    @@include("../../partials/head/head-meta.html")
+    <title>Sign In | TIGER FIT</title>
+    @@include("../../partials/head/head-links.html")
+  </head>
+
+  <body>
+    <main class="d-flex flex-column justify-content-center vh-100">
+      <!--Sign up start-->
+      <section>
+        <div class="container">
+          <div class="row mb-8">
+            <div class="col-xl-4 offset-xl-4 col-md-12 col-12">
+              <div class="text-center">
+                <a href="#!" class="fs-2 fw-bold d-flex align-items-center gap-2 justify-content-center mb-6">
+                  <img src="@@webRoot/assets/images/brand/logo/tigerfit-logo.png" alt="TIGER FIT" style="width: 40px; height: 40px;" />
+                  <span style="color: white;">TIGER FIT</span>
+                </a>
+                <h1 class="mb-1">Welcome Back</h1>
+                <p class="mb-0">
+                  Don’t have an account yet?
+                  <a href="sign-up.html" class="text-primary">Register here</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-12">
+              <div class="card card-lg mb-6">
+                <div class="card-body p-6">
+                  <form id="signinForm" class="needs-validation mb-6" novalidate>
+                    <div class="mb-3">
+                      <label for="signinEmailInput" class="form-label">
+                        Email
+                        <span class="text-danger">*</span>
+                      </label>
+                      <input type="email" class="form-control" id="signinEmailInput" required />
+                      <div class="invalid-feedback">Please enter email.</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="formSignUpPassword" class="form-label">Password</label>
+                      <div class="password-field position-relative">
+                        <input type="password" class="form-control fakePassword" id="formSignUpPassword" required />
+                        <span><i class="ti ti-eye-off passwordToggler"></i></span>
+                        <div class="invalid-feedback">Please enter password.</div>
+                      </div>
+                    </div>
+
+                    <div class="mb-4 d-flex align-items-center justify-content-between">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMeCheckbox" />
+                        <label class="form-check-label" for="rememberMeCheckbox">Remember me</label>
+                      </div>
+
+                      <div><a href="forget-password.html" class="text-primary">Forgot Password</a></div>
+                    </div>
+
+                    <div class="d-grid">
+                      <button class="btn btn-primary" type="submit">Sign In</button>
+                    </div>
+                  </form>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--Sign up end-->
+      <div class="position-absolute end-0 bottom-0 m-4">
+        <div class="dropdown">
+          <button class="btn btn-light btn-icon rounded-circle d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+            <i class="bi theme-icon-active lh-1"><i class="bi theme-icon bi-sun-fill"></i></i>
+            <span class="visually-hidden bs-theme-text">Toggle theme</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow">
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light" aria-pressed="true">
+                <i class="ti theme-icon ti ti-sun"></i>
+                <span class="ms-2">Light</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                <i class="ti theme-icon ti-moon-stars"></i>
+                <span class="ms-2">Dark</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="false">
+                <i class="ti theme-icon ti-circle-half-2"></i>
+                <span class="ms-2">Auto</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    @@include("../../partials/scripts.html")
+    <script src="@@webRoot/assets/js/vendors/password.js"></script>
+    <script>
+      const API_BASE = 'http://localhost:8000/api/auth';
+
+      async function postJson(url, payload) {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.detail || data.message || 'Request failed');
+        return data;
+      }
+
+      document.getElementById('signinForm')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('signinEmailInput').value.trim();
+        const password = document.getElementById('formSignUpPassword').value;
+        const rememberMe = document.getElementById('rememberMeCheckbox')?.checked;
+        
+        try {
+          const data = await postJson(`${API_BASE}/signin/`, { identifier: email, password });
+          const user = data.user || {};
+          
+          // Set expiration: 15 days if rememberMe is checked, else 24 hours
+          const expireDays = rememberMe ? 15 : 1;
+          user.expiresAt = Date.now() + (expireDays * 24 * 60 * 60 * 1000);
+          
+          localStorage.setItem('auth_user', JSON.stringify(user));
+          window.location.href = '../../index.html';
+        } catch (err) {
+          alert(err.message);
+        }
+      });
+
+
+    </script>
+  </body>
+</html>

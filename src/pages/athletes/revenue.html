@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    @@include("../../partials/head/head-meta.html", {"webRoot": "../.."})
+    <title>Athlete Revenue | TIGER FIT</title>
+    @@include("../../partials/head/head-links.html", {"webRoot": "../.."})
+  </head>
+
+  <body>
+    <div>
+      @@include("../../partials/sidebar-collapse.html", {"webRoot": "../.."})
+
+      <div id="content" class="position-relative h-100">
+        @@include("../../partials/topbar-second.html", {"webRoot": "../.."})
+        <div class="custom-container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="mb-5 d-flex justify-content-between align-items-center">
+                <div>
+                  <h1 class="mb-1 h2">Athlete Revenue</h1>
+                  <p class="text-muted mb-0">Track subscription status across all athlete groups.</p>
+                </div>
+                <a href="list.html" class="btn btn-outline-secondary">Back to Athletes</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-lg">
+                <div class="card-header border-bottom-0 pb-0">
+                  <ul class="nav nav-tabs border-bottom" id="revenueTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="all-tab" type="button">All Athletes</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="fitness-tab" type="button">Fitness Athletes</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="swimmers-tab" type="button">Swimmers</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="football-tab" type="button">Football</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="basketball-tab" type="button">Basketball</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="crossfit-tab" type="button">CrossFit</button>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <div class="d-flex flex-wrap gap-3 mb-4">
+                    <div class="badge text-bg-light border px-3 py-2">Total Athletes: <span id="totalAthletes">0</span></div>
+                    <div class="badge text-bg-success-subtle border px-3 py-2">Subscribed: <span id="subscribedAthletes">0</span></div>
+                    <div class="badge text-bg-warning-subtle border px-3 py-2">Unsubscribed: <span id="unsubscribedAthletes">0</span></div>
+                    <div class="badge text-bg-primary-subtle border px-3 py-2">Total Revenue: <span id="totalRevenue">0</span> EGP</div>
+                  </div>
+
+                  <div class="table-responsive">
+                    <table class="table text-nowrap mb-0 table-centered table-hover">
+                      <thead>
+                        <tr>
+                          <th>Athlete Name</th>
+                          <th>Type</th>
+                          <th>Fee (EGP)</th>
+                          <th>Subscription Start</th>
+                          <th>Subscription End</th>
+                          <th>Subscribed</th>
+                          <th>Profile</th>
+                        </tr>
+                      </thead>
+                      <tbody id="revenueTableBody"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    @@include("../../partials/scripts.html", {"webRoot": "../.."})
+    <script>
+      document.addEventListener('DOMContentLoaded', async () => {
+        const tableBody = document.getElementById('revenueTableBody');
+        const totalAthletes = document.getElementById('totalAthletes');
+        const subscribedAthletes = document.getElementById('subscribedAthletes');
+        const unsubscribedAthletes = document.getElementById('unsubscribedAthletes');
+        let athletes = [];
+        let activeFilter = '';
+
+        function setActiveTab(tabId) {
+          document.querySelectorAll('#revenueTabs .nav-link').forEach((btn) => btn.classList.remove('active'));
+          document.getElementById(tabId).classList.add('active');
+        }
+
+        function getAthleteType(athlete) {
+          if (athlete.swimming_records?.length) return 'Swimmer';
+          if (athlete.football_records?.length) return 'Football';
+          if (athlete.basketball_records?.length) return 'Basketball';
+          if (athlete.crossfit_records?.length) return 'CrossFit';
+          return 'Fitness Athlete';
+        }
+
+        function dedupeAthletes(items) {
+          const map = new Map();
+          items.forEach((athlete) => {
+            const key = [
+              (athlete.name || '').trim().toLowerCase(),
+              athlete.age ?? '',
+              athlete.gender ?? '',
+              athlete.height ?? '',
+              athlete.weight ?? '',
+              (athlete.body_type || '').trim().toLowerCase()
+            ].join('|');
+
+            const existing = map.get(key);
+            if (!existing) {
+              map.set(key, athlete);
+              return;
+            }
+
+            const existingUpdated = new Date(existing.updated_at || existing.created_at || 0).getTime();
+            const candidateUpdated = new Date(athlete.updated_at || athlete.created_at || 0).getTime();
+            if (candidateUpdated >= existingUpdated) {
+              map.set(key, athlete);
+            }
+          });
+          return Array.from(map.values());
+        }
+
+        function getFilteredAthletes() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const searchQuery = urlParams.get('search')?.toLowerCase() || '';
+          
+          let filtered = athletes;
+          
+          if (activeFilter && activeFilter !== 'Fitness Athlete') {
+            filtered = filtered.filter((athlete) => getAthleteType(athlete) === activeFilter);
+          }
+          
+          if (searchQuery) {
+            filtered = filtered.filter((athlete) => 
+              athlete.name?.toLowerCase().includes(searchQuery)
+            );
+          }
+          
+          return filtered;
+        }
+
+        function updateCounters(items) {
+          totalAthletes.innerText = items.length;
+          const subscribedItems = items.filter((athlete) => athlete.is_subscribed);
+          subscribedAthletes.innerText = subscribedItems.length;
+          unsubscribedAthletes.innerText = items.length - subscribedItems.length;
+          
+          const totalRevenueValue = subscribedItems.reduce((sum, athlete) => sum + parseFloat(athlete.subscription_fee || 0), 0);
+          document.getElementById('totalRevenue').innerText = totalRevenueValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        async function updateSubscription(athleteId, isSubscribed, toggleEl) {
+          toggleEl.disabled = true;
+          try {
+            const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ is_subscribed: isSubscribed })
+            });
+            if (!res.ok) throw new Error('Subscription update failed');
+
+            const index = athletes.findIndex((athlete) => athlete.id === athleteId);
+            if (index >= 0) athletes[index].is_subscribed = isSubscribed;
+            updateCounters(getFilteredAthletes());
+          } catch (error) {
+            console.error(error);
+            toggleEl.checked = !isSubscribed;
+            alert('Could not update subscription status.');
+          } finally {
+            toggleEl.disabled = false;
+          }
+        }
+
+        async function updateSubscriptionDates(athleteId, payload, inputEl) {
+          inputEl.disabled = true;
+          try {
+            const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            if (!res.ok) throw new Error('Subscription date update failed');
+
+            const updated = await res.json();
+            const index = athletes.findIndex((athlete) => athlete.id === athleteId);
+            if (index >= 0) {
+              athletes[index].subscription_start_date = updated.subscription_start_date;
+              athletes[index].subscription_end_date = updated.subscription_end_date;
+            }
+          } catch (error) {
+            console.error(error);
+            alert('Could not update subscription dates.');
+          } finally {
+            inputEl.disabled = false;
+          }
+        }
+
+        async function updateSubscriptionFee(athleteId, fee, inputEl) {
+          inputEl.disabled = true;
+          try {
+            const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ subscription_fee: fee })
+            });
+            if (!res.ok) throw new Error('Fee update failed');
+
+            const updated = await res.json();
+            const index = athletes.findIndex((athlete) => athlete.id === athleteId);
+            if (index >= 0) {
+              athletes[index].subscription_fee = updated.subscription_fee;
+            }
+            updateCounters(getFilteredAthletes());
+          } catch (error) {
+            console.error(error);
+            alert('Could not update subscription fee.');
+          } finally {
+            inputEl.disabled = false;
+          }
+        }
+
+        function renderTable() {
+          const filtered = getFilteredAthletes();
+          tableBody.innerHTML = '';
+
+          if (!filtered.length) {
+            tableBody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">No athletes found for this view.</td></tr>';
+            updateCounters([]);
+            return;
+          }
+
+          filtered.forEach((athlete) => {
+            const row = document.createElement('tr');
+            const type = getAthleteType(athlete);
+
+            row.innerHTML = `
+              <td class="fw-semibold">${athlete.name}</td>
+              <td><span class="badge text-primary-emphasis bg-primary-subtle">${type}</span></td>
+              <td>
+                <input class="form-control form-control-sm subscription-fee" type="number" step="0.01" value="${athlete.subscription_fee || 0}" style="width: 100px;">
+              </td>
+              <td>
+                <input class="form-control form-control-sm subscription-start" type="date" value="${athlete.subscription_start_date || ''}">
+              </td>
+              <td>
+                <input class="form-control form-control-sm subscription-end" type="date" value="${athlete.subscription_end_date || ''}">
+              </td>
+              <td>
+                <div class="form-check form-switch m-0">
+                  <input class="form-check-input subscription-toggle" type="checkbox" ${athlete.is_subscribed ? 'checked' : ''}>
+                  <label class="form-check-label small">${athlete.is_subscribed ? 'Subscribed' : 'Not Subscribed'}</label>
+                </div>
+              </td>
+              <td>
+                <a href="details.html?id=${athlete.id}" class="btn btn-outline-primary btn-xs">View</a>
+              </td>
+            `;
+
+            const toggle = row.querySelector('.subscription-toggle');
+            const label = row.querySelector('.form-check-label');
+            const startInput = row.querySelector('.subscription-start');
+            const endInput = row.querySelector('.subscription-end');
+            const feeInput = row.querySelector('.subscription-fee');
+            toggle.addEventListener('change', async () => {
+              label.innerText = toggle.checked ? 'Subscribed' : 'Not Subscribed';
+              await updateSubscription(athlete.id, toggle.checked, toggle);
+            });
+            startInput.addEventListener('change', async () => {
+              await updateSubscriptionDates(athlete.id, { subscription_start_date: startInput.value || null }, startInput);
+            });
+            endInput.addEventListener('change', async () => {
+              await updateSubscriptionDates(athlete.id, { subscription_end_date: endInput.value || null }, endInput);
+            });
+            feeInput.addEventListener('change', async () => {
+              await updateSubscriptionFee(athlete.id, feeInput.value || 0, feeInput);
+            });
+
+            tableBody.appendChild(row);
+          });
+
+          updateCounters(filtered);
+        }
+
+        async function fetchAthletes() {
+          try {
+            const response = await fetch('http://localhost:8000/api/athletes/');
+            if (!response.ok) throw new Error('Failed to fetch athletes');
+            athletes = dedupeAthletes(await response.json());
+            renderTable();
+          } catch (error) {
+            console.error(error);
+            tableBody.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Failed to load athlete revenue data.</td></tr>';
+          }
+        }
+
+        function clearSearchQuery() {
+          const url = new URL(window.location);
+          url.searchParams.delete('search');
+          window.history.replaceState({}, '', url);
+        }
+
+        document.getElementById('all-tab').addEventListener('click', () => {
+          clearSearchQuery();
+          activeFilter = '';
+          setActiveTab('all-tab');
+          renderTable();
+        });
+        document.getElementById('fitness-tab').addEventListener('click', () => {
+          clearSearchQuery();
+          activeFilter = 'Fitness Athlete';
+          setActiveTab('fitness-tab');
+          renderTable();
+        });
+        document.getElementById('swimmers-tab').addEventListener('click', () => {
+          clearSearchQuery();
+          activeFilter = 'Swimmer';
+          setActiveTab('swimmers-tab');
+          renderTable();
+        });
+        document.getElementById('football-tab').addEventListener('click', () => {
+          clearSearchQuery();
+          activeFilter = 'Football';
+          setActiveTab('football-tab');
+          renderTable();
+        });
+        document.getElementById('basketball-tab').addEventListener('click', () => {
+          clearSearchQuery();
+          activeFilter = 'Basketball';
+          setActiveTab('basketball-tab');
+          renderTable();
+        });
+        document.getElementById('crossfit-tab').addEventListener('click', () => {
+          clearSearchQuery();
+          activeFilter = 'CrossFit';
+          setActiveTab('crossfit-tab');
+          renderTable();
+        });
+
+        fetchAthletes();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,2 @@
+psycopg2-binary
+# Add other deps you need here (e.g. django, djangorestframework)

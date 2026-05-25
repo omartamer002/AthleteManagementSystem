@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  @@include("partials/head/head-meta.html")
+  <title>TIGER FIT</title>
+  <link rel="stylesheet" href="@@webRoot/node_modules/swiper/swiper-bundle.min.css" />
+  @@include("partials/head/head-links.html")
+</head>
+
+<body>
+  <!-- Vertical Sidebar -->
+  <div>
+    @@include("partials/sidebar-collapse.html")
+
+    <!-- Main Content -->
+    <div id="content" class="position-relative h-100">
+      @@include("partials/topbar-second.html")
+      <!-- container -->
+      <div class="custom-container">
+        <!-- row -->
+        <div class="row mb-6 g-6">
+          <div class="col-xl-8 col-lg-6">
+            <div class="card card-lg shadow-sm h-100">
+              <div class="card-body">
+                <!--heading-->
+                <h1 class="fs-3 fw-bold mb-2">Hello <span id="dashboardUsername">User</span>,</h1>
+                <p class="text-secondary mb-4">Welcome to your Athlete Management System! Monitor your athletes, track their progress, and gain valuable insights.</p>
+                <a href="@@webRoot/pages/athletes/list.html" class="btn btn-primary shadow-sm px-4">View Athletes</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-lg-6">
+            <!-- card -->
+            <div class="card card-lg">
+              <!-- card body -->
+              <div class="card-body">
+                <div class="mb-4 d-flex justify-content-between align-items-start py-2">
+                  <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                      <h5 class="mb-0">Predictive Intelligence Hub</h5>
+                      <span class="badge bg-primary-subtle text-primary border border-primary-subtle fw-medium px-2 py-1" style="font-size: 0.7rem;">
+                        <span class="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true" style="width: 8px; height: 8px;"></span>
+                        AI Engine Online
+                      </span>
+                    </div>
+                    <p class="small text-secondary mb-0">Real-time strategic insights</p>
+                  </div>
+                  <!-- swiper navigation-->
+                  <div class="d-flex gap-1 mt-1">
+                    <div class="swiper-button-prev-custom cursor-pointer text-primary border rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick="document.querySelector('#swiper-1').swiper.slidePrev()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    </div>
+                    <div class="swiper-button-next-custom cursor-pointer text-primary border rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick="document.querySelector('#swiper-1').swiper.slideNext()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <!-- swiper -->
+                    <div class="swiper-container swiper" id="swiper-1" data-pagination-type="" data-speed="900"
+                      data-space-between="100" data-pagination="false" data-navigation="true" data-autoplay="false"
+                      data-autoplay-delay="2000"
+                      data-breakpoints='{"480": {"slidesPerView": 1}, "768": {"slidesPerView": 1}, "1024": {"slidesPerView": 1}, "1200": {"slidesPerView": 1}}'>
+                      <div class="swiper-wrapper" id="aiInsightsWrapper">
+                        <!-- Loading Slide -->
+                        <div class="swiper-slide">
+                          <div class="py-4 text-center">
+                            <div class="spinner-border text-primary spinner-border-sm mb-2" role="status"></div>
+                            <p class="small text-secondary">Analyzing athlete data patterns...</p>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Add Pagination -->
+                      <div class="swiper-pagination"></div>
+                      <!-- Add Navigation -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- row -->
+        <div class="row row-cols-1 row-cols-xl-3 row-cols-md-3 mb-6 g-6">
+          <div class="col">
+            <!-- card -->
+            <div class="card card-lg">
+              <!-- card body -->
+              <div class="card-body d-flex flex-column gap-8">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="icon-shape icon-lg rounded-circle bg-warning-darker text-warning-lighter">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                      class="icon icon-tabler icons-tabler-outline icon-tabler-run">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M13 4m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                      <path d="M4 17l5 1l.75 -1.5" />
+                      <path d="M15 21l0 -4l-4 -3l1 -6" />
+                      <path d="M7 12l0 -3l5 -1l3 3l3 1" />
+                    </svg>
+                  </div>
+                  <div>Athletes</div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center lh-1">
+                  <div class="fs-3 fw-bold" id="totalAthletesCount">0</div>
+                  <div class="small" id="athleteChangeBadge">
+                    <span id="athleteChangePercentage">0%</span>
+                    <span id="athleteChangeIcon"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <!-- card -->
+            <div class="card card-lg">
+              <!-- card body -->
+              <div class="card-body d-flex flex-column gap-8">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="icon-shape icon-lg rounded-circle bg-success-darker text-success-lighter">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                      class="icon icon-tabler icons-tabler-outline icon-tabler-coin">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                      <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
+                      <path d="M12 7v10" />
+                    </svg>
+                  </div>
+                  <div>Revenue</div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center lh-1">
+                  <div class="fs-3 fw-bold"><span id="totalRevenueCount">0</span> EGP</div>
+                  <div class="small" id="revenueChangeBadge">
+                    <span id="revenueChangePercentage">0%</span>
+                    <span id="revenueChangeIcon"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <!-- card -->
+            <div class="card card-lg">
+              <!-- card body -->
+              <div class="card-body d-flex flex-column gap-8">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="icon-shape icon-lg rounded-circle bg-info-darker text-info-lighter">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                      class="icon icon-tabler icons-tabler-outline icon-tabler-user-circle">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                      <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                      <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+                    </svg>
+                  </div>
+                  <div>Conversion Rate</div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center lh-1">
+                  <div class="fs-3 fw-bold" id="totalConversionRate">0%</div>
+                  <div class="small" id="conversionChangeBadge">
+                    <span id="conversionChangePercentage">0%</span>
+                    <span id="conversionChangeIcon"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- row -->
+        <div class="row g-6 mb-6">
+          <div class="col-xl-8 col-12">
+            <!-- card -->
+            <div class="card card-lg">
+              <!--  card body -->
+              <div class="card-body d-flex flex-column gap-5">
+                <div class="mb-4">
+                  <!-- heading -->
+                  <h5 class="mb-0">Revenue</h5>
+                </div>
+                <div class="bg-gray-100 p-3 rounded-3">
+                  <ul class="nav nav-pills-white nav-fill" id="chartTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="current-week-tab" data-bs-toggle="pill"
+                        data-bs-target="#current-week" type="button" role="tab" aria-controls="current-week"
+                        aria-selected="true">
+                        <span class="d-flex flex-column">
+                          <span class="d-flex align-items-center gap-2">
+                            <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                fill="currentColor"
+                                class="icon icon-tabler icons-tabler-filled icon-tabler-circle text-primary">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                  d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z" />
+                              </svg></span><span>Total Income</span>
+                          </span>
+                          <span class="text-start fs-3 fw-semibold mt-2"><span class="totalRevenueValue">0</span> EGP</span>
+                        </span>
+                      </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="past-week-tab" data-bs-toggle="pill" data-bs-target="#past-week"
+                        type="button" role="tab" aria-controls="past-week" aria-selected="false">
+                        <span class="d-flex flex-column">
+                          <span class="d-flex align-items-center gap-2">
+                            <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                fill="currentColor"
+                                class="icon icon-tabler icons-tabler-filled icon-tabler-circle text-warning">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                  d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z" />
+                              </svg></span><span>Conversion Rate</span>
+                          </span>
+                          <span id="revenueConvRateVal" class="text-start fs-3 fw-semibold mt-2">0%</span>
+                        </span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="tab-content" id="chartTabsContent">
+                  <div class="tab-pane fade show active" id="current-week" role="tabpanel"
+                    aria-labelledby="current-week-tab">
+                    <div id="totalIncomeChart"></div>
+                  </div>
+                  <div class="tab-pane fade" id="past-week" role="tabpanel" aria-labelledby="past-week-tab">
+                    <div id="totalExpensesChart"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-12">
+            <!-- card -->
+            <div class="card card-lg">
+              <!-- card body -->
+              <div class="card-body">
+                <!-- heading -->
+                <h5 class="mb-6">Sport Specialization</h5>
+                <div id="totalSale" class="d-flex justify-content-center"></div>
+                <!-- table -->
+                <table class="table table-sm table-borderless mb-0 mt-5">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                              fill="currentColor"
+                              class="icon icon-tabler icons-tabler-filled icon-tabler-circle text-primary">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                              <path
+                                d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z" />
+                            </svg>
+                          </span>
+                          <span class="ms-1">Swimming</span>
+                        </div>
+                      </td>
+                      <td class="d-flex justify-content-end gap-2 align-items-center">
+                        <div class="text-end">
+                          <div class="fw-bold"><span id="swimmingCount">0</span> Athletes</div>
+                          <div class="small text-secondary"><span id="swimmingRevenue">0</span> EGP (<span id="swimmingPercent">0%</span>)</div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                              fill="currentColor"
+                              class="icon icon-tabler icons-tabler-filled icon-tabler-circle text-warning">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                              <path
+                                d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z" />
+                            </svg>
+                          </span>
+                          <span class="ms-1">Football</span>
+                        </div>
+                      </td>
+                      <td class="d-flex justify-content-end gap-2 align-items-center">
+                        <div class="text-end">
+                          <div class="fw-bold"><span id="footballCount">0</span> Athletes</div>
+                          <div class="small text-secondary"><span id="footballRevenue">0</span> EGP (<span id="footballPercent">0%</span>)</div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                              fill="currentColor"
+                              class="icon icon-tabler icons-tabler-filled icon-tabler-circle text-info">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                              <path
+                                d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z" />
+                            </svg>
+                          </span>
+                          <span class="ms-1">Basketball</span>
+                        </div>
+                      </td>
+                      <td class="d-flex justify-content-end gap-2 align-items-center">
+                        <div class="text-end">
+                          <div class="fw-bold"><span id="basketballCount">0</span> Athletes</div>
+                          <div class="small text-secondary"><span id="basketballRevenue">0</span> EGP (<span id="basketballPercent">0%</span>)</div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                              fill="currentColor"
+                              class="icon icon-tabler icons-tabler-filled icon-tabler-circle text-danger">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                              <path
+                                d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z" />
+                            </svg>
+                          </span>
+                          <span class="ms-1">CrossFit</span>
+                        </div>
+                      </td>
+                      <td class="d-flex justify-content-end gap-2 align-items-center">
+                        <div class="text-end">
+                          <div class="fw-bold"><span id="crossfitCount">0</span> Athletes</div>
+                          <div class="small text-secondary"><span id="crossfitRevenue">0</span> EGP (<span id="crossfitPercent">0%</span>)</div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- row -->
+        <div class="row g-6 mb-6">
+          <div class="col-xl-8">
+            <!-- card -->
+            <div class="card card-lg">
+              <!-- card header -->
+                <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="mb-0">Subscription Analytics & Retention</h5>
+                  <div class="dropdown">
+                    <a class="btn btn-ghost btn-icon btn-sm rounded-circle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-secondary"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#" onclick="exportToCSV()">Export to CSV</a></li>
+                    </ul>
+                  </div>
+                </div>
+              <!-- table -->
+              <div class="table-responsive">
+                <table class="table text-nowrap mb-0 table-centered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Athlete</th>
+                      <th>LTV (Est.)</th>
+                      <th>Last Payment</th>
+                      <th>Next Billing</th>
+                      <th>Health Score</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="subscriptionAnalyticsBody">
+                    <tr>
+                      <td colspan="6" class="text-center py-4">
+                        <div class="spinner-border text-primary spinner-border-sm me-2" role="status"></div>
+                        Calculating lifetime metrics...
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <!-- card -->
+            <div class="card card-lg">
+              <!--  card body -->
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-6">
+                  <h5 class="mb-0">Revenue Segmentation (RFM)</h5>
+                  <span class="badge bg-info-subtle text-info border border-info-subtle">Engagement vs. Spend</span>
+                </div>
+                <div id="rfmSegmentationChart" style="width: 100%; height: 300px"></div>
+                <div class="d-flex flex-column gap-4" id="rfmSegmentsList">
+                  <div class="py-4 text-center">
+                    <div class="spinner-border text-info spinner-border-sm mb-2" role="status"></div>
+                    <p class="small text-secondary">Categorizing athlete profiles...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row g-6 mb-6">
+          <div class="col-xl-4">
+            <!-- card -->
+            <div class="card card-lg">
+              <!-- card body -->
+              <div class="card-body">
+                <!-- heading -->
+                <div class="mb-5">
+                  <h5>Athletes by gender</h5>
+                </div>
+                <div id="salesBygender"></div>
+              </div>
+              <div class="border-top border-dashed px-6 py-4">
+                <div class="d-flex align-items-center justify-content-center gap-6">
+                  <div class="d-flex align-items-center gap-1">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="icon icon-tabler icons-tabler-filled icon-tabler-circle text-primary">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z" />
+                      </svg></span><span class="lh-1">Male</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-1">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="icon icon-tabler icons-tabler-filled icon-tabler-circle text-info">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z" />
+                      </svg></span><span class="lh-1">Female</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-8">
+            <!-- card -->
+            <div class="card card-lg">
+              <div class="card-header border-bottom-0">
+                <!-- heading -->
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0">Top Performing Athletes</h5>
+                  <ul class="nav nav-pills nav-pills-light" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="pills-swimming-tab" data-bs-toggle="pill" data-bs-target="#pills-swimming" type="button" role="tab">Swimming</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-football-tab" data-bs-toggle="pill" data-bs-target="#pills-football" type="button" role="tab">Football</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-basketball-tab" data-bs-toggle="pill" data-bs-target="#pills-basketball" type="button" role="tab">Basketball</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-crossfit-tab" data-bs-toggle="pill" data-bs-target="#pills-crossfit" type="button" role="tab">CrossFit</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-body pt-0">
+                <div class="tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade show active" id="pills-swimming" role="tabpanel">
+                    <div class="table-responsive">
+                      <table class="table text-nowrap mb-0 table-centered table-hover">
+                        <thead class="table-light">
+                          <tr>
+                            <th>Athlete Name</th>
+                            <th>Total Rating</th>
+                            <th>Attendance Rate</th>
+                          </tr>
+                        </thead>
+                        <tbody id="topSwimmingAthletes"></tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="pills-football" role="tabpanel">
+                    <div class="table-responsive">
+                      <table class="table text-nowrap mb-0 table-centered table-hover">
+                        <thead class="table-light">
+                          <tr>
+                            <th>Athlete Name</th>
+                            <th>Total Rating</th>
+                            <th>Attendance Rate</th>
+                          </tr>
+                        </thead>
+                        <tbody id="topFootballAthletes"></tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="pills-basketball" role="tabpanel">
+                    <div class="table-responsive">
+                      <table class="table text-nowrap mb-0 table-centered table-hover">
+                        <thead class="table-light">
+                          <tr>
+                            <th>Athlete Name</th>
+                            <th>Total Rating</th>
+                            <th>Attendance Rate</th>
+                          </tr>
+                        </thead>
+                        <tbody id="topBasketballAthletes"></tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="pills-crossfit" role="tabpanel">
+                    <div class="table-responsive">
+                      <table class="table text-nowrap mb-0 table-centered table-hover">
+                        <thead class="table-light">
+                          <tr>
+                            <th>Athlete Name</th>
+                            <th>Total Rating</th>
+                            <th>Attendance Rate</th>
+                          </tr>
+                        </thead>
+                        <tbody id="topCrossfitAthletes"></tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @@include("partials/scripts.html")
+  <!-- jsvectormap -->
+  <script src="@@webRoot/assets/js/vendors/sidebarnav.js"></script>
+  <script src="@@webRoot/node_modules/jsvectormap/dist/js/jsvectormap.min.js"></script>
+  <script src="@@webRoot/node_modules/jsvectormap/dist/maps/world.js"></script>
+  <script src="@@webRoot/node_modules/jsvectormap/dist/maps/world-merc.js"></script>
+  <script src="@@webRoot/node_modules/apexcharts/dist/apexcharts.min.js"></script>
+  <script src="@@webRoot/assets/js/vendors/chart.js"></script>
+  <script src="@@webRoot/node_modules/choices.js/public/assets/scripts/choices.min.js"></script>
+  <script src="@@webRoot/assets/js/vendors/choice.js"></script>
+  <script src="@@webRoot/node_modules/swiper/swiper-bundle.min.js"></script>
+  <script src="@@webRoot/assets/js/vendors/swiper.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const totalCountEl = document.getElementById('totalAthletesCount');
+      const changePercentEl = document.getElementById('athleteChangePercentage');
+      const changeIconEl = document.getElementById('athleteChangeIcon');
+      const changeBadgeEl = document.getElementById('athleteChangeBadge');
+
+      function dedupeAthletes(items) {
+        const map = new Map();
+        items.forEach((athlete) => {
+          const key = [
+            (athlete.name || '').trim().toLowerCase(),
+            athlete.age ?? '',
+            athlete.gender ?? '',
+            athlete.height ?? '',
+            athlete.weight ?? '',
+            (athlete.body_type || '').trim().toLowerCase()
+          ].join('|');
+
+          const existing = map.get(key);
+          if (!existing) {
+            map.set(key, athlete);
+            return;
+          }
+
+          const existingUpdated = new Date(existing.updated_at || existing.created_at || 0).getTime();
+          const candidateUpdated = new Date(athlete.updated_at || athlete.created_at || 0).getTime();
+          
+          // Prioritize subscribed record, then newer record
+          if (athlete.is_subscribed && !existing.is_subscribed) {
+            map.set(key, athlete);
+          } else if (candidateUpdated >= existingUpdated && (athlete.is_subscribed === existing.is_subscribed)) {
+            map.set(key, athlete);
+          }
+        });
+        return Array.from(map.values());
+      }
+
+      try {
+        const res = await fetch('http://localhost:8000/api/athletes/');
+        if (!res.ok) throw new Error('Failed to fetch athletes');
+        const rawAthletes = await res.json();
+        const athletes = dedupeAthletes(rawAthletes);
+
+        // 1. Total Count
+        totalCountEl.innerText = athletes.length.toLocaleString();
+
+        // 2. Total Revenue
+        const subscribedAthletes = athletes.filter(a => a.is_subscribed);
+        const totalRevenue = subscribedAthletes.reduce((sum, a) => sum + parseFloat(a.subscription_fee || 0), 0);
+        const formattedRevenue = totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        
+        document.getElementById('totalRevenueCount').innerText = formattedRevenue;
+        document.querySelectorAll('.totalRevenueValue').forEach(el => el.innerText = formattedRevenue);
+
+        // 3. Percentage Change (Last 30 days)
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+        // Athlete stats
+        const newAthletes = athletes.filter(a => new Date(a.created_at) > thirtyDaysAgo).length;
+        const previousTotalAthletes = athletes.length - newAthletes;
+        let athletePercentage = 0;
+        if (previousTotalAthletes > 0) athletePercentage = (newAthletes / previousTotalAthletes) * 100;
+        else if (newAthletes > 0) athletePercentage = 100;
+
+        // Revenue stats
+        const newRevenue = subscribedAthletes
+          .filter(a => new Date(a.created_at) > thirtyDaysAgo)
+          .reduce((sum, a) => sum + parseFloat(a.subscription_fee || 0), 0);
+        const previousTotalRevenue = totalRevenue - newRevenue;
+        let revenuePercentage = 0;
+        if (previousTotalRevenue > 0) revenuePercentage = (newRevenue / previousTotalRevenue) * 100;
+        else if (newRevenue > 0) revenuePercentage = 100;
+
+        // Update Athlete UI
+        changePercentEl.innerText = `${athletePercentage.toFixed(2)}%`;
+        updateTrendUI(athletePercentage, changeBadgeEl, changeIconEl);
+
+        // Update Revenue UI
+        const revChangePercentEl = document.getElementById('revenueChangePercentage');
+        const revChangeIconEl = document.getElementById('revenueChangeIcon');
+        const revChangeBadgeEl = document.getElementById('revenueChangeBadge');
+        
+        revChangePercentEl.innerText = `${revenuePercentage.toFixed(2)}%`;
+        updateTrendUI(revenuePercentage, revChangeBadgeEl, revChangeIconEl);
+
+        // 4. Conversion Rate stats
+        const currentCR = athletes.length > 0 ? (subscribedAthletes.length / athletes.length) * 100 : 0;
+        const previousSubscribed = subscribedAthletes.filter(a => new Date(a.created_at) <= thirtyDaysAgo).length;
+        const previousCR = previousTotalAthletes > 0 ? (previousSubscribed / previousTotalAthletes) * 100 : 0;
+        
+        let conversionGrowth = 0;
+        if (previousCR > 0) {
+          conversionGrowth = ((currentCR - previousCR) / previousCR) * 100;
+        } else if (currentCR > 0) {
+          conversionGrowth = 100;
+        }
+
+        // Update Conversion UI
+        const convRateEl = document.getElementById('totalConversionRate');
+        const convChangePercentEl = document.getElementById('conversionChangePercentage');
+        const convChangeIconEl = document.getElementById('conversionChangeIcon');
+        const convChangeBadgeEl = document.getElementById('conversionChangeBadge');
+
+        convRateEl.innerText = `${currentCR.toFixed(1)}%`;
+        convChangePercentEl.innerText = `${Math.abs(conversionGrowth).toFixed(2)}%`;
+        updateTrendUI(conversionGrowth, convChangeBadgeEl, convChangeIconEl);
+
+        // 5. Update Revenue and Conversion Charts
+        updateRevenueChart(athletes);
+
+        // 6. Sport Specialization stats
+        let swimming = 0, football = 0, basketball = 0, crossfit = 0;
+        let sRev = 0, fRev = 0, bRev = 0, cRev = 0;
+
+        athletes.forEach(a => {
+          const isSwimming = a.swimming_records && a.swimming_records.length > 0;
+          const isFootball = a.football_records && a.football_records.length > 0;
+          const isBasketball = a.basketball_records && a.basketball_records.length > 0;
+          const isCrossfit = a.crossfit_records && a.crossfit_records.length > 0;
+
+          if (isSwimming) swimming++;
+          if (isFootball) football++;
+          if (isBasketball) basketball++;
+          if (isCrossfit) crossfit++;
+
+          if (a.is_subscribed) {
+            const fee = parseFloat(a.subscription_fee || 0);
+            if (isSwimming) sRev += fee;
+            if (isFootball) fRev += fee;
+            if (isBasketball) bRev += fee;
+            if (isCrossfit) cRev += fee;
+          }
+        });
+
+        const totalSports = swimming + football + basketball + crossfit;
+        const sP = totalSports > 0 ? (swimming / totalSports) * 100 : 0;
+        const fP = totalSports > 0 ? (football / totalSports) * 100 : 0;
+        const bP = totalSports > 0 ? (basketball / totalSports) * 100 : 0;
+        const cP = totalSports > 0 ? (crossfit / totalSports) * 100 : 0;
+
+        document.getElementById('swimmingCount').innerText = swimming;
+        document.getElementById('swimmingRevenue').innerText = sRev.toLocaleString();
+        document.getElementById('swimmingPercent').innerText = `${sP.toFixed(1)}%`;
+        
+        document.getElementById('footballCount').innerText = football;
+        document.getElementById('footballRevenue').innerText = fRev.toLocaleString();
+        document.getElementById('footballPercent').innerText = `${fP.toFixed(1)}%`;
+        
+        document.getElementById('basketballCount').innerText = basketball;
+        document.getElementById('basketballRevenue').innerText = bRev.toLocaleString();
+        document.getElementById('basketballPercent').innerText = `${bP.toFixed(1)}%`;
+        
+        document.getElementById('crossfitCount').innerText = crossfit;
+        document.getElementById('crossfitRevenue').innerText = cRev.toLocaleString();
+        document.getElementById('crossfitPercent').innerText = `${cP.toFixed(1)}%`;
+
+        // Update Donut Chart (Series remains counts for occupancy)
+        const checkDonut = setInterval(() => {
+          const donutEl = document.querySelector('#totalSale');
+          if (donutEl) {
+            clearInterval(checkDonut);
+            donutEl.innerHTML = ''; // Clear any existing chart
+            const options = {
+              series: [swimming, football, basketball, crossfit],
+              labels: ['Swimming', 'Football', 'Basketball', 'CrossFit'],
+              colors: [window.theme.primary, window.theme.warning, window.theme.info, window.theme.danger],
+              chart: {
+                type: 'donut',
+                height: 377,
+                fontFamily: 'Public Sans, serif',
+              },
+              legend: { show: false },
+              dataLabels: { enabled: true },
+              plotOptions: {
+                pie: {
+                  donut: { size: '65%' }
+                }
+              },
+              stroke: { width: 0 }
+            };
+            const chart = new ApexCharts(donutEl, options);
+            chart.render();
+          }
+        }, 500);
+
+        // Update Athletes by Gender Chart
+        const males = athletes.filter(a => a.gender === 'M').length;
+        const females = athletes.filter(a => a.gender === 'F').length;
+        if (document.getElementById('salesBygender')) {
+          ApexCharts.exec('athletesByGenderChart', 'updateSeries', [males, females]);
+        }
+
+        // 7. Top Performing Athletes
+        updateTopAthletes(athletes);
+
+        // 8. AI Predictive Insights
+        updateAIInsights(athletes);
+
+        // 9. Subscription Analytics
+        updateSubscriptionAnalytics(athletes);
+
+        // 10. RFM Segmentation
+        updateRFMSegmentation(athletes);
+
+      } catch (err) {
+        console.error('Error updating dashboard stats:', err);
+      }
+    });
+
+    function updateTopAthletes(athletes) {
+      const sports = {
+        'swimming': 'topSwimmingAthletes',
+        'football': 'topFootballAthletes',
+        'basketball': 'topBasketballAthletes',
+        'crossfit': 'topCrossfitAthletes'
+      };
+
+      Object.entries(sports).forEach(([sport, tbodyId]) => {
+        const sportAthletes = athletes.filter(a => {
+          if (sport === 'swimming') return a.swimming_records && a.swimming_records.length > 0;
+          if (sport === 'football') return a.football_records && a.football_records.length > 0;
+          if (sport === 'basketball') return a.basketball_records && a.basketball_records.length > 0;
+          if (sport === 'crossfit') return a.crossfit_records && a.crossfit_records.length > 0;
+          return false;
+        });
+
+        // Calculate stats for each
+        const ranked = sportAthletes.map(a => {
+          // Attendance Rate
+          const totalSessions = a.attendance_records ? a.attendance_records.length : 0;
+          const presentSessions = a.attendance_records ? a.attendance_records.filter(r => r.attended).length : 0;
+          const attendanceRate = totalSessions > 0 ? (presentSessions / totalSessions) * 100 : 0;
+
+          // Rating: Average of performance_rating in attendance_records (1-10)
+          let totalRating = 0;
+          if (a.attendance_records && a.attendance_records.length > 0) {
+            const ratings = a.attendance_records.filter(r => r.performance_rating != null).map(r => r.performance_rating);
+            if (ratings.length > 0) {
+              totalRating = ratings.reduce((sum, r) => sum + r, 0) / ratings.length;
+            }
+          }
+          
+          // Fallback logic for rating display
+          if (totalRating === 0) totalRating = 0; 
+
+          return {
+            name: a.name,
+            rating: totalRating,
+            attendance: attendanceRate
+          };
+        });
+
+        // Sort by rating descending
+        ranked.sort((a, b) => b.rating - a.rating);
+
+        // Take top 5
+        const top5 = ranked.slice(0, 5);
+
+        // Update UI
+        const tbody = document.getElementById(tbodyId);
+        if (tbody) {
+          tbody.innerHTML = top5.map(a => `
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                   <div class="avatar avatar-sm bg-light rounded-circle text-primary d-flex align-items-center justify-content-center fw-bold">
+                    ${a.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()}
+                  </div>
+                  <span class="text-inherit">${a.name}</span>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="text-warning">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-star">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
+                    </svg>
+                  </span>
+                  <span>${a.rating > 0 ? a.rating.toFixed(1) : 'N/A'}/10</span>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <div class="progress w-100" style="height: 6px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: ${a.attendance}%"></div>
+                  </div>
+                  <span class="small">${a.attendance.toFixed(0)}%</span>
+                </div>
+              </td>
+            </tr>
+          `).join('');
+          
+          if (top5.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="3" class="text-center py-4 text-muted small">No athletes ranked in this category yet.</td></tr>';
+          }
+        }
+      });
+    }
+
+    function updateAIInsights(athletes) {
+      const wrapper = document.getElementById('aiInsightsWrapper');
+      if (!wrapper) return;
+
+      const subscribedAthletes = athletes.filter(a => a.is_subscribed);
+      const totalRevenue = subscribedAthletes.reduce((sum, a) => sum + parseFloat(a.subscription_fee || 0), 0);
+      
+      // 1. Revenue Forecast (Linear Growth Projection)
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      const newRevenue = subscribedAthletes
+        .filter(a => new Date(a.created_at) > thirtyDaysAgo)
+        .reduce((sum, a) => sum + parseFloat(a.subscription_fee || 0), 0);
+      
+      const growthRate = totalRevenue > 0 ? (newRevenue / (totalRevenue - newRevenue)) : 0;
+      const projectedRevenue = totalRevenue * (1 + (growthRate || 0.05)); // Fallback to 5% growth
+
+      // 2. Churn Risk (Attendance based)
+      const atRiskAthletes = athletes.filter(a => {
+        if (!a.attendance_records || a.attendance_records.length === 0) return false;
+        const recentSessions = a.attendance_records.slice(-5);
+        const attendanceRate = recentSessions.filter(r => r.attended).length / recentSessions.length;
+        return attendanceRate < 0.5;
+      }).length;
+
+      // 3. Market Growth (Fastest growing sport)
+      const sports = ['swimming', 'football', 'basketball', 'crossfit'];
+      const growthBySport = sports.map(sport => {
+        const count = athletes.filter(a => a[`${sport}_records`] && a[`${sport}_records`].length > 0).length;
+        const recent = athletes.filter(a => a[`${sport}_records`] && a[`${sport}_records`].length > 0 && new Date(a.created_at) > thirtyDaysAgo).length;
+        return { sport, growth: count > 0 ? (recent / count) : 0 };
+      }).sort((a, b) => b.growth - a.growth);
+
+      const topSport = growthBySport[0];
+
+      const insights = [
+        {
+          title: "Revenue Forecast (30D)",
+          desc: `Projected to reach <span class="text-success fw-bold">${projectedRevenue.toLocaleString(undefined, { maximumFractionDigits: 0 })} EGP</span>. Current growth trend is <span class="text-success">+${(growthRate * 100).toFixed(1)}%</span>.`,
+          btn: "View Forecast",
+          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`
+        },
+        {
+          title: "Retention Risk Alert",
+          desc: `<span class="text-danger fw-bold">${atRiskAthletes} Athletes</span> show a significant drop in attendance (>50% decrease). High churn probability detected.`,
+          btn: "Re-engage Now",
+          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-danger"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`
+        },
+        {
+          title: "Market Intelligence",
+          desc: `Specialization in <span class="fw-bold text-capitalize">${topSport.sport}</span> is expanding rapidly. Consider adding more coaching slots for this segment.`,
+          btn: "Scale Operations",
+          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-info"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>`
+        }
+      ];
+
+      wrapper.innerHTML = insights.map(insight => `
+        <div class="swiper-slide">
+          <div class="d-flex flex-column gap-3">
+            <div class="d-flex align-items-center gap-3">
+              <div class="icon-shape icon-md rounded bg-light">
+                ${insight.icon}
+              </div>
+              <h5 class="mb-0">${insight.title}</h5>
+            </div>
+            <div>
+              <p class="mb-0 text-secondary" style="font-size: 0.9rem; line-height: 1.5;">${insight.desc}</p>
+            </div>
+            <div class="mt-2">
+              <a href="#!" class="btn btn-outline-primary btn-sm rounded-pill px-4" onclick="handleAIAction('${insight.btn}')">${insight.btn}</a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Re-initialize swiper if it exists
+      if (window.Swiper && document.querySelector('#swiper-1').swiper) {
+        document.querySelector('#swiper-1').swiper.update();
+      }
+    }
+
+    function handleAIAction(action) {
+      if (action === 'View Forecast') {
+        const revenueSection = document.getElementById('chartTabs');
+        if (revenueSection) {
+          revenueSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          revenueSection.classList.add('shadow-lg');
+          setTimeout(() => revenueSection.classList.remove('shadow-lg'), 2000);
+        }
+      } else if (action === 'Re-engage Now') {
+        window.location.href = '@@webRoot/pages/athletes/list.html';
+      } else if (action === 'Scale Operations') {
+        window.location.href = '@@webRoot/pages/athletes/add.html';
+      }
+    }
+
+    function updateTrendUI(percentage, badgeEl, iconEl) {
+      if (percentage >= 0) {
+        badgeEl.classList.add('text-success');
+        badgeEl.classList.remove('text-danger');
+        iconEl.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-trending-up">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 17l6 -6l4 4l8 -8" />
+            <path d="M14 7l7 0l0 7" />
+          </svg>
+        `;
+      } else {
+        badgeEl.classList.add('text-danger');
+        badgeEl.classList.remove('text-success');
+        iconEl.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-trending-down">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 7l6 6l4 -4l8 8" />
+            <path d="M21 10l0 7l-7 0" />
+          </svg>
+        `;
+      }
+    }
+
+    function updateSubscriptionAnalytics(athletes) {
+      const tbody = document.getElementById('subscriptionAnalyticsBody');
+      if (!tbody) return;
+
+      const subscribers = athletes.filter(a => a.is_subscribed);
+      
+      const rows = subscribers.map(a => {
+        // Calculate LTV
+        const joined = new Date(a.created_at);
+        const now = new Date();
+        const tenureMonths = Math.max(1, (now.getFullYear() - joined.getFullYear()) * 12 + (now.getMonth() - joined.getMonth()));
+        const ltv = tenureMonths * parseFloat(a.subscription_fee || 0);
+
+        // Next Billing
+        let nextBilling = "N/A";
+        if (a.subscription_end_date) {
+          nextBilling = new Date(a.subscription_end_date).toLocaleDateString();
+        } else {
+          // Estimate next billing as start_date + tenure + 1 month
+          const next = new Date(joined);
+          next.setMonth(next.getMonth() + tenureMonths);
+          nextBilling = next.toLocaleDateString();
+        }
+
+        // Health Score (based on recent attendance)
+        let healthScore = 0;
+        if (a.attendance_records && a.attendance_records.length > 0) {
+          const recent = a.attendance_records.slice(-10);
+          healthScore = (recent.filter(r => r.attended).length / recent.length) * 100;
+        }
+
+        // Status & Color
+        let status = "Active";
+        let statusClass = "bg-success-subtle text-success";
+        
+        if (healthScore < 50) {
+          status = "At Risk";
+          statusClass = "bg-danger-subtle text-danger";
+        } else if (healthScore < 75) {
+          status = "Warning";
+          statusClass = "bg-warning-subtle text-warning";
+        }
+
+        return `
+          <tr>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <div class="avatar avatar-xs bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 32px; height: 32px; font-size: 0.75rem;">
+                  ${a.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()}
+                </div>
+                <div>
+                  <h6 class="mb-0 fs-6">${a.name}</h6>
+                </div>
+              </div>
+            </td>
+            <td><span class="fw-medium">${ltv.toLocaleString()} EGP</span></td>
+            <td>${joined.toLocaleDateString()}</td>
+            <td>${nextBilling}</td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <div class="progress w-100" style="height: 4px; width: 60px !important;">
+                  <div class="progress-bar ${healthScore > 70 ? 'bg-success' : healthScore > 40 ? 'bg-warning' : 'bg-danger'}" role="progressbar" style="width: ${healthScore}%"></div>
+                </div>
+                <span class="small">${healthScore.toFixed(0)}%</span>
+              </div>
+            </td>
+            <td><span class="badge ${statusClass}">${status}</span></td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = rows.length > 0 ? rows.join('') : '<tr><td colspan="6" class="text-center py-4 text-muted">No active subscribers found.</td></tr>';
+    }
+
+    window.exportToCSV = function() {
+      const tbody = document.getElementById('subscriptionAnalyticsBody');
+      const rows = tbody.querySelectorAll('tr');
+      if (rows.length === 0 || (rows.length === 1 && rows[0].innerText.includes('No active subscribers'))) {
+        alert("No data to export.");
+        return;
+      }
+      
+      let csv = ["Athlete,LTV (Est.),Last Payment,Next Billing,Health Score,Status"];
+      rows.forEach(row => {
+        const cols = row.querySelectorAll('td');
+        if (cols.length < 6) return;
+        const athleteName = cols[0].querySelector('h6').innerText.trim();
+        const ltv = cols[1].innerText.trim().replace(/,/g, '');
+        const lastPayment = cols[2].innerText.trim();
+        const nextBilling = cols[3].innerText.trim();
+        const healthScore = cols[4].querySelector('span').innerText.trim();
+        const status = cols[5].innerText.trim();
+        
+        csv.push(`"${athleteName}","${ltv}","${lastPayment}","${nextBilling}","${healthScore}","${status}"`);
+      });
+
+      const csvContent = "data:text/csv;charset=utf-8," + csv.join("\n");
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `subscription_analytics_${new Date().toISOString().split('T')[0]}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function updateRFMSegmentation(athletes) {
+      const container = document.getElementById('rfmSegmentsList');
+      const chartEl = document.getElementById('rfmSegmentationChart');
+      if (!container || !chartEl) return;
+
+      const subscribed = athletes.filter(a => a.is_subscribed);
+      const totalRev = subscribed.reduce((sum, a) => sum + parseFloat(a.subscription_fee || 0), 0);
+      
+      // Calculate Average Fee and Average Attendance for Benchmarking
+      const avgFee = totalRev / (subscribed.length || 1);
+      
+      const segments = {
+        'Champions': { count: 0, rev: 0, color: 'primary', desc: 'High spend & high engagement' },
+        'Loyalists': { count: 0, rev: 0, color: 'success', desc: 'Standard spend & high engagement' },
+        'Potential': { count: 0, rev: 0, color: 'info', desc: 'New or irregular but high spend' },
+        'At Risk': { count: 0, rev: 0, color: 'warning', desc: 'Declining attendance' },
+        'Lost': { count: 0, rev: 0, color: 'danger', desc: 'Inactive or cancelled' }
+      };
+
+      subscribed.forEach(a => {
+        const fee = parseFloat(a.subscription_fee || 0);
+        let attendanceRate = 0;
+        if (a.attendance_records && a.attendance_records.length > 0) {
+          const recent = a.attendance_records.slice(-10);
+          attendanceRate = recent.filter(r => r.attended).length / recent.length;
+        }
+
+        // Logic: How we identify the Champions
+        let seg = 'At Risk';
+        
+        if (attendanceRate >= 0.8 && fee >= avgFee) {
+          seg = 'Champions'; // Top Tier: High Loyalty + High Value
+        } else if (attendanceRate >= 0.8 && fee < avgFee) {
+          seg = 'Loyalists'; // Middle Tier: High Loyalty + Standard Value
+        } else if (attendanceRate >= 0.4 && fee >= avgFee) {
+          seg = 'Potential'; // Potential: High Value + Irregular Attendance
+        } else if (attendanceRate < 0.2) {
+          seg = 'Lost'; // Bottom Tier: Inactive
+        }
+
+        segments[seg].count++;
+        segments[seg].rev += fee;
+      });
+
+      const segmentData = Object.entries(segments).map(([name, data]) => ({
+        name,
+        ...data,
+        percent: totalRev > 0 ? (data.rev / totalRev) * 100 : 0
+      })).filter(s => s.count > 0 || s.rev > 0);
+
+      container.innerHTML = segmentData.map(s => `
+        <div class="mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge bg-${s.color}-subtle text-${s.color} rounded-pill px-2" style="font-size: 0.65rem;">${s.count} Athletes</span>
+              <div>
+                <span class="fw-bold small d-block">${s.name}</span>
+                <span class="text-secondary" style="font-size: 0.7rem;">${s.desc}</span>
+              </div>
+            </div>
+            <div class="text-end">
+              <span class="small fw-bold d-block">${s.rev.toLocaleString()} EGP</span>
+              <span class="text-secondary" style="font-size: 0.7rem;">${s.percent.toFixed(1)}% Share</span>
+            </div>
+          </div>
+          <div class="progress" style="height: 5px">
+            <div class="progress-bar bg-${s.color}" role="progressbar" style="width: ${s.percent}%"></div>
+          </div>
+        </div>
+      `).join('');
+
+      // Render mini chart
+      if (window.ApexCharts && segmentData.length > 0) {
+        chartEl.innerHTML = '';
+        const theme = window.theme || { primary: '#0d6efd', success: '#198754', info: '#0dcaf0', warning: '#ffc107', danger: '#dc3545' };
+        const options = {
+          series: segmentData.map(s => s.rev),
+          labels: segmentData.map(s => s.name),
+          chart: { type: 'donut', height: 280, toolbar: { show: false } },
+          dataLabels: { enabled: true, dropShadow: { enabled: false } },
+          legend: { show: false },
+          stroke: { width: 2, colors: ['#fff'] },
+          colors: segmentData.map(s => theme[s.color] || '#ccc'),
+          plotOptions: {
+            pie: {
+              donut: {
+                size: '70%',
+                labels: {
+                  show: true,
+                  name: { show: true, fontSize: '12px', color: '#666', offsetY: -5 },
+                  value: {
+                    show: true,
+                    fontSize: '18px',
+                    fontWeight: 700,
+                    offsetY: 10,
+                    formatter: (val) => `${parseInt(val).toLocaleString()} EGP`
+                  },
+                  total: {
+                    show: true,
+                    label: 'Total Revenue',
+                    formatter: () => `${totalRev.toLocaleString()} EGP`
+                  }
+                }
+              }
+            }
+          }
+        };
+        new ApexCharts(chartEl, options).render();
+      }
+    }
+
+    function updateRevenueChart(athletes) {
+      const monthlyRevenue = new Array(12).fill(0);
+      const monthlyConvRate = new Array(12).fill(0);
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      const currentMonth = now.getMonth();
+
+      const subscribedAthletes = athletes.filter(a => a.is_subscribed);
+      const currentTotalCR = athletes.length > 0 ? (subscribedAthletes.length / athletes.length) * 100 : 0;
+      document.getElementById('revenueConvRateVal').innerText = `${currentTotalCR.toFixed(1)}%`;
+
+      for (let m = 0; m <= currentMonth; m++) {
+        const monthStart = new Date(currentYear, m, 1);
+        const monthEnd = new Date(currentYear, m + 1, 0);
+
+        let totalInMonth = 0;
+        let subscribedInMonth = 0;
+
+        athletes.forEach(athlete => {
+          const joined = new Date(athlete.created_at);
+          if (joined <= monthEnd) {
+            totalInMonth++;
+            
+            if (athlete.is_subscribed) {
+              const start = athlete.subscription_start_date ? new Date(athlete.subscription_start_date) : joined;
+              const end = athlete.subscription_end_date ? new Date(athlete.subscription_end_date) : null;
+
+              const startsBeforeOrInMonth = start <= monthEnd;
+              const endsAfterOrInMonth = !end || end >= monthStart;
+
+              if (startsBeforeOrInMonth && endsAfterOrInMonth) {
+                monthlyRevenue[m] += parseFloat(athlete.subscription_fee || 0);
+                subscribedInMonth++;
+              }
+            }
+          }
+        });
+        monthlyConvRate[m] = totalInMonth > 0 ? (subscribedInMonth / totalInMonth) * 100 : 0;
+      }
+
+      const checkCharts = setInterval(() => {
+        const incomeChartEl = document.querySelector('#totalIncomeChart');
+        const expenseChartEl = document.querySelector('#totalExpensesChart');
+        
+        if (incomeChartEl && incomeChartEl.childNodes.length > 0 && 
+            expenseChartEl && expenseChartEl.childNodes.length > 0) {
+          clearInterval(checkCharts);
+          
+          // Update Revenue Chart
+          ApexCharts.exec('totalIncomeChart', 'updateOptions', {
+            series: [{
+              name: 'Total Income',
+              data: monthlyRevenue
+            }],
+            yaxis: {
+              labels: {
+                formatter: function (val) {
+                  return val.toLocaleString() + ' EGP';
+                }
+              }
+            }
+          });
+
+          // Update Conversion Rate Chart
+          ApexCharts.exec('totalExpensesChart', 'updateOptions', {
+            series: [{
+              name: 'Conversion Rate',
+              data: monthlyConvRate
+            }]
+          });
+        }
+      }, 500);
+    }
+  </script>
+</body>
+
+</html>

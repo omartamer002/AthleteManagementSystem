@@ -1,0 +1,51 @@
+<!-- Favicon icon-->
+<link rel="icon" type="image/png" href="@@webRoot/assets/images/favicon/favicon.png" />
+<link rel="apple-touch-icon" href="@@webRoot/assets/images/favicon/favicon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="@@webRoot/assets/images/favicon/favicon.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="@@webRoot/assets/images/favicon/favicon.png" />
+
+<meta name="msapplication-TileColor" content="#ffffff" />
+<meta name="msapplication-TileImage" content="@@webRoot/assets/images/favicon/ms-icon-144x144.png" />
+<meta name="theme-color" content="#ffffff" />
+<!-- Color modes -->
+<script src="@@webRoot/assets/js/vendors/color-modes.js"></script>
+<script>
+  if (localStorage.getItem('sidebarExpanded') === 'false') {
+    document.documentElement.classList.add('collapsed');
+    document.documentElement.classList.remove('expanded');
+  } else {
+    document.documentElement.classList.remove('collapsed');
+    document.documentElement.classList.add('expanded');
+  }
+
+  // Auth redirect logic
+  const isAuthPage = window.location.pathname.includes('/authentication/');
+  const userStr = localStorage.getItem('auth_user');
+  
+  if (!userStr && !isAuthPage) {
+    window.location.href = '@@webRoot/pages/authentication/sign-in.html';
+  } else if (userStr) {
+    try {
+      const user = JSON.parse(userStr);
+      if (user.expiresAt && Date.now() > user.expiresAt) {
+        localStorage.removeItem('auth_user');
+        if (!isAuthPage) {
+          window.location.href = '@@webRoot/pages/authentication/sign-in.html';
+        }
+      }
+    } catch (e) {
+      console.error('Auth parse error', e);
+    }
+  }
+</script>
+<!-- Libs CSS -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&display=swap" />
+<link rel="stylesheet" href="@@webRoot/node_modules/simplebar/dist/simplebar.min.css" />
+<link rel="stylesheet" href="@@webRoot/node_modules/@tabler/icons-webfont/tabler-icons.min.css" />
+
+<!-- Theme CSS -->
+<!-- build:css @@webRoot/assets/css/theme.min.css -->
+<link rel="stylesheet" href="@@webRoot/assets/css/theme.css" />
+<!-- endbuild -->

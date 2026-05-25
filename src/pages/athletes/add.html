@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    @@include("../../partials/head/head-meta.html", {"webRoot": "../.."})
+    <title>Add Athlete | TIGER FIT</title>
+    @@include("../../partials/head/head-links.html", {"webRoot": "../.."})
+  </head>
+
+  <body>
+    <!-- Vertical Sidebar -->
+    <div>
+      @@include("../../partials/sidebar-collapse.html", {"webRoot": "../.."})
+
+      <!-- Main Content -->
+      <div id="content" class="position-relative h-100">
+        @@include("../../partials/topbar-second.html", {"webRoot": "../.."})
+        <div class="custom-container">
+          <div class="row mb-6">
+            <div class="col-lg-12">
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <h1 class="mb-1 h2 fw-bold" id="pageTitle">Add New Athlete</h1>
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                      <li class="breadcrumb-item"><a href="../../index.html" class="text-decoration-none">Dashboard</a></li>
+                      <li class="breadcrumb-item"><a href="list.html" class="text-decoration-none">Athletes</a></li>
+                      <li class="breadcrumb-item active" aria-current="page" id="breadcrumbAction">New Profile</li>
+                    </ol>
+                  </nav>
+                </div>
+                <div>
+                  <a href="list.html" class="btn btn-white shadow-sm border">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-1"><path d="m15 18-6-6 6-6"/></svg>
+                    Back to List
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+              <div class="card shadow-sm border-0 mb-8 overflow-hidden">
+                <div class="card-header bg-transparent border-bottom py-4">
+                  <h4 class="mb-0 fs-5 fw-bold">Athlete Intake Form</h4>
+                </div>
+                <div class="card-body p-6 p-lg-8">
+                  <form id="athleteForm" class="needs-validation" novalidate>
+                    
+                    <!-- Athlete Info Section -->
+                    <div class="mb-8">
+                      <div class="d-flex align-items-center gap-2 mb-4">
+                        <div class="icon-shape icon-sm rounded bg-primary-subtle text-primary fw-bold">1</div>
+                        <h5 class="mb-0 fw-bold">Personal Information</h5>
+                      </div>
+                    <div class="row mb-3">
+                      <div class="col-md-4 mb-3 mb-md-0">
+                        <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="name" placeholder="John Doe" required />
+                      </div>
+                      <div class="col-md-2 mb-3 mb-md-0">
+                        <label for="age" class="form-label">Age <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" id="age" min="1" max="100" placeholder="25" required />
+                      </div>
+                      <div class="col-md-3">
+                        <label for="date_of_birth" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="date_of_birth" />
+                      </div>
+                      <div class="col-md-3">
+                        <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                        <select class="form-select" id="gender" required>
+                          <option value="M">Male</option>
+                          <option value="F">Female</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                      <div class="col-md-4 mb-3 mb-md-0">
+                        <label for="height" class="form-label">Height (cm) <span class="text-danger">*</span></label>
+                        <input type="number" step="0.01" class="form-control" id="height" required />
+                      </div>
+                      <div class="col-md-4 mb-3 mb-md-0">
+                        <label for="weight" class="form-label">Weight (kg) <span class="text-danger">*</span></label>
+                        <input type="number" step="0.01" class="form-control" id="weight" required />
+                      </div>
+                      <div class="col-md-4">
+                        <label for="body_type" class="form-label">Body Type <span class="text-danger">*</span></label>
+                        <select class="form-select" id="body_type" required>
+                          <option value="Ectomorph">Ectomorph</option>
+                          <option value="Mesomorph">Mesomorph</option>
+                          <option value="Endomorph">Endomorph</option>
+                        </select>
+                      </div>
+                    </div>
+
+                      <div class="col-md-6 mb-3 mb-md-0">
+                        <label for="strengths" class="form-label">Strengths</label>
+                        <textarea class="form-control" id="strengths" rows="2"></textarea>
+                      </div>
+                      <div class="col-md-6 mb-3 mb-md-0">
+                        <label for="weaknesses" class="form-label">Weaknesses</label>
+                        <textarea class="form-control" id="weaknesses" rows="2"></textarea>
+                      </div>
+                    </div>
+
+                    <hr class="my-5">
+
+                    <!-- Injury Tracking Section -->
+                    <div class="mb-8">
+                      <div class="d-flex align-items-center gap-2 mb-4">
+                        <div class="icon-shape icon-sm rounded bg-danger-subtle text-danger fw-bold">2</div>
+                        <h5 class="mb-0 fw-bold">Injury Tracking <span class="text-muted fw-normal fs-6 ms-2">(Admin Only)</span></h5>
+                      </div>
+
+                      <div id="injuryHistoryContainer" class="mb-4 d-none">
+                        <h6 class="fw-bold mb-3">Injury History</h6>
+                        <div class="table-responsive rounded-3 border">
+                          <table class="table table-hover table-centered mb-0">
+                            <thead class="bg-body-tertiary">
+                              <tr>
+                                <th>Type</th>
+                                <th>Severity</th>
+                                <th>Status</th>
+                                <th>Start Date</th>
+                                <th>Cleared</th>
+                              </tr>
+                            </thead>
+                            <tbody id="injuryHistoryBody"></tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <div class="p-5 rounded-3 border border-dashed border-danger mb-4">
+                        <h6 class="fw-bold mb-4 d-flex align-items-center gap-2" id="addInjuryTitle">
+                          <i class="bi bi-plus-circle-dotted text-danger"></i>
+                          Add New Injury Record
+                        </h6>
+                        <div class="row g-4 mb-4">
+                          <div class="col-md-4">
+                            <label for="injury_type" class="form-label fw-medium">Injury Type</label>
+                            <input type="text" class="form-control" id="injury_type" placeholder="e.g. Sprained Ankle" />
+                          </div>
+                          <div class="col-md-4">
+                            <label for="injury_severity" class="form-label fw-medium">Severity</label>
+                            <select class="form-select" id="injury_severity">
+                              <option value="Mild">Mild</option>
+                              <option value="Moderate">Moderate</option>
+                              <option value="Severe">Severe</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4">
+                            <label for="injury_start_date" class="form-label fw-medium">Start Date</label>
+                            <input type="date" class="form-control" id="injury_start_date" />
+                          </div>
+                        </div>
+                        <div class="row g-4 mb-4">
+                          <div class="col-md-6">
+                            <label for="expected_recovery_time" class="form-label fw-medium">Recovery Time</label>
+                            <input type="text" class="form-control" id="expected_recovery_time" placeholder="e.g. 2 weeks" />
+                          </div>
+                          <div class="col-md-6">
+                            <label for="cleared_by" class="form-label fw-medium">Cleared By</label>
+                            <input type="text" class="form-control" id="cleared_by" placeholder="Medical Professional Name" />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <label for="injury_notes" class="form-label fw-medium">Medical Notes</label>
+                            <textarea class="form-control" id="injury_notes" rows="3" placeholder="Enter clinical details..."></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <hr class="my-5">
+
+                    <!-- Fitness Tracking Section -->
+                    <div class="mb-8">
+                      <div class="d-flex align-items-center gap-2 mb-4">
+                        <div class="icon-shape icon-sm rounded bg-info-subtle text-info fw-bold">3</div>
+                        <h5 class="mb-0 fw-bold">Fitness & Training</h5>
+                      </div>
+                      
+                      <div class="row mb-5">
+                        <div class="col-md-6">
+                          <label for="sessions_per_week" class="form-label fw-medium">Sessions per Week <span class="text-danger">*</span></label>
+                          <input type="number" class="form-control" id="sessions_per_week" placeholder="e.g. 5" required />
+                        </div>
+                      </div>
+
+                      <div class="mb-5">
+                        <label class="form-label fw-bold d-block mb-3">Workout Strategy</label>
+                        <div id="fitnessWorkoutsContainer">
+                          <div class="fitness-workout-row border rounded-3 p-4 mb-3 bg-transparent position-relative">
+                            <div class="row g-3">
+                              <div class="col-md-12">
+                                <label class="form-label fw-medium">Workout Focus / Type <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control fit-type" placeholder="e.g. Strength & Conditioning, Hypertrophy" required />
+                              </div>
+                              <div class="col-md-12">
+                                <label class="form-label fw-medium">Workout Plan Details <span class="text-danger">*</span></label>
+                                <textarea class="form-control fit-plan" rows="3" placeholder="Describe the routine, sets, and focus..." required></textarea>
+                              </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-danger remove-fit-workout position-absolute top-0 end-0 m-3 d-none">
+                              <i class="bi bi-trash me-1"></i> Remove
+                            </button>
+                          </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-primary shadow-sm" id="addFitWorkoutBtn">
+                          <i class="bi bi-plus-lg me-1"></i> Add Another Strategy
+                        </button>
+                      </div>
+
+                      <div id="fitnessTestsHeader" class="mb-5">
+                        <label class="form-label fw-bold d-block mb-3">Primary Fitness Benchmarks</label>
+                        <div id="fitnessTestsContainer">
+                          <div class="test-result-row border rounded-3 p-4 mb-3 bg-transparent position-relative">
+                            <div class="row g-3">
+                              <div class="col-md-5">
+                                <label class="form-label fw-medium">Exercise / Test Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control test-name" placeholder="e.g. Bench Press, Squat" />
+                              </div>
+                              <div class="col-md-4">
+                                <label class="form-label fw-medium">Result</label>
+                                <div class="input-group">
+                                  <input type="number" step="0.01" class="form-control test-value" placeholder="85.5" />
+                                  <select class="form-select test-weight-unit" style="max-width: 80px;">
+                                    <option value="kg">kg</option>
+                                    <option value="lbs">lbs</option>
+                                    <option value="">-</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-medium">Reps</label>
+                                <input type="number" step="1" min="0" class="form-control test-reps" placeholder="e.g. 10" />
+                              </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-danger remove-test-row position-absolute top-0 end-0 m-3 d-none">
+                               <i class="bi bi-trash me-1"></i> Remove
+                            </button>
+                          </div>
+                        </div>
+                        <div class="mt-4">
+                          <label class="form-label fw-semibold d-block mb-2">Rep Count Tests</label>
+                          <div id="repTestsContainer">
+                            <div class="rep-test-row border rounded-3 p-4 mb-3 bg-transparent position-relative">
+                              <div class="row g-3">
+                                <div class="col-md-7">
+                                  <label class="form-label fw-medium">Test Name</label>
+                                  <input type="text" class="form-control rep-test-name" placeholder="e.g. Pushups, Crunches, Pull-ups" />
+                                </div>
+                                <div class="col-md-5">
+                                  <label class="form-label fw-medium">Rep Count</label>
+                                  <input type="number" step="1" min="0" class="form-control rep-test-value" placeholder="e.g. 35" />
+                                </div>
+                              </div>
+                              <button type="button" class="btn btn-sm btn-outline-danger remove-rep-test-row position-absolute top-0 end-0 m-3 d-none">
+                                 <i class="bi bi-trash me-1"></i> Remove
+                              </button>
+                            </div>
+                          </div>
+                          <button type="button" class="btn btn-sm btn-outline-primary shadow-sm" id="addRepTestRowBtn">
+                            <i class="bi bi-plus-lg me-1"></i> Add Rep Test
+                          </button>
+                        </div>
+                        <div class="mt-4">
+                          <label class="form-label fw-semibold d-block mb-2">Machine & Running Tests</label>
+                          <div class="accordion accordion-flush rounded-3 border overflow-hidden" id="machineTestsAccordion">
+                            <div class="accordion-item">
+                              <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTreadmillTest">Treadmill Running Test</button>
+                              </h2>
+                              <div id="collapseTreadmillTest" class="accordion-collapse collapse" data-bs-parent="#machineTestsAccordion">
+                                <div class="accordion-body">
+                                  <div class="row g-3">
+                                    <div class="col-md-4">
+                                      <label class="form-label">Maximum Speed</label>
+                                      <div class="input-group">
+                                        <input type="number" step="0.01" min="0" class="form-control machine-test-field" data-key="Treadmill Max Speed" data-unit-source="treadmillSpeedUnit" data-group="Treadmill Running Test" placeholder="e.g. 16.5">
+                                        <select class="form-select" id="treadmillSpeedUnit" style="max-width: 95px;">
+                                          <option value="km/h">km/h</option>
+                                          <option value="m/s">m/s</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                      <label class="form-label">Time</label>
+                                      <div class="input-group" data-time-key="Treadmill Time" data-time-group="Treadmill Running Test">
+                                        <input type="number" min="0" class="form-control machine-time-hours" placeholder="Hours">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-minutes" placeholder="Minutes">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-seconds" placeholder="Seconds">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label class="form-label">Heart Rate</label>
+                                      <input type="number" step="1" min="0" class="form-control machine-test-field" data-key="Treadmill Heart Rate" data-unit="BPM" data-group="Treadmill Running Test" placeholder="e.g. 172">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="accordion-item">
+                              <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTrackTest">Track Running Test</button>
+                              </h2>
+                              <div id="collapseTrackTest" class="accordion-collapse collapse" data-bs-parent="#machineTestsAccordion">
+                                <div class="accordion-body">
+                                  <div class="row g-3 mb-3">
+                                    <div class="col-md-3">
+                                      <label class="form-label">Total Laps</label>
+                                      <input type="number" step="1" min="0" class="form-control machine-test-field" data-key="Track Total Laps" data-unit="laps" data-group="Track Running Test" placeholder="e.g. 6">
+                                    </div>
+                                    <div class="col-md-2">
+                                      <label class="form-label">Lap Length (m)</label>
+                                      <input type="number" step="1" min="0" class="form-control machine-test-field" data-key="Track Lap Length" data-unit="m" data-group="Track Running Test" value="400">
+                                    </div>
+                                    <!-- Track Total Distance removed (computed client-side) -->
+                                    <div class="col-md-5">
+                                      <label class="form-label">Total Time</label>
+                                      <div class="input-group" data-time-key="Track Total Time" data-time-group="Track Running Test">
+                                        <input type="number" min="0" class="form-control machine-time-hours" placeholder="Hours">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-minutes" placeholder="Minutes">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-seconds" placeholder="Seconds">
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row g-3">
+                                    <div class="col-md-3">
+                                      <label class="form-label">50m Time</label>
+                                      <div class="input-group" data-time-key="Track 50m Time" data-time-group="Track Running Test">
+                                        <input type="number" min="0" class="form-control machine-time-hours" placeholder="H">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-minutes" placeholder="M">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-seconds" placeholder="S">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label class="form-label">100m Time</label>
+                                      <div class="input-group" data-time-key="Track 100m Time" data-time-group="Track Running Test">
+                                        <input type="number" min="0" class="form-control machine-time-hours" placeholder="H">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-minutes" placeholder="M">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-seconds" placeholder="S">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label class="form-label">200m Time</label>
+                                      <div class="input-group" data-time-key="Track 200m Time" data-time-group="Track Running Test">
+                                        <input type="number" min="0" class="form-control machine-time-hours" placeholder="H">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-minutes" placeholder="M">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-seconds" placeholder="S">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label class="form-label">400m Time</label>
+                                      <div class="input-group" data-time-key="Track 400m Time" data-time-group="Track Running Test">
+                                        <input type="number" min="0" class="form-control machine-time-hours" placeholder="H">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-minutes" placeholder="M">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-seconds" placeholder="S">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="accordion-item">
+                              <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEllipticalTest">Elliptical Test</button>
+                              </h2>
+                              <div id="collapseEllipticalTest" class="accordion-collapse collapse" data-bs-parent="#machineTestsAccordion">
+                                <div class="accordion-body">
+                                  <div class="row g-3">
+                                    <div class="col-md-4">
+                                      <label class="form-label">Time</label>
+                                      <div class="input-group" data-time-key="Elliptical Time" data-time-group="Elliptical Test">
+                                        <input type="number" min="0" class="form-control machine-time-hours" placeholder="Hours">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-minutes" placeholder="Minutes">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-seconds" placeholder="Seconds">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <label class="form-label">Distance</label>
+                                      <div class="input-group">
+                                        <input type="number" step="0.01" min="0" class="form-control machine-test-field" data-key="Elliptical Distance" data-unit-source="ellipticalDistanceUnit" data-group="Elliptical Test" placeholder="e.g. 3.2">
+                                        <select class="form-select" id="ellipticalDistanceUnit" style="max-width: 90px;">
+                                          <option value="km">km</option>
+                                          <option value="mi">mi</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <label class="form-label">Speed / Pace</label>
+                                      <div class="input-group">
+                                        <input type="number" step="0.01" min="0" class="form-control machine-test-field" data-key="Elliptical Speed" data-unit-source="ellipticalSpeedUnit" data-group="Elliptical Test" placeholder="e.g. 9.5">
+                                        <select class="form-select" id="ellipticalSpeedUnit" style="max-width: 95px;">
+                                          <option value="km/h">km/h</option>
+                                          <option value="mph">mph</option>
+                                          <option value="min/km">min/km</option>
+                                          <option value="min/mi">min/mi</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label class="form-label">Stride Rate</label>
+                                      <input type="number" step="1" min="0" class="form-control machine-test-field" data-key="Elliptical Stride Rate" data-unit="SPM" data-group="Elliptical Test" placeholder="e.g. 130">
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label class="form-label">Calories Burned</label>
+                                      <input type="number" step="1" min="0" class="form-control machine-test-field" data-key="Elliptical Calories" data-unit="kcal" data-group="Elliptical Test" placeholder="e.g. 260">
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label class="form-label">Heart Rate</label>
+                                      <input type="number" step="1" min="0" class="form-control machine-test-field" data-key="Elliptical Heart Rate" data-unit="BPM" data-group="Elliptical Test" placeholder="e.g. 155">
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label class="form-label">Resistance Level</label>
+                                      <input type="number" step="1" min="0" class="form-control machine-test-field" data-key="Elliptical Resistance Level" data-unit="level" data-group="Elliptical Test" placeholder="e.g. 12">
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label class="form-label">Incline / Ramp Angle</label>
+                                      <input type="number" step="0.1" min="0" class="form-control machine-test-field" data-key="Elliptical Incline" data-unit="deg" data-group="Elliptical Test" placeholder="e.g. 8">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="accordion-item">
+                              <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCyclingTest">Cycling Machine Test</button>
+                              </h2>
+                              <div id="collapseCyclingTest" class="accordion-collapse collapse" data-bs-parent="#machineTestsAccordion">
+                                <div class="accordion-body">
+                                  <div class="row g-3">
+                                    <div class="col-md-3">
+                                      <label class="form-label">Cadence</label>
+                                      <input type="number" step="1" min="0" class="form-control machine-test-field" data-key="Cycling Cadence" data-unit="RPM" data-group="Cycling Machine Test" placeholder="e.g. 88">
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label class="form-label">Resistance / Gear</label>
+                                      <input type="number" step="1" min="0" class="form-control machine-test-field" data-key="Cycling Resistance Level" data-unit="level" data-group="Cycling Machine Test" placeholder="e.g. 14">
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label class="form-label">Distance</label>
+                                      <div class="input-group">
+                                        <input type="number" step="0.01" min="0" class="form-control machine-test-field" data-key="Cycling Distance" data-unit-source="cyclingDistanceUnit" data-group="Cycling Machine Test" placeholder="e.g. 12.4">
+                                        <select class="form-select" id="cyclingDistanceUnit" style="max-width: 90px;">
+                                          <option value="km">km</option>
+                                          <option value="mi">mi</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <label class="form-label">Speed</label>
+                                      <div class="input-group">
+                                        <input type="number" step="0.01" min="0" class="form-control machine-test-field" data-key="Cycling Speed" data-unit-source="cyclingSpeedUnit" data-group="Cycling Machine Test" placeholder="e.g. 28">
+                                        <select class="form-select" id="cyclingSpeedUnit" style="max-width: 95px;">
+                                          <option value="km/h">km/h</option>
+                                          <option value="mph">mph</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <label class="form-label">Time</label>
+                                      <div class="input-group" data-time-key="Cycling Time" data-time-group="Cycling Machine Test">
+                                        <input type="number" min="0" class="form-control machine-time-hours" placeholder="Hours">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-minutes" placeholder="Minutes">
+                                        <input type="number" min="0" max="59" class="form-control machine-time-seconds" placeholder="Seconds">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <label class="form-label">Calories Burned</label>
+                                      <input type="number" step="1" min="0" class="form-control machine-test-field" data-key="Cycling Calories" data-unit="kcal" data-group="Cycling Machine Test" placeholder="e.g. 420">
+                                    </div>
+                                    <div class="col-md-4">
+                                      <label class="form-label">Heart Rate</label>
+                                      <input type="number" step="1" min="0" class="form-control machine-test-field" data-key="Cycling Heart Rate" data-unit="BPM" data-group="Cycling Machine Test" placeholder="e.g. 162">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-primary shadow-sm" id="addTestRowBtn">
+                          <i class="bi bi-plus-lg me-1"></i> Add Another Benchmark
+                        </button>
+                      </div>
+
+                      <div class="row g-4 mb-4 p-4 rounded-3 border">
+                        <div class="col-md-12">
+                          <label for="fitness_goal" class="form-label fw-medium">Overall Fitness Goals</label>
+                          <textarea class="form-control" id="fitness_goal" rows="2" placeholder="e.g. Increase explosive power for basketball season..."></textarea>
+                        </div>
+                        <div class="col-md-12">
+                          <label for="current_fitness_tests_notes" class="form-label fw-medium">Additional Performance Notes</label>
+                          <textarea class="form-control" id="current_fitness_tests_notes" rows="2" placeholder="Any specific details about current performance levels..."></textarea>
+                        </div>
+                        <div class="col-md-12">
+                          <label for="nutrition_plan" class="form-label fw-medium">Nutrition Strategy</label>
+                          <textarea class="form-control" id="nutrition_plan" rows="2" placeholder="Dietary restrictions, macro goals, supplements..."></textarea>
+                        </div>
+                        <div class="col-md-12">
+                          <label for="inbody_file" class="form-label fw-medium d-flex align-items-center gap-2">
+                             InBody Test Result
+                             <span class="badge bg-light text-secondary border fw-normal">Optional</span>
+                          </label>
+                          <div class="input-group">
+                            <input class="form-control" type="file" id="inbody_file">
+                            <label class="input-group-text" for="inbody_file">Upload PDF/JPG</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <!-- ADVANCED ASSESSMENTS (6 categories) -->
+                    <div class="mb-8">
+                      <div class="d-flex align-items-center gap-2 mb-2">
+                        <div class="icon-shape icon-sm rounded bg-warning-subtle text-warning fw-bold">3B</div>
+                        <h5 class="mb-0 fw-bold">Advanced Diagnostics</h5>
+                      </div>
+                      <p class="text-secondary small mb-4 ms-5">Advanced laboratory-grade assessments for precision performance tracking.</p>
+
+                      <div class="accordion accordion-flush rounded-3 border overflow-hidden ms-lg-5" id="assessmentAccordion">
+                      <!-- 1. Mobility -->
+                      <div class="accordion-item border-start border-4">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseM">
+                            <i class="bi bi-arrows-move me-2 text-primary"></i> 1. Mobility Assessments
+                          </button>
+                        </h2>
+                        <div id="collapseM" class="accordion-collapse collapse">
+                          <div class="accordion-body bg-light">
+                            <div class="row g-3">
+                              <div class="col-md-4">
+                                <label class="form-label fw-semibold">FMS Composite Score <span class="text-muted fw-normal">/21</span></label>
+                                <input type="number" step="0.5" min="0" max="21" class="form-control assess-field" data-key="mobility__fms_score" placeholder="0-21">
+                                <div class="form-text">Norm: &gt;=14 low injury risk. 3=perfect, 2=compensation, 1=failed, 0=pain.</div>
+                              </div>
+                              <div class="col-md-4">
+                                <label class="form-label fw-semibold">Prone Shoulder Flexion (deg)</label>
+                                <input type="number" step="1" min="0" max="200" class="form-control assess-field" data-key="mobility__prone_shoulder_flex_deg" placeholder="160-180">
+                                <div class="form-text">Norm: &gt;=160 deg</div>
+                              </div>
+                              <div class="col-md-4">
+                                <label class="form-label fw-semibold">Static Hip ROM (deg)</label>
+                                <input type="number" step="1" min="0" max="180" class="form-control assess-field" data-key="mobility__hip_rom_deg" placeholder="e.g. 85">
+                                <div class="form-text">Goniometer / inclinometer. Norm: &gt;=75 pass, &gt;=90 good.</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- 2. Plyometric & Power -->
+                      <div class="accordion-item border-start border-4">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseP">
+                            <i class="bi bi-lightning-charge me-2" style="color:#1cc88a"></i> 2. Plyometric &amp; Power
+                          </button>
+                        </h2>
+                        <div id="collapseP" class="accordion-collapse collapse">
+                          <div class="accordion-body bg-light">
+                            <div class="row g-3">
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">Squat Jump (cm)</label>
+                                <input type="number" step="0.1" class="form-control assess-field" data-key="plyometric__squat_jump_cm" placeholder="e.g. 38">
+                                <div class="form-text">&gt;=30cm pass, &gt;=40cm good.</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">CMJ (cm)</label>
+                                <input type="number" step="0.1" class="form-control assess-field" data-key="plyometric__cmj_cm" placeholder="e.g. 42">
+                                <div class="form-text">Countermovement Jump (SSC). &gt;=35cm pass.</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">Depth Jump (cm)</label>
+                                <input type="number" step="0.1" class="form-control assess-field" data-key="plyometric__depth_jump_cm" placeholder="e.g. 36">
+                                <div class="form-text">Optimal box height test.</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">Anaerobic Power (W)</label>
+                                <input type="number" step="1" class="form-control assess-field" data-key="plyometric__anaerobic_power_w" placeholder="e.g. 720">
+                                <div class="form-text">6-sec cycle sprint. &gt;=600W pass.</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- 3. Strength -->
+                      <div class="accordion-item border-start border-4">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseStr">
+                            <i class="bi bi-bar-chart-fill me-2 text-danger"></i> 3. Strength Assessments
+                          </button>
+                        </h2>
+                        <div id="collapseStr" class="accordion-collapse collapse">
+                          <div class="accordion-body bg-light">
+                            <p class="text-muted small">Use direct 1RM or Epley Formula: <code>1RM = weight x reps x 0.0333 + weight</code></p>
+                            <div class="row g-3 mb-3">
+                              <div class="col-md-4">
+                                <label class="form-label fw-semibold">1RM Back Squat (kg)</label>
+                                <input type="number" step="0.5" class="form-control assess-field" data-key="strength__1rm_back_squat_kg" placeholder="e.g. 110">
+                                <div class="form-text">Youth norm: ~1.5x body mass.</div>
+                              </div>
+                              <div class="col-md-4">
+                                <label class="form-label fw-semibold">1RM Bench Press (kg)</label>
+                                <input type="number" step="0.5" class="form-control assess-field" data-key="strength__1rm_bench_press_kg" placeholder="e.g. 80">
+                              </div>
+                              <div class="col-md-4">
+                                <label class="form-label fw-semibold">1RM Pull-up (kg)</label>
+                                <input type="number" step="0.5" class="form-control assess-field" data-key="strength__1rm_pull_up_kg" placeholder="e.g. 85">
+                              </div>
+                            </div>
+                            <div class="row g-3">
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">Snatch (% BW)</label>
+                                <input type="number" step="1" class="form-control assess-field" data-key="strength__snatch_pct_bw" placeholder="80-90">
+                                <div class="form-text">Age 16: 80-90% BW.</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">Clean (% BW)</label>
+                                <input type="number" step="1" class="form-control assess-field" data-key="strength__clean_pct_bw" placeholder="100-110">
+                                <div class="form-text">Age 16: 100-110% BW.</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">Epley Bench Weight (kg)</label>
+                                <input type="number" step="0.5" class="form-control assess-field" data-key="_epley_bench_weight_kg" placeholder="Sub-max weight">
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">Epley Bench Reps</label>
+                                <input type="number" step="1" min="2" class="form-control assess-field" data-key="_epley_bench_reps" placeholder="Reps">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- 4. Muscle Endurance -->
+                      <div class="accordion-item border-start border-4">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEnd">
+                            <i class="bi bi-activity me-2" style="color:#f6c23e"></i> 4. Muscle Endurance
+                          </button>
+                        </h2>
+                        <div id="collapseEnd" class="accordion-collapse collapse">
+                          <div class="accordion-body bg-light">
+                            <div class="row g-3">
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">6-Test Battery Score (/30)</label>
+                                <input type="number" step="1" min="0" max="30" class="form-control assess-field" data-key="endurance__6test_battery_score" placeholder="0-30">
+                                <div class="form-text"><strong>&gt;=18 required</strong> before barbell training.</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">McGill Back Extension (s)</label>
+                                <input type="number" step="1" class="form-control assess-field" data-key="endurance__mcgill_back_ext_s" placeholder="e.g. 135">
+                                <div class="form-text">Elite &gt;=150s | Required &gt;=120s.</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">Flexor Hold (s)</label>
+                                <input type="number" step="1" class="form-control assess-field" data-key="endurance__mcgill_flexor_hold_s" placeholder="e.g. 130">
+                                <div class="form-text">60-deg trunk hold. Flex:Ext &gt; 1.0.</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">Side Plank (s)</label>
+                                <input type="number" step="1" class="form-control assess-field" data-key="endurance__mcgill_side_plank_s" placeholder="e.g. 75">
+                                <div class="form-text">Target up to 90s. R:L within 0.05 of 1.0.</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- 5. Aerobic & Cardiovascular -->
+                      <div class="accordion-item border-start border-4">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAero">
+                            <i class="bi bi-heart-pulse me-2" style="color:#36b9cc"></i> 5. Aerobic &amp; Cardiovascular
+                          </button>
+                        </h2>
+                        <div id="collapseAero" class="accordion-collapse collapse">
+                          <div class="accordion-body bg-light">
+                            <div class="row g-3">
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">MAS (km/h)</label>
+                                <input type="number" step="0.1" id="masInput" class="form-control assess-field" data-key="aerobic__mas_kmh" placeholder="e.g. 16.5">
+                                <div class="form-text">VO2max = 3.5 x MAS (auto-fills below).</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">VO2max (ml/kg/min)</label>
+                                <input type="number" step="0.1" id="vo2maxField" class="form-control assess-field" data-key="aerobic__vo2max_ml_kg_min" placeholder="Auto-filled or manual">
+                                <div class="form-text">&gt;=45 pass | &gt;=55 excellent.</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">Yo-Yo IRT Level</label>
+                                <input type="number" step="1" class="form-control assess-field" data-key="aerobic__yoyo_level" placeholder="e.g. 15">
+                                <div class="form-text">2x20m shuttle + 10s rest. &gt;=13 pass.</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">HRR 1-min Drop (bpm)</label>
+                                <input type="number" step="1" class="form-control assess-field" data-key="aerobic__hrr_bpm_drop" placeholder="e.g. 22">
+                                <div class="form-text">&gt;=15 pass | &gt;=25 excellent recovery.</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- 6. Speed & Power Endurance -->
+                      <div class="accordion-item border-start border-4">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpe">
+                            <i class="bi bi-speedometer2 me-2" style="color:#fd7e14"></i> 6. Speed &amp; Power Endurance
+                          </button>
+                        </h2>
+                        <div id="collapseSpe" class="accordion-collapse collapse">
+                          <div class="accordion-body bg-light">
+                            <div class="row g-3">
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">10m Sprint (s)</label>
+                                <input type="number" step="0.01" class="form-control assess-field" data-key="speed__10m_sprint_s" placeholder="e.g. 1.79">
+                                <div class="form-text">&lt;=1.90s pass | &lt;=1.70s excellent.</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">20m Sprint (s)</label>
+                                <input type="number" step="0.01" class="form-control assess-field" data-key="speed__20m_sprint_s" placeholder="e.g. 2.95">
+                                <div class="form-text">&lt;=3.10s pass | &lt;=2.80s excellent.</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">Wingate Peak Power (W)</label>
+                                <input type="number" step="1" class="form-control assess-field" data-key="speed__wingate_peak_power_w" placeholder="e.g. 780">
+                                <div class="form-text">30-sec Wingate. &gt;=650W pass.</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label class="form-label fw-semibold">Fatigue Index (%)</label>
+                                <input type="number" step="0.1" class="form-control assess-field" data-key="speed__fatigue_index_pct" placeholder="e.g. 18">
+                                <div class="form-text">Target: <strong>&lt;20%</strong>.</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END Advanced Assessments -->
+
+                    <hr class="my-5">
+
+                    <!-- Sport Selection -->
+                    <div class="mb-8">
+                      <div class="d-flex align-items-center gap-2 mb-4">
+                        <div class="icon-shape icon-sm rounded bg-success-subtle text-success fw-bold">4</div>
+                        <h5 class="mb-0 fw-bold">Sport Specialization</h5>
+                      </div>
+                      
+                      <div class="mb-4 p-4 rounded-3 border">
+                        <div class="d-flex flex-wrap gap-4">
+                          <div class="form-check form-check-inline custom-sport-check">
+                            <input class="form-check-input" type="radio" name="sportType" id="typeSwimming" value="swimming" checked onchange="toggleSportFields()">
+                            <label class="form-check-label fw-bold" for="typeSwimming">Swimming</label>
+                          </div>
+                          <div class="form-check form-check-inline custom-sport-check">
+                            <input class="form-check-input" type="radio" name="sportType" id="typeBasketball" value="basketball" onchange="toggleSportFields()">
+                            <label class="form-check-label fw-bold" for="typeBasketball">Basketball</label>
+                          </div>
+                          <div class="form-check form-check-inline custom-sport-check">
+                            <input class="form-check-input" type="radio" name="sportType" id="typeFootball" value="football" onchange="toggleSportFields()">
+                            <label class="form-check-label fw-bold" for="typeFootball">Football</label>
+                          </div>
+                          <div class="form-check form-check-inline custom-sport-check">
+                            <input class="form-check-input" type="radio" name="sportType" id="typeCrossFit" value="crossfit" onchange="toggleSportFields()">
+                            <label class="form-check-label fw-bold" for="typeCrossFit">CrossFit</label>
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="bg-light p-4 rounded mb-5 border">
+                      <!-- Swimming Fields -->
+                      <div id="swimmingFields" class="sport-section">
+                        <div class="row">
+                          <div class="col-md-12 mb-3">
+                            <label for="swimming_goal" class="form-label">Swimming Goal</label>
+                            <textarea class="form-control sport-rf" id="swimming_goal" rows="2" placeholder="Time objectives, specific focuses..."></textarea>
+                          </div>
+                        </div>
+
+                        <div id="swimmingEventsContainer">
+                          <div class="swimming-event-row border rounded p-3 mb-3 bg-white position-relative">
+                            <div class="row">
+                              <div class="col-md-3 mb-3">
+                                <label class="form-label">Stroke <span class="text-danger">*</span></label>
+                                <select class="form-select swim-stroke sport-rf" required>
+                                  <option value="Freestyle">Freestyle</option>
+                                  <option value="Backstroke">Backstroke</option>
+                                  <option value="Breaststroke">Breaststroke</option>
+                                  <option value="Butterfly">Butterfly</option>
+                                  <option value="Individual Medley">Individual Medley</option>
+                                </select>
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <label class="form-label">Event <span class="text-danger">*</span></label>
+                                <select class="form-select swim-event sport-rf" required></select>
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <label class="form-label swim-record-label">Current Record (Secs) <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control swim-record sport-rf" placeholder="29.45" required />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <label class="form-label">Total Laps</label>
+                                <input type="number" min="1" step="1" class="form-control swim-total-laps sport-rf" value="1" />
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Lap Distance (m)</label>
+                                    <input type="text" class="form-control swim-lap-distance sport-rf" placeholder="e.g. 50m" />
+                                </div>
+                            </div>
+                            
+                            <!-- Dynamic Splits Container -->
+                            <div class="swim-splits-container mt-3 d-none border-top pt-3">
+                                <h6 class="fw-bold mb-3 small text-uppercase text-muted">Lap Splits Tracker</h6>
+                                <div class="splits-list"></div>
+                            </div>
+
+                            <button type="button" class="btn btn-sm btn-danger remove-swim-event position-absolute top-0 end-0 m-2 d-none">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
+                              Remove</button>
+                          </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-primary" id="addSwimEventBtn">+ Add Another Event</button>
+                      </div>
+
+                      <!-- Basketball Fields -->
+                      <div id="basketballFields" class="sport-section d-none">
+                        <div class="row">
+                          <div class="col-md-6 mb-3">
+                            <label for="basket_position" class="form-label">Position <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="basket_position" placeholder="Point Guard" />
+                          </div>
+                          <div class="col-md-6 mb-3">
+                            <label for="basket_vertical" class="form-label">Vertical Jump (inches) <span class="text-danger">*</span></label>
+                            <input type="number" step="0.01" class="form-control" id="basket_vertical" />
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label for="basket_game_high" class="form-label">Current Game High (Pts) <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="basket_game_high" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Football Fields -->
+                      <div id="footballFields" class="sport-section d-none">
+                        <div class="row">
+                          <div class="col-md-12 mb-3">
+                            <label for="foot_position" class="form-label">Position <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="foot_position" placeholder="Striker" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- CrossFit Fields -->
+                      <div id="crossfitFields" class="sport-section d-none">
+                        <div class="row">
+                          <div class="col-md-12 mb-3">
+                            <label for="cross_level" class="form-label">Level <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="cross_level" placeholder="Rx" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end align-items-center gap-3 mt-6 pt-5 border-top">
+                      <a href="list.html" class="btn btn-white px-6">Cancel</a>
+                      <button type="submit" id="submitBtn" class="btn btn-primary px-8 shadow-sm">Save Athlete Profile</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    @@include("../../partials/scripts.html", {"webRoot": "../.."})
+    <script>
+      function toggleSportFields() {
+        const selected = document.querySelector('input[name="sportType"]:checked').value;
+        const sections = ['swimming', 'basketball', 'football', 'crossfit'];
+        
+        sections.forEach(sport => {
+          const div = document.getElementById(`${sport}Fields`);
+          const inputs = div.querySelectorAll('input');
+          const isSelected = selected === sport;
+
+          if (isSelected) {
+            div.classList.remove('d-none');
+            // make them required
+            inputs.forEach(el => el.setAttribute('required', 'required'));
+          } else {
+            div.classList.add('d-none');
+            // remove required so form can submit
+            inputs.forEach(el => el.removeAttribute('required'));
+            const selects = div.querySelectorAll('select');
+            if (selects) selects.forEach(el => el.removeAttribute('required'));
+          }
+        });
+      }
+
+      // Initialize defaults
+      toggleSportFields();
+
+      const swimmingEventMappings = {
+        'Freestyle': ['50m', '100m', '200m', '400m', '800m', '1500m', '5km', '10km', '25km'],
+        'Backstroke': ['50m', '100m', '200m'],
+        'Breaststroke': ['50m', '100m', '200m'],
+        'Butterfly': ['50m', '100m', '200m'],
+        'Individual Medley': ['200m', '400m']
+      };
+
+      function updateSwimEventDropdown(row) {
+         const strokeSelect = row.querySelector('.swim-stroke');
+         const eventSelect = row.querySelector('.swim-event');
+         const options = swimmingEventMappings[strokeSelect.value] || [];
+         eventSelect.innerHTML = '';
+         options.forEach(opt => {
+            const optionEl = document.createElement('option');
+            optionEl.value = opt;
+            optionEl.textContent = opt;
+            eventSelect.appendChild(optionEl);
+          });
+          updateRecordLabel(row);
+      }
+
+      function updateRecordLabel(row) {
+        const eventVal = row.querySelector('.swim-event').value;
+        const label = row.querySelector('.swim-record-label');
+        const input = row.querySelector('.swim-record');
+        
+        if (eventVal === '50m') {
+          label.innerHTML = 'Current Record (Secs) <span class="text-danger">*</span>';
+          input.placeholder = '29.45';
+        } else if (['100m', '200m', '400m', '800m', '1500m'].includes(eventVal)) {
+          label.innerHTML = 'Current Record (M:SS.ss) <span class="text-danger">*</span>';
+          input.placeholder = '1:03.00';
+        } else if (['5km', '10km', '25km'].includes(eventVal)) {
+          label.innerHTML = 'Current Record (H:MM:SS) <span class="text-danger">*</span>';
+          input.placeholder = '1:30:00';
+        }
+      }
+
+      document.getElementById('swimmingEventsContainer').addEventListener('change', function(e) {
+        if (e.target.classList.contains('swim-stroke')) {
+          const containerRow = e.target.closest('.swimming-event-row');
+          updateSwimEventDropdown(containerRow);
+        }
+        if (e.target.classList.contains('swim-event')) {
+          const containerRow = e.target.closest('.swimming-event-row');
+          updateRecordLabel(containerRow);
+        }
+      });
+
+      document.getElementById('swimmingEventsContainer').addEventListener('input', function(e) {
+        if (e.target.classList.contains('swim-total-laps')) {
+          const containerRow = e.target.closest('.swimming-event-row');
+          updateSplits(containerRow);
+        }
+      });
+
+      // Initialize the first row
+      const firstSwimRow = document.querySelector('.swimming-event-row');
+      if (firstSwimRow) {
+        updateSwimEventDropdown(firstSwimRow);
+        updateSplits(firstSwimRow);
+      }
+
+      // Dynamic Swim Event rows
+      document.getElementById('addSwimEventBtn').addEventListener('click', () => {
+        const container = document.getElementById('swimmingEventsContainer');
+        const firstRow = container.querySelector('.swimming-event-row');
+        const newRow = firstRow.cloneNode(true);
+        
+        // Clear inputs inside the new row
+        newRow.querySelectorAll('input').forEach(i => i.value = '');
+        newRow.querySelector('.swim-total-laps').value = '1';
+        newRow.querySelector('.splits-list').innerHTML = '';
+        newRow.querySelector('.swim-splits-container').classList.add('d-none');
+        
+        updateSwimEventDropdown(newRow);
+        updateSplits(newRow);
+        
+        // Show the remove button for this new row
+        const removeBtn = newRow.querySelector('.remove-swim-event');
+        removeBtn.classList.remove('d-none');
+        removeBtn.addEventListener('click', (e) => {
+          e.target.closest('.swimming-event-row').remove();
+        });
+        
+        container.appendChild(newRow);
+      });
+
+      // Dynamic Workout Strategy rows
+      document.getElementById('addFitWorkoutBtn').addEventListener('click', () => {
+        const container = document.getElementById('fitnessWorkoutsContainer');
+        const firstRow = container.querySelector('.fitness-workout-row');
+        const newRow = firstRow.cloneNode(true);
+        
+        newRow.querySelectorAll('input, textarea').forEach(i => i.value = '');
+        
+        const removeBtn = newRow.querySelector('.remove-fit-workout');
+        removeBtn.classList.remove('d-none');
+        removeBtn.addEventListener('click', (e) => {
+          e.target.closest('.fitness-workout-row').remove();
+        });
+        
+        container.appendChild(newRow);
+      });
+
+      // Dynamic Fitness Test rows
+      document.getElementById('addTestRowBtn').addEventListener('click', () => {
+        const container = document.getElementById('fitnessTestsContainer');
+        const firstRow = container.querySelector('.test-result-row');
+        const newRow = firstRow.cloneNode(true);
+        
+        newRow.querySelectorAll('input').forEach(i => i.value = '');
+        
+        const removeBtn = newRow.querySelector('.remove-test-row');
+        removeBtn.classList.remove('d-none');
+        removeBtn.addEventListener('click', (e) => {
+          e.target.closest('.test-result-row').remove();
+        });
+        
+        container.appendChild(newRow);
+      });
+
+      document.getElementById('addRepTestRowBtn').addEventListener('click', () => {
+        const container = document.getElementById('repTestsContainer');
+        const firstRow = container.querySelector('.rep-test-row');
+        const newRow = firstRow.cloneNode(true);
+
+        newRow.querySelectorAll('input').forEach(i => i.value = '');
+
+        const removeBtn = newRow.querySelector('.remove-rep-test-row');
+        removeBtn.classList.remove('d-none');
+        removeBtn.addEventListener('click', (e) => {
+          e.target.closest('.rep-test-row').remove();
+        });
+
+        container.appendChild(newRow);
+      });
+
+
+      // ── Assessment helpers ────────────────────────────────────────────────
+      // Auto-fill VO2max from MAS and keep Track distance in sync with laps & lap-length
+      function updateTrackDistance() {
+        const lapsEl = document.querySelector('.machine-test-field[data-key="Track Total Laps"]');
+        const lapLenEl = document.querySelector('.machine-test-field[data-key="Track Lap Length"]');
+        const distanceInput = document.querySelector('.machine-test-field[data-key="Track Total Distance"]');
+        const laps = lapsEl ? parseFloat(lapsEl.value) : NaN;
+        const lapLen = lapLenEl ? parseFloat(lapLenEl.value) : 400;
+        const effectiveLapLen = isNaN(lapLen) ? 400 : lapLen;
+        if (distanceInput) distanceInput.value = !isNaN(laps) ? Math.round(laps * effectiveLapLen) : '';
+      }
+
+      document.addEventListener('input', function(e) {
+        if (e.target && e.target.id === 'masInput') {
+          const mas = parseFloat(e.target.value);
+          const vo2 = document.getElementById('vo2maxField');
+          if (!isNaN(mas) && vo2) {
+            vo2.value = (3.5 * mas).toFixed(1);
+          }
+        }
+
+        // Recompute track distance when laps or lap-length change
+        if (e.target && (e.target.dataset.key === 'Track Total Laps' || e.target.dataset.key === 'Track Lap Length')) {
+          updateTrackDistance();
+        }
+      });
+
+      // Initialize computed distance on load
+      updateTrackDistance();
+
+      // Collect all .assess-field values into an object (keyed by data-key)
+      function collectAssessmentValues() {
+        const obj = {};
+        document.querySelectorAll('.assess-field').forEach(el => {
+          const key = el.dataset.key;
+          const val = parseFloat(el.value);
+          if (key && !isNaN(val)) obj[key] = val;
+        });
+        return obj;
+      }
+
+      function isAdvancedAssessmentKey(key) {
+        return typeof key === 'string' && (key.includes('__') || key.startsWith('_'));
+      }
+
+      // Repopulate assess-fields from a tests object (edit mode)
+      function populateAssessmentFields(tests) {
+        document.querySelectorAll('.assess-field').forEach(el => {
+          const key = el.dataset.key;
+          if (key && tests[key] !== undefined) {
+            el.value = tests[key];
+          }
+        });
+      }
+
+      function secondsToTimeParts(totalSeconds) {
+        const safeSeconds = Math.max(0, Math.round(Number(totalSeconds) || 0));
+        return {
+          hours: Math.floor(safeSeconds / 3600),
+          minutes: Math.floor((safeSeconds % 3600) / 60),
+          seconds: safeSeconds % 60
+        };
+      }
+
+      function collectMachineTestValues() {
+        const obj = {};
+        document.querySelectorAll('.machine-test-field').forEach(el => {
+          const key = el.dataset.key;
+          const val = parseFloat(el.value);
+          if (!key || isNaN(val)) return;
+
+          const unit = el.dataset.unitSource
+            ? (document.getElementById(el.dataset.unitSource)?.value || '')
+            : (el.dataset.unit || '');
+
+          obj[key] = {
+            value: val,
+            reps: null,
+            unit: unit || null,
+            measure: 'machine_metric',
+            group: el.dataset.group || 'Machine & Running Tests'
+          };
+        });
+
+        document.querySelectorAll('[data-time-key]').forEach(group => {
+          const key = group.dataset.timeKey;
+          const hours = parseInt(group.querySelector('.machine-time-hours')?.value || '0', 10);
+          const minutes = parseInt(group.querySelector('.machine-time-minutes')?.value || '0', 10);
+          const seconds = parseInt(group.querySelector('.machine-time-seconds')?.value || '0', 10);
+          const totalSeconds = ((isNaN(hours) ? 0 : hours) * 3600) + ((isNaN(minutes) ? 0 : minutes) * 60) + (isNaN(seconds) ? 0 : seconds);
+
+          if (key && totalSeconds > 0) {
+            obj[key] = {
+              value: totalSeconds,
+              reps: null,
+              unit: 'sec',
+              measure: 'time_seconds',
+              group: group.dataset.timeGroup || 'Machine & Running Tests'
+            };
+          }
+        });
+
+        return obj;
+      }
+
+      function populateMachineTestFields(tests) {
+        document.querySelectorAll('.machine-test-field').forEach(el => {
+          const key = el.dataset.key;
+          const entry = tests[key];
+          if (!entry || typeof entry !== 'object') return;
+
+          if (typeof entry.value === 'number') el.value = entry.value;
+          if (el.dataset.unitSource && entry.unit) {
+            const unitEl = document.getElementById(el.dataset.unitSource);
+            if (unitEl) unitEl.value = entry.unit;
+          }
+        });
+
+        document.querySelectorAll('[data-time-key]').forEach(group => {
+          const entry = tests[group.dataset.timeKey];
+          if (!entry || typeof entry !== 'object' || typeof entry.value !== 'number') return;
+          const parts = secondsToTimeParts(entry.value);
+          const h = group.querySelector('.machine-time-hours');
+          const m = group.querySelector('.machine-time-minutes');
+          const s = group.querySelector('.machine-time-seconds');
+          if (h) h.value = parts.hours;
+          if (m) m.value = parts.minutes;
+          if (s) s.value = parts.seconds;
+        });
+      }
+
+      // Edit Mode Detection
+      const urlParams = new URLSearchParams(window.location.search);
+      const editId = urlParams.get('id');
+      let existingFitnessId = null;
+      let existingSportRecordIds = []; // For many-to-one
+      let existingSportType = null;
+      let existingCurrentFitnessTests = {};
+      let existingSwimmingRecords = {};
+
+      if (editId) {
+        document.getElementById('pageTitle').innerText = "Edit Athlete Profile";
+        document.getElementById('submitBtn').innerText = "Update Full Profile";
+        loadAthleteData(editId);
+      }
+
+      async function loadAthleteData(id) {
+        try {
+          const res = await fetch(`http://localhost:8000/api/athletes/${id}/`);
+          if (!res.ok) throw new Error("Athlete not found");
+          const a = await res.json();
+
+          // Populate Basic Info
+          document.getElementById('name').value = a.name;
+          document.getElementById('age').value = a.age;
+          document.getElementById('gender').value = a.gender;
+          document.getElementById('height').value = a.height;
+          document.getElementById('weight').value = a.weight;
+          document.getElementById('body_type').value = a.body_type;
+          document.getElementById('date_of_birth').value = a.date_of_birth || "";
+          document.getElementById('strengths').value = a.strengths || "";
+          document.getElementById('weaknesses').value = a.weaknesses || "";
+          
+          if (a.injury_records && a.injury_records.length > 0) {
+            document.getElementById('injuryHistoryContainer').classList.remove('d-none');
+            document.getElementById('addInjuryTitle').innerText = "Add Another Injury Record";
+            const tbody = document.getElementById('injuryHistoryBody');
+            tbody.innerHTML = '';
+            a.injury_records.forEach(inj => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td>${inj.injury_type}</td>
+                <td><span class="badge ${inj.severity === 'Severe' ? 'bg-danger' : (inj.severity === 'Moderate' ? 'bg-warning' : 'bg-secondary')}">${inj.severity}</span></td>
+                <td><span class="badge ${inj.is_active ? 'bg-danger' : 'bg-success'}">${inj.is_active ? 'Active' : 'Resolved'}</span></td>
+                <td>${inj.start_date}</td>
+                <td>${inj.cleared_to_train ? 'Yes' : 'No'}</td>
+              `;
+              tbody.appendChild(tr);
+            });
+          }
+
+          // Populate Fitness
+          if (a.fitness_profile) {
+            const f = a.fitness_profile;
+            existingFitnessId = f.id;
+            existingCurrentFitnessTests = JSON.parse(JSON.stringify(f.current_fitness_tests || {}));
+            document.getElementById('sessions_per_week').value = f.sessions_per_week;
+            document.getElementById('fitness_goal').value = f.fitness_goal || "";
+            document.getElementById('nutrition_plan').value = f.nutrition_plan || "";
+            
+            // Reconstruct Workout Rows
+            const types = (f.workout_type || "").split(' | ');
+            const plans = (f.workout_plan || "").split('\n\n---\n\n');
+            const container = document.getElementById('fitnessWorkoutsContainer');
+            container.innerHTML = ""; // Clear default
+            types.forEach((t, i) => {
+                if(!t) return;
+                const row = createWorkoutRow(t, plans[i] || "");
+                container.appendChild(row);
+            });
+            if (container.children.length === 0) container.appendChild(createWorkoutRow());
+
+            // Reconstruct Tests
+            const tests = f.current_fitness_tests || {};
+            const testContainer = document.getElementById('fitnessTestsContainer');
+            const repTestContainer = document.getElementById('repTestsContainer');
+            testContainer.innerHTML = "";
+            repTestContainer.innerHTML = "";
+            Object.keys(tests).forEach(k => {
+                if (k === 'notes') {
+                    document.getElementById('current_fitness_tests_notes').value = tests[k];
+                } else if (isAdvancedAssessmentKey(k)) {
+                    return;
+                } else if (typeof tests[k] === 'object' && !Array.isArray(tests[k]) && tests[k].measure === 'rep_count') {
+                    repTestContainer.appendChild(createRepTestRow(k, tests[k].value));
+                } else if (typeof tests[k] === 'object' && !Array.isArray(tests[k]) && ['machine_metric', 'time_seconds'].includes(tests[k].measure)) {
+                    return;
+                } else if (typeof tests[k] === 'object' && !Array.isArray(tests[k]) && tests[k].value !== undefined) {
+                    // New format: {value, reps, unit}
+                    testContainer.appendChild(createTestRow(k, tests[k].value, tests[k].reps || '', tests[k].unit || ''));
+                } else if (typeof tests[k] === 'number') {
+                    // Old format: just a number value
+                    testContainer.appendChild(createTestRow(k, tests[k]));
+                }
+            });
+            if (testContainer.children.length === 0) testContainer.appendChild(createTestRow());
+            if (repTestContainer.children.length === 0) repTestContainer.appendChild(createRepTestRow());
+            // Repopulate Advanced Assessment fields
+            populateAssessmentFields(f.current_fitness_tests || {});
+            populateMachineTestFields(f.current_fitness_tests || {});
+          }
+
+          // Populate Sport
+          if (a.swimming_records?.length) {
+            existingSportType = 'swimming';
+            existingSwimmingRecords = {};
+            document.getElementById('typeSwimming').checked = true;
+            document.getElementById('swimming_goal').value = a.swimming_records[0].swimming_goal || "";
+            const swimContainer = document.getElementById('swimmingEventsContainer');
+            swimContainer.innerHTML = "";
+            a.swimming_records.forEach(r => {
+                existingSportRecordIds.push(r.id);
+                existingSwimmingRecords[`${r.stroke}__${r.events}`] = {
+                  id: r.id,
+                  current_record: r.current_record,
+                  previous_record: r.previous_record,
+                  expected_record: r.expected_record,
+                  splits_data: r.splits_data
+                };
+                swimContainer.appendChild(createSwimRow(r.stroke, r.events, r.current_record, r.total_laps, r.lap_distance, r.splits_data));
+            });
+          } else if (a.basketball_records?.length) {
+            existingSportType = 'basketball';
+            document.getElementById('typeBasketball').checked = true;
+            const b = a.basketball_records[0];
+            existingSportRecordIds.push(b.id);
+            document.getElementById('basket_position').value = b.position;
+            document.getElementById('basket_vertical').value = b.vertical_jump;
+            document.getElementById('basket_game_high').value = b.current_game_high;
+          } else if (a.football_records?.length) {
+            existingSportType = 'football';
+            document.getElementById('typeFootball').checked = true;
+            existingSportRecordIds.push(a.football_records[0].id);
+            document.getElementById('foot_position').value = a.football_records[0].position;
+          } else if (a.crossfit_records?.length) {
+            existingSportType = 'crossfit';
+            document.getElementById('typeCrossFit').checked = true;
+            existingSportRecordIds.push(a.crossfit_records[0].id);
+            document.getElementById('cross_level').value = a.crossfit_records[0].level;
+          }
+          toggleSportFields();
+
+        } catch (error) {
+          console.error(error);
+          alert("Failed to load existing athlete data.");
+        }
+      }
+
+      function createWorkoutRow(type = "", plan = "") {
+        const div = document.createElement('div');
+        div.className = "fitness-workout-row border rounded p-3 mb-3 bg-white position-relative";
+        div.innerHTML = `
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">Workout Type <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control fit-type" value="${type}" placeholder="e.g. Hypertrophy" required />
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">Workout Plan Details <span class="text-danger">*</span></label>
+                    <textarea class="form-control fit-plan" rows="2" required>${plan}</textarea>
+                </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-danger remove-fit-workout position-absolute top-0 end-0 m-2">Remove</button>
+        `;
+        div.querySelector('.remove-fit-workout').onclick = () => div.remove();
+        return div;
+      }
+
+      function createTestRow(name = "", val = "", reps = "", unit = "") {
+        const div = document.createElement('div');
+        div.className = "test-result-row border rounded p-3 mb-3 bg-white position-relative";
+        div.innerHTML = `
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label class="form-label">Test Name</label>
+                    <input type="text" class="form-control test-name" value="${name}" placeholder="e.g. Bench Press" />
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="row g-2">
+                        <div class="col-8">
+                            <label class="form-label">Weight</label>
+                            <input type="number" step="0.01" class="form-control test-value" value="${val}" placeholder="85.5" />
+                        </div>
+                        <div class="col-4">
+                            <label class="form-label">Unit</label>
+                            <select class="form-select test-weight-unit">
+                                <option value="">-</option>
+                                <option value="kg" ${unit === 'kg' ? 'selected' : ''}>kg</option>
+                                <option value="lbs" ${unit === 'lbs' ? 'selected' : ''}>lbs</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Reps</label>
+                    <input type="number" step="1" min="0" class="form-control test-reps" value="${reps}" placeholder="e.g. 10" />
+                </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-danger remove-test-row position-absolute top-0 end-0 m-2">Remove</button>
+        `;
+        div.querySelector('.remove-test-row').onclick = () => div.remove();
+        return div;
+      }
+
+      function createRepTestRow(name = "", reps = "") {
+        const div = document.createElement('div');
+        div.className = "rep-test-row border rounded p-3 mb-3 bg-white position-relative";
+        div.innerHTML = `
+            <div class="row">
+                <div class="col-md-7 mb-3">
+                    <label class="form-label">Rep Count Test Name</label>
+                    <input type="text" class="form-control rep-test-name" value="${name}" placeholder="e.g. Pushups, Crunches" />
+                </div>
+                <div class="col-md-5 mb-3">
+                    <label class="form-label">Rep Count</label>
+                    <input type="number" step="1" min="0" class="form-control rep-test-value" value="${reps}" placeholder="e.g. 35" />
+                </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-danger remove-rep-test-row position-absolute top-0 end-0 m-2">Remove</button>
+        `;
+        div.querySelector('.remove-rep-test-row').onclick = () => div.remove();
+        return div;
+      }
+
+      function createSwimRow(stroke = "Freestyle", event = "50m", record = "", totalLaps = 1, lapDistance = "", splitsData = []) {
+        const div = document.createElement('div');
+        div.className = "swimming-event-row border rounded p-3 mb-3 bg-white position-relative";
+        div.innerHTML = `
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Stroke <span class="text-danger">*</span></label>
+                    <select class="form-select swim-stroke sport-rf" required>
+                        <option value="Freestyle">Freestyle</option>
+                        <option value="Backstroke">Backstroke</option>
+                        <option value="Breaststroke">Breaststroke</option>
+                        <option value="Butterfly">Butterfly</option>
+                        <option value="Individual Medley">Individual Medley</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Event <span class="text-danger">*</span></label>
+                    <select class="form-select swim-event sport-rf" required></select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label swim-record-label">Current Record <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control swim-record sport-rf" value="${record}" placeholder="29.45" required />
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Total Laps</label>
+                    <input type="number" min="1" step="1" class="form-control swim-total-laps sport-rf" value="${totalLaps}" />
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Lap Distance (m)</label>
+                    <input type="text" class="form-control swim-lap-distance sport-rf" value="${lapDistance}" placeholder="e.g. 50m" />
+                </div>
+            </div>
+
+            <div class="swim-splits-container mt-3 ${totalLaps > 1 ? '' : 'd-none'} border-top pt-3">
+                <h6 class="fw-bold mb-3 small text-uppercase text-muted">Lap Splits Tracker</h6>
+                <div class="splits-list"></div>
+            </div>
+
+            <button type="button" class="btn btn-sm btn-danger remove-swim-event position-absolute top-0 end-0 m-2">Remove</button>
+        `;
+        div.querySelector('.swim-stroke').value = stroke;
+        updateSwimEventDropdown(div);
+        div.querySelector('.swim-event').value = event;
+        
+        const totalLapsInput = div.querySelector('.swim-total-laps');
+        totalLapsInput.addEventListener('input', () => updateSplits(div));
+        
+        if (splitsData && splitsData.length > 0) {
+            updateSplits(div, splitsData);
+        } else if (totalLaps > 1) {
+            updateSplits(div);
+        }
+
+        div.querySelector('.remove-swim-event').onclick = () => div.remove();
+        return div;
+      }
+
+      function updateSplits(row, existingSplits = null) {
+        const totalLaps = parseInt(row.querySelector('.swim-total-laps').value) || 1;
+        const container = row.querySelector('.swim-splits-container');
+        const list = row.querySelector('.splits-list');
+        
+        if (totalLaps <= 1) {
+            container.classList.add('d-none');
+            list.innerHTML = '';
+            return;
+        }
+        
+        container.classList.remove('d-none');
+        list.innerHTML = '';
+
+        for (let i = 1; i <= totalLaps; i++) {
+            const splitData = existingSplits ? existingSplits.find(s => s.lap_number === i) : null;
+            const splitRow = document.createElement('div');
+            splitRow.className = 'row g-2 mb-2 align-items-end split-item';
+            splitRow.dataset.lap = i;
+            splitRow.innerHTML = `
+                <div class="col-md-1">
+                    <div class="fw-bold small mb-1">Lap ${i}</div>
+                </div>
+                <div class="col-md-11">
+                    <label class="small text-muted mb-1">Current Split Time</label>
+                    <input type="text" class="form-control form-control-sm split-curr" value="${splitData?.current || ''}" placeholder="e.g. 29.8">
+                </div>
+            `;
+            list.appendChild(splitRow);
+        }
+      }
+
+      // Form submission
+      document.getElementById('athleteForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const form = event.target;
+        if (!form.checkValidity()) {
+          event.stopPropagation();
+          form.classList.add('was-validated');
+          return;
+        }
+
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Processing...";
+
+        try {
+          const athleteUrl = editId ? `http://localhost:8000/api/athletes/${editId}/` : 'http://localhost:8000/api/athletes/';
+          const athleteMethod = editId ? 'PATCH' : 'POST';
+
+          // 1. Post/Patch Athlete Info
+          const resAthlete = await fetch(athleteUrl, {
+            method: athleteMethod,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: document.getElementById('name').value,
+              age: parseInt(document.getElementById('age').value, 10),
+              gender: document.getElementById('gender').value,
+              height: parseFloat(document.getElementById('height').value),
+              weight: parseFloat(document.getElementById('weight').value),
+              body_type: document.getElementById('body_type').value,
+              date_of_birth: document.getElementById('date_of_birth').value || null,
+              strengths: document.getElementById('strengths').value,
+              weaknesses: document.getElementById('weaknesses').value
+            })
+          });
+
+          if (!resAthlete.ok) throw new Error("Failed to save Athlete Info");
+          const athleteData = await resAthlete.json();
+          const athleteId = athleteData.id;
+
+          // 2. Post/Patch Fitness Profile
+          const fitWorkouts = document.querySelectorAll('.fitness-workout-row');
+          let combinedWorkoutTypes = [];
+          let combinedWorkoutPlans = [];
+          fitWorkouts.forEach(row => {
+            combinedWorkoutTypes.push(row.querySelector('.fit-type').value);
+            combinedWorkoutPlans.push(row.querySelector('.fit-plan').value);
+          });
+          
+          let fitnessFormData = new FormData();
+          fitnessFormData.append('athlete', athleteId);
+          fitnessFormData.append('workout_type', combinedWorkoutTypes.join(' | '));
+          fitnessFormData.append('workout_plan', combinedWorkoutPlans.join('\n\n---\n\n'));
+          fitnessFormData.append('sessions_per_week', parseInt(document.getElementById('sessions_per_week').value, 10));
+          fitnessFormData.append('fitness_goal', document.getElementById('fitness_goal').value);
+          fitnessFormData.append('nutrition_plan', document.getElementById('nutrition_plan').value);
+
+          let testsObj = {};
+          document.querySelectorAll('.test-result-row').forEach(row => {
+              const name = row.querySelector('.test-name').value;
+              const val = parseFloat(row.querySelector('.test-value').value);
+              const reps = row.querySelector('.test-reps').value;
+              const unit = row.querySelector('.test-weight-unit').value;
+
+              if (name && !isNaN(val)) {
+                // Store as object with metadata
+                testsObj[name] = {
+                  value: val,
+                  reps: reps ? parseInt(reps, 10) : null,
+                  unit: unit || null
+                };
+              }
+          });
+          document.querySelectorAll('.rep-test-row').forEach(row => {
+              const name = row.querySelector('.rep-test-name').value;
+              const reps = parseInt(row.querySelector('.rep-test-value').value, 10);
+
+              if (name && !isNaN(reps)) {
+                testsObj[name] = {
+                  value: reps,
+                  reps: null,
+                  unit: 'reps',
+                  measure: 'rep_count'
+                };
+              }
+          });
+          Object.assign(testsObj, collectMachineTestValues());
+          if (document.getElementById('current_fitness_tests_notes').value) {
+            testsObj['notes'] = document.getElementById('current_fitness_tests_notes').value;
+          }
+          // Merge Advanced Assessment fields into testsObj
+          const assessObj = collectAssessmentValues();
+          const mergedTests = Object.assign({}, testsObj, assessObj);
+          const previousTests = editId ? JSON.parse(JSON.stringify(existingCurrentFitnessTests || {})) : {};
+          fitnessFormData.append('current_fitness_tests', JSON.stringify(mergedTests));
+          fitnessFormData.append('previous_fitness_tests', JSON.stringify(previousTests));
+          fitnessFormData.append('expected_fitness_results', JSON.stringify({}));
+
+          const inbodyFile = document.getElementById('inbody_file').files[0];
+          if (inbodyFile) fitnessFormData.append('inbody_file', inbodyFile);
+
+          const fitnessUrl = editId && existingFitnessId ? `http://localhost:8000/api/fitness/${existingFitnessId}/` : 'http://localhost:8000/api/fitness/';
+          const fitnessMethod = editId && existingFitnessId ? 'PATCH' : 'POST';
+
+          const resFitness = await fetch(fitnessUrl, {
+            method: fitnessMethod,
+            body: fitnessFormData
+          });
+          if (!resFitness.ok) throw new Error("Failed to save Fitness record");
+
+          // 3. Post/Patch Sport Specialization
+          // Logic: If editId, delete existingSportRecordIds first to avoid duplicates, or just PATCH the first one and create others.
+          // For simplicity and to handle row changes accurately, we'll DELETE existing sport records and re-POST.
+          if (editId) {
+             for (let rid of existingSportRecordIds) {
+                 if (!existingSportType) break;
+                 await fetch(`http://localhost:8000/api/${existingSportType}/${rid}/`, { method: 'DELETE' });
+             }
+          }
+
+          const targetSport = document.querySelector('input[name="sportType"]:checked').value;
+          const sportApiUrl = `http://localhost:8000/api/${targetSport}/`;
+
+          if (targetSport === 'swimming') {
+            const swimmingGoal = document.getElementById('swimming_goal').value;
+            const eventRows = document.querySelectorAll('.swimming-event-row');
+            for (let row of eventRows) {
+              const stroke = row.querySelector('.swim-stroke').value;
+              const eventName = row.querySelector('.swim-event').value;
+              const record = row.querySelector('.swim-record').value;
+              const totalLaps = parseInt(row.querySelector('.swim-total-laps').value) || 1;
+              const lapDistance = row.querySelector('.swim-lap-distance').value;
+              
+              let splitsData = [];
+              const existingSwimRecord = existingSwimmingRecords[`${stroke}__${eventName}`];
+              const oldSplits = (existingSwimRecord && existingSwimRecord.splits_data) || [];
+
+              if (totalLaps > 1) {
+                row.querySelectorAll('.split-item').forEach(s => {
+                  const lapNum = parseInt(s.dataset.lap);
+                  const oldSplit = oldSplits.find(os => os.lap_number === lapNum);
+                  const newCurrent = s.querySelector('.split-curr')?.value || "";
+                  
+                  // Preserve existing previous/expected if editing, otherwise set to empty
+                  splitsData.push({
+                    lap_number: lapNum,
+                    previous: (editId && oldSplit) ? (oldSplit.current || oldSplit.previous || "") : (oldSplit ? oldSplit.previous : ""),
+                    current: newCurrent,
+                    expected: oldSplit ? (oldSplit.expected || "") : ""
+                  });
+                });
+              }
+
+              const swPayload = {
+                athlete: athleteId,
+                stroke,
+                events: eventName,
+                current_record: record,
+                swimming_goal: swimmingGoal,
+                total_laps: totalLaps,
+                lap_distance: lapDistance,
+                splits_data: splitsData
+              };
+
+              if (editId && existingSwimRecord) {
+                swPayload.previous_record = existingSwimRecord.current_record || existingSwimRecord.previous_record || null;
+              }
+
+              await fetch(sportApiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(swPayload)
+              });
+            }
+          } else {
+            let sportPayload = { athlete: athleteId };
+            if (targetSport === 'basketball') {
+              sportPayload.position = document.getElementById('basket_position').value;
+              sportPayload.vertical_jump = parseFloat(document.getElementById('basket_vertical').value);
+              sportPayload.current_game_high = parseInt(document.getElementById('basket_game_high').value, 10);
+            } else if (targetSport === 'football') {
+              sportPayload.position = document.getElementById('foot_position').value;
+            } else if (targetSport === 'crossfit') {
+              sportPayload.level = document.getElementById('cross_level').value;
+            }
+            await fetch(sportApiUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(sportPayload)
+            });
+          }
+
+          // 4. Post Initial Injury (if provided)
+          const injuryType = document.getElementById('injury_type')?.value;
+          if (injuryType) {
+             const injuryPayload = {
+                athlete: athleteId,
+                is_active: true,
+                injury_type: injuryType,
+                severity: document.getElementById('injury_severity').value,
+                start_date: document.getElementById('injury_start_date').value || new Date().toISOString().split('T')[0],
+                expected_recovery_time: document.getElementById('expected_recovery_time').value,
+                cleared_by: document.getElementById('cleared_by').value,
+                medical_notes: document.getElementById('injury_notes').value,
+                cleared_to_train: false
+             };
+             await fetch('http://localhost:8000/api/injuries/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(injuryPayload)
+             });
+          }
+
+          window.location.href = 'list.html';
+
+        } catch (error) {
+          console.error(error);
+          alert(error.message || 'Error occurred while saving!');
+          submitBtn.disabled = false;
+          submitBtn.innerText = editId ? "Update Full Profile" : "Save Full Profile";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+21 objects imported automatically (use -v 2 for details).
+
+[
+  [
+    4,
+    {
+      "Bench press": 84.0,
+      "notes": "None"
+    }
+  ],
+  [
+    5,
+    {
+      "Bench press": {
+        "value": 85.0,
+        "reps": 13,
+        "unit": "kg"
+      },
+      "Lat pulldowns": {
+        "value": 60.0,
+        "reps": 8,
+        "unit": "kg"
+      },
+      "Row": {
+        "value": 70.0,
+        "reps": 7,
+        "unit": "kg"
+      },
+      "notes": "None",
+      "mobility__fms_score": 17.0,
+      "mobility__prone_shoulder_flex_deg": 176.0,
+      "mobility__hip_rom_deg": 85.0,
+      "plyometric__squat_jump_cm": 38.0,
+      "plyometric__cmj_cm": 42.0,
+      "plyometric__depth_jump_cm": 36.0,
+      "plyometric__anaerobic_power_w": 720.0,
+      "strength__1rm_back_squat_kg": 110.0,
+      "strength__1rm_bench_press_kg": 80.0,
+      "strength__1rm_pull_up_kg": 85.0,
+      "strength__snatch_pct_bw": 86.0,
+      "strength__clean_pct_bw": 107.0,
+      "_epley_bench_weight_kg": 90.0,
+      "_epley_bench_reps": 4.0,
+      "endurance__6test_battery_score": 27.0,
+      "endurance__mcgill_back_ext_s": 135.0,
+      "endurance__mcgill_flexor_hold_s": 130.0,
+      "endurance__mcgill_side_plank_s": 75.0,
+      "aerobic__mas_kmh": 16.5,
+      "aerobic__vo2max_ml_kg_min": 50.0,
+      "aerobic__yoyo_level": 15.0,
+      "aerobic__hrr_bpm_drop": 22.0,
+      "speed__10m_sprint_s": 1.79,
+      "speed__20m_sprint_s": 2.95,
+      "speed__wingate_peak_power_w": 780.0,
+      "speed__fatigue_index_pct": 18.0
+    }
+  ]
+]

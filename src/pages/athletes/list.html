@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    @@include("../../partials/head/head-meta.html", {"webRoot": "../.."})
+    <title>Athlete List | TIGER FIT</title>
+    @@include("../../partials/head/head-links.html", {"webRoot": "../.."})
+  </head>
+
+  <body>
+    <!-- Vertical Sidebar -->
+    <div>
+      @@include("../../partials/sidebar-collapse.html", {"webRoot": "../.."})
+
+      <!-- Main Content -->
+      <div id="content" class="position-relative h-100">
+        @@include("../../partials/topbar-second.html", {"webRoot": "../.."})
+        <div class="custom-container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+              <!-- Page header -->
+              <div class="mb-5 d-flex justify-content-between align-items-center">
+                  <h1 class="mb-0 h2">Athlete Management</h1>
+                  <a href="add.html" class="btn btn-primary d-flex align-items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Add Athlete
+                  </a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-lg">
+                <div class="card-header border-bottom-0 pb-0">
+                  <ul class="nav nav-tabs border-bottom" id="athleteTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true">All Athletes</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="swimmers-tab" data-bs-toggle="tab" data-bs-target="#swimmers" type="button" role="tab" aria-controls="swimmers" aria-selected="false">Swimmers</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="fitness-tab" data-bs-toggle="tab" data-bs-target="#fitness" type="button" role="tab" aria-controls="fitness" aria-selected="false">Fitness Athletes</button>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table text-nowrap mb-0 table-centered table-hover">
+                      <thead>
+                        <tr>
+                          <th>Athlete Name</th>
+                          <th>Type</th>
+                          <th>Age</th>
+                          <th>Status</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="athleteTableBody">
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    @@include("../../partials/scripts.html", {"webRoot": "../.."})
+    <script>
+      document.addEventListener('DOMContentLoaded', async () => {
+        const tableBody = document.getElementById('athleteTableBody');
+        let athletes = [];
+
+        function getAthleteType(athlete) {
+          if (athlete.swimming_records?.length) return 'Swimmer';
+          if (athlete.basketball_records?.length) return 'Basketball';
+          if (athlete.football_records?.length) return 'Football';
+          if (athlete.crossfit_records?.length) return 'CrossFit';
+          return 'Fitness Athlete';
+        }
+
+        function getAttendanceRate(athlete) {
+          if (!athlete.attendance_records || athlete.attendance_records.length === 0) return 0;
+          const attended = athlete.attendance_records.filter(r => r.attended).length;
+          return (attended / athlete.attendance_records.length) * 100;
+        }
+
+        function dedupeAthletes(items) {
+          const map = new Map();
+
+          items.forEach((athlete) => {
+            const key = [
+              (athlete.name || '').trim().toLowerCase(),
+              athlete.age ?? '',
+              athlete.gender ?? '',
+              athlete.height ?? '',
+              athlete.weight ?? '',
+              (athlete.body_type || '').trim().toLowerCase()
+            ].join('|');
+
+            const existing = map.get(key);
+            if (!existing) {
+              map.set(key, athlete);
+              return;
+            }
+
+            const existingUpdated = new Date(existing.updated_at || existing.created_at || 0).getTime();
+            const candidateUpdated = new Date(athlete.updated_at || athlete.created_at || 0).getTime();
+            if (candidateUpdated >= existingUpdated) {
+              map.set(key, athlete);
+            }
+          });
+
+          return Array.from(map.values());
+        }
+
+        async function fetchAthletes() {
+          try {
+            const response = await fetch('http://localhost:8000/api/athletes/');
+            if (!response.ok) throw new Error('Failed to fetch from API');
+            athletes = dedupeAthletes(await response.json());
+            renderTable('');
+          } catch (error) {
+            console.error(error);
+            tableBody.innerHTML = '<tr><td colspan="5" class="text-center text-danger">Failed to load athletes data from backend API. Make sure the Django server is running.</td></tr>';
+          }
+        }
+
+        function renderTable(typeFilter) {
+          tableBody.innerHTML = '';
+          if (athletes.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="5" class="text-center">No athletes found in the database.</td></tr>';
+            return;
+          }
+
+          const filtered = athletes.filter(a => {
+            if (typeFilter === '' || typeFilter === 'Fitness Athlete') return true;
+            return getAthleteType(a) === typeFilter;
+          });
+
+          filtered.forEach(a => {
+            const athleteType = getAthleteType(a);
+            const attendanceRate = getAttendanceRate(a);
+            const isActive = attendanceRate >= 50;
+            const statusBadge = isActive 
+              ? '<span class="badge text-success-emphasis bg-success-subtle">Active</span>'
+              : '<span class="badge text-danger-emphasis bg-danger-subtle">Inactive</span>';
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>
+                <div class="d-flex align-items-center gap-2 text-inherit">
+                  <span class="text-truncate fw-semibold">${a.name}</span>
+                </div>
+              </td>
+              <td><span class="badge text-primary-emphasis bg-primary-subtle">${athleteType}</span></td>
+              <td>${a.age}</td>
+              <td>${statusBadge}</td>
+              <td>
+                <div class="d-flex gap-2">
+                    <a href="details.html?id=${a.id}" class="btn btn-outline-primary btn-xs" title="View Profile"><i class="bi bi-eye"></i></a>
+                    <a href="add.html?id=${a.id}" class="btn btn-outline-secondary btn-xs" title="Edit Profile"><i class="bi bi-pencil"></i></a>
+                    <button onclick="window.confirmDelete(${a.id})" class="btn btn-outline-danger btn-xs" title="Delete Athlete"><i class="bi bi-trash"></i></button>
+                </div>
+              </td>
+            `;
+            tableBody.appendChild(row);
+          });
+        }
+
+        window.confirmDelete = async (id) => {
+            if (confirm("Are you sure you want to delete this athlete? This will remove all their performance data and records.")) {
+                try {
+                    const res = await fetch(`http://localhost:8000/api/athletes/${id}/`, {
+                        method: 'DELETE'
+                    });
+                    if (!res.ok) throw new Error("Delete failed");
+                    alert("Athlete deleted successfully.");
+                    fetchAthletes();
+                } catch (err) {
+                    console.error(err);
+                    alert("Could not delete athlete.");
+                }
+            }
+        };
+
+        document.getElementById('all-tab').addEventListener('click', () => renderTable(''));
+        document.getElementById('swimmers-tab').addEventListener('click', () => renderTable('Swimmer'));
+        document.getElementById('fitness-tab').addEventListener('click', () => renderTable('Fitness Athlete'));
+
+        fetchAthletes();
+      });
+    </script>
+  </body>
+</html>

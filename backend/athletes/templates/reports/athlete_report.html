@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{{ dir }}">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @font-face {
+            font-family: 'Amiri';
+            src: url('file://{{ static_path }}/fonts/Amiri-Regular.ttf');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'Amiri';
+            src: url('file://{{ static_path }}/fonts/Amiri-Bold.ttf');
+            font-weight: bold;
+        }
+
+        body {
+            font-family: 'Amiri', serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            font-size: 10pt;
+        }
+
+        .header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #bc9a32;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 60px;
+            margin-right: 15px;
+        }
+
+        .academy-name {
+            font-size: 20pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .academy-slogan {
+            font-size: 8pt;
+            color: #bc9a32;
+            text-transform: uppercase;
+        }
+
+        .report-meta {
+            text-align: right;
+        }
+
+        .report-meta h2 {
+            margin: 0;
+            font-size: 12pt;
+            color: #bc9a32;
+        }
+
+        .section-header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 8px 15px;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin: 20px 0 10px;
+            border-left: 5px solid #bc9a32;
+        }
+
+        .profile-bar {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .profile-bar .name-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-bar .name {
+            font-size: 18pt;
+            font-weight: bold;
+        }
+
+        .profile-bar .title-badge {
+            background-color: #bc9a32;
+            color: black;
+            padding: 2px 8px;
+            font-size: 8pt;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 4px;
+            border: 1px solid #bc9a32;
+        }
+
+        .stat-card .value {
+            font-size: 20pt;
+            font-weight: bold;
+            color: #bc9a32;
+        }
+
+        .stat-card .label {
+            font-size: 8pt;
+            text-transform: uppercase;
+            color: #aaa;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: left;
+            padding: 10px;
+            text-transform: uppercase;
+            font-size: 8pt;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .summary-box {
+            background-color: #f9f9f9;
+            border-left: 5px solid #bc9a32;
+            padding: 20px;
+            margin-top: 30px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            font-size: 7pt;
+            color: #888;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* RTL Specifics */
+        [dir="rtl"] .header { border-left: none; border-right: none; }
+        [dir="rtl"] th { text-align: right; }
+        [dir="rtl"] .section-header { border-left: none; border-right: 5px solid #bc9a32; }
+        [dir="rtl"] .report-meta { text-align: left; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <img src="file://{{ logo_path }}" alt="Logo">
+            <div>
+                <div class="academy-name">TIGER FIT</div>
+                <div class="academy-slogan">Elite Athletic Development</div>
+            </div>
+        </div>
+        <div class="report-meta">
+            <h2>Athlete Performance Report</h2>
+            <div>{{ report_date }}</div>
+            <div style="font-size: 7pt; color: #888;">REF: TA-{{ athlete.id }}-{{ ref_date }}</div>
+        </div>
+    </div>
+
+    <div class="profile-bar">
+        <div class="name-title">
+            <div class="name">{{ athlete.name }}</div>
+            <div class="title-badge">SPRINT & TRACK • SPRINTER</div>
+        </div>
+        <div style="display: flex; gap: 20px;">
+            <div style="text-align: center;">
+                <div style="font-size: 14pt; font-weight: bold; color: #bc9a32;">{{ avg_rating }}</div>
+                <div style="font-size: 6pt; text-transform: uppercase;">Session Rating</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 14pt; font-weight: bold; color: #bc9a32;">{{ attendance_rate }}%</div>
+                <div style="font-size: 6pt; text-transform: uppercase;">Attendance</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-header">Athlete Information & Medical Profile</div>
+    <div style="display: flex; gap: 20px;">
+        <table style="flex: 1;">
+            <tr><td><strong>Full Name</strong></td><td>{{ athlete.name }}</td></tr>
+            <tr><td><strong>Age</strong></td><td>{{ athlete.age }} Years</td></tr>
+            <tr><td><strong>Gender</strong></td><td>{{ athlete.gender }}</td></tr>
+            <tr><td><strong>Height</strong></td><td>{{ athlete.height }} cm</td></tr>
+        </table>
+        <table style="flex: 1;">
+            <tr><td><strong>Weight</strong></td><td>{{ athlete.weight }} kg</td></tr>
+            <tr><td><strong>Body Type</strong></td><td>{{ athlete.body_type }}</td></tr>
+            <tr><td><strong>Medical Notes</strong></td><td>{{ athlete.injuries|default:"None" }}</td></tr>
+        </table>
+    </div>
+
+    <div class="section-header">Performance Insights — Targets & Strategy</div>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="value">{{ sessions_count }}</div>
+            <div class="label">Sessions This Week</div>
+        </div>
+        <div class="stat-card">
+            <div class="value">Q3</div>
+            <div class="label">Peak Target</div>
+        </div>
+        <div class="stat-card">
+            <div class="value">+12%</div>
+            <div class="label">Power Goal</div>
+        </div>
+        <div class="stat-card">
+            <div class="value">{{ avg_rating }}</div>
+            <div class="label">Avg Rating</div>
+        </div>
+    </div>
+
+    <div class="section-header">Detailed Assessment Table</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Assessment Category</th>
+                <th>Metric / Test</th>
+                <th>Baseline</th>
+                <th>Current</th>
+                <th>Target</th>
+                <th>Change</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in stats %}
+            <tr>
+                <td>{{ s.category }}</td>
+                <td>{{ s.metric|default:"-" }}</td>
+                <td>{{ s.previous }}</td>
+                <td style="font-weight: bold;">{{ s.current }}</td>
+                <td>{{ s.target }}</td>
+                <td style="color: green;">{{ s.delta|default:"-" }}</td>
+                <td><span style="background-color: #d4edda; color: #155724; padding: 2px 5px; font-size: 7pt; border-radius: 3px;">{{ s.status }}</span></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="7" style="text-align: center;">No assessment data for this week.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="section-header">Weekly Performance Summary</div>
+    <div class="summary-box">
+        {{ summary }}
+    </div>
+
+    <div class="footer">
+        <div>Tiger Academy • Elite Athletic Development • Confidential Document</div>
+        <div>Page 1 / 1</div>
+    </div>
+</body>
+</html>
