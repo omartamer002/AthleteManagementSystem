@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "env": {
+    "DATABASE_URL": "postgresql://postgres.bjarijdscgstpswuttni:57yVeqW2oVHGd90@aws-0-eu-west-1.pooler.supabase.com:6543/postgres",
+    "DB_NAME": "postgres",
+    "DB_USER": "postgres.bjarijdscgstpswuttni",
+    "DB_PASSWORD": "57yVeqW2oVHGd90",
+    "DB_HOST": "aws-0-eu-west-1.pooler.supabase.com",
+    "DB_PORT": "6543"
+  },
+  "builds": [
+    {
+      "src": "backend/ams_core/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb"
+      }
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/ams_core/wsgi.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
