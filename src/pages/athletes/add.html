@@ -1194,7 +1194,7 @@
 
       async function loadAthleteData(id) {
         try {
-          const res = await fetch(`http://localhost:8000/api/athletes/${id}/`);
+          const res = await fetch(`/api/athletes/${id}/`);
           if (!res.ok) throw new Error("Athlete not found");
           const a = await res.json();
 
@@ -1506,7 +1506,7 @@
         submitBtn.innerText = "Processing...";
 
         try {
-          const athleteUrl = editId ? `http://localhost:8000/api/athletes/${editId}/` : 'http://localhost:8000/api/athletes/';
+          const athleteUrl = editId ? `/api/athletes/${editId}/` : '/api/athletes/';
           const athleteMethod = editId ? 'PATCH' : 'POST';
 
           // 1. Post/Patch Athlete Info
@@ -1591,7 +1591,7 @@
           const inbodyFile = document.getElementById('inbody_file').files[0];
           if (inbodyFile) fitnessFormData.append('inbody_file', inbodyFile);
 
-          const fitnessUrl = editId && existingFitnessId ? `http://localhost:8000/api/fitness/${existingFitnessId}/` : 'http://localhost:8000/api/fitness/';
+          const fitnessUrl = editId && existingFitnessId ? `/api/fitness/${existingFitnessId}/` : '/api/fitness/';
           const fitnessMethod = editId && existingFitnessId ? 'PATCH' : 'POST';
 
           const resFitness = await fetch(fitnessUrl, {
@@ -1606,12 +1606,12 @@
           if (editId) {
              for (let rid of existingSportRecordIds) {
                  if (!existingSportType) break;
-                 await fetch(`http://localhost:8000/api/${existingSportType}/${rid}/`, { method: 'DELETE' });
+                 await fetch(`/api/${existingSportType}/${rid}/`, { method: 'DELETE' });
              }
           }
 
           const targetSport = document.querySelector('input[name="sportType"]:checked').value;
-          const sportApiUrl = `http://localhost:8000/api/${targetSport}/`;
+          const sportApiUrl = `/api/${targetSport}/`;
 
           if (targetSport === 'swimming') {
             const swimmingGoal = document.getElementById('swimming_goal').value;
@@ -1696,7 +1696,7 @@
                 medical_notes: document.getElementById('injury_notes').value,
                 cleared_to_train: false
              };
-             await fetch('http://localhost:8000/api/injuries/', {
+             await fetch('/api/injuries/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(injuryPayload)

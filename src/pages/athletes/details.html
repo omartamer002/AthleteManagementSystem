@@ -922,7 +922,7 @@
 
         async function fetchFullProfile() {
             try {
-                const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/`);
+                const res = await fetch(`/api/athletes/${athleteId}/`);
                 if (!res.ok) throw new Error('Athlete not found');
                 const athlete = await res.json();
                 
@@ -941,7 +941,7 @@
                 // Fetch assessment data for PIC and render both
                 let assessmentCategories = [];
                 try {
-                    const assessRes = await fetch(`http://localhost:8000/api/athletes/${athleteId}/assessments/`);
+                    const assessRes = await fetch(`/api/athletes/${athleteId}/assessments/`);
                     if (assessRes.ok) { const ad = await assessRes.json(); assessmentCategories = ad.categories || []; }
                 } catch(e) { console.warn('Assessment fetch failed for PIC:', e); }
                 
@@ -1191,7 +1191,7 @@
                     btn.onclick = async () => {
                         const injId = btn.dataset.id;
                         if (confirm('Mark this injury as resolved? This will set it to "Cleared" status.')) {
-                            const res = await fetch(`http://localhost:8000/api/injuries/${injId}/`, {
+                            const res = await fetch(`/api/injuries/${injId}/`, {
                                 method: 'PATCH',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({ is_active: false, cleared_to_train: true, rehab_phase: 'Cleared' })
@@ -1216,7 +1216,7 @@
                                 payload.is_active = false;
                                 payload.cleared_to_train = true;
                             }
-                            const res = await fetch(`http://localhost:8000/api/injuries/${injId}/`, {
+                            const res = await fetch(`/api/injuries/${injId}/`, {
                                 method: 'PATCH',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify(payload)
@@ -1966,12 +1966,12 @@
                 const payload = { athlete: athleteId, attended: isAttended, date: todayStr };
                 
                 if (todayRecordId) {
-                    res = await fetch(`http://localhost:8000/api/attendance/${todayRecordId}/`, {
+                    res = await fetch(`/api/attendance/${todayRecordId}/`, {
                         method: 'PATCH', headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
                 } else {
-                    res = await fetch(`http://localhost:8000/api/attendance/`, {
+                    res = await fetch(`/api/attendance/`, {
                         method: 'POST', headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
@@ -2011,7 +2011,7 @@
             }
 
             try {
-                const res = await fetch(`http://localhost:8000/api/attendance/${todayRecordId}/`, {
+                const res = await fetch(`/api/attendance/${todayRecordId}/`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
@@ -2036,7 +2036,7 @@
 
         // Report Generation Logic
         const downloadReport = (lang) => {
-            const url = `http://localhost:8000/api/athletes/${athleteId}/generate_report/?lang=${lang}`;
+            const url = `/api/athletes/${athleteId}/generate_report/?lang=${lang}`;
             window.open(url, '_blank');
         };
 
@@ -2113,7 +2113,7 @@
                 
                 document.getElementById('readinessMetricsDisplay').innerHTML = readinessDisplay;
                 
-                const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/generate_workout_plan/`, {
+                const res = await fetch(`/api/athletes/${athleteId}/generate_workout_plan/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ api_key: GEMINI_API_KEY })
@@ -2156,7 +2156,7 @@
             aiModal.show();
 
             try {
-                const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/generate_nutrition_strategy/`, {
+                const res = await fetch(`/api/athletes/${athleteId}/generate_nutrition_strategy/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ api_key: GEMINI_API_KEY })
@@ -2190,7 +2190,7 @@
             loading.classList.remove('d-none');
             
             try {
-                const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/generate_injury_prediction/`, {
+                const res = await fetch(`/api/athletes/${athleteId}/generate_injury_prediction/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ api_key: GEMINI_API_KEY })
@@ -2252,7 +2252,7 @@
             btn.innerText = "Saving...";
 
             try {
-                const res = await fetch('http://localhost:8000/api/injuries/', {
+                const res = await fetch('/api/injuries/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -2365,7 +2365,7 @@
                     notes: notes
                 };
 
-                const res = await fetch('http://localhost:8000/api/painlogs/', {
+                const res = await fetch('/api/painlogs/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)

@@ -575,7 +575,7 @@
       }
 
       try {
-        const res = await fetch('http://localhost:8000/api/athletes/');
+        const res = await fetch('/api/athletes/');
         if (!res.ok) throw new Error('Failed to fetch athletes');
         const rawAthletes = await res.json();
         const athletes = dedupeAthletes(rawAthletes);

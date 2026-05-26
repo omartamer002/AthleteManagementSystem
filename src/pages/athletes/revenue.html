@@ -164,7 +164,7 @@
         async function updateSubscription(athleteId, isSubscribed, toggleEl) {
           toggleEl.disabled = true;
           try {
-            const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/`, {
+            const res = await fetch(`/api/athletes/${athleteId}/`, {
               method: 'PATCH',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ is_subscribed: isSubscribed })
@@ -186,7 +186,7 @@
         async function updateSubscriptionDates(athleteId, payload, inputEl) {
           inputEl.disabled = true;
           try {
-            const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/`, {
+            const res = await fetch(`/api/athletes/${athleteId}/`, {
               method: 'PATCH',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload)
@@ -210,7 +210,7 @@
         async function updateSubscriptionFee(athleteId, fee, inputEl) {
           inputEl.disabled = true;
           try {
-            const res = await fetch(`http://localhost:8000/api/athletes/${athleteId}/`, {
+            const res = await fetch(`/api/athletes/${athleteId}/`, {
               method: 'PATCH',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ subscription_fee: fee })
@@ -295,7 +295,7 @@
 
         async function fetchAthletes() {
           try {
-            const response = await fetch('http://localhost:8000/api/athletes/');
+            const response = await fetch('/api/athletes/');
             if (!response.ok) throw new Error('Failed to fetch athletes');
             athletes = dedupeAthletes(await response.json());
             renderTable();
