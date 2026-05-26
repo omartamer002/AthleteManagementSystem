@@ -14,6 +14,7 @@
     "cleanTemp": "gulp cleanTemp",
     "cleanDist": "gulp cleanDist",
     "build": "gulp build",
+    "vercel-build": "gulp build",
     "start": "gulp",
     "serve": "gulp default"
   },

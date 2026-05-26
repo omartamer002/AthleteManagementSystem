@@ -5,4 +5,4 @@ whitenoise==6.4.0
 psycopg2-binary==2.9.12
 python-dotenv==1.2.2
 
-# Add additional production-only packages here as needed
+# Add any other production-only packages here
