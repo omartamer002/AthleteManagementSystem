@@ -3,3 +3,13 @@ dist/
 .temp/
 .DS_Store
 .vscode/
+
+# Python virtual environments and cache
+venv/
+__pycache__/
+*.pyc
+
+# Local database and credentials
+db.sqlite3
+.env
+backend/.env
