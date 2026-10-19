@@ -134,12 +134,39 @@ function cleanDist(callback) {
   callback();
 }
 
+const httpProxy = require('http-proxy');
+const apiProxy = httpProxy.createProxyServer({ target: 'http://127.0.0.1:8000', changeOrigin: true });
+apiProxy.on('error', (err, req, res) => {
+  console.error('API proxy error:', err.message);
+  if (!res.headersSent) {
+    res.writeHead(502, { 'Content-Type': 'text/plain' });
+  }
+  res.end('Proxy error: ' + err.message);
+});
+
 // Browser Sync Serve
 function browsersyncServe(callback) {
   browsersync.init({
     server: {
       baseDir: [paths.temp.basetemp, paths.src.basesrc, paths.base.base],
+      middleware: [
+        function (req, res, next) {
+          if (
+            req.url.startsWith('/api/') ||
+            req.url.startsWith('/media/') ||
+            req.url.startsWith('/admin/') ||
+            req.url === '/api' ||
+            req.url === '/admin'
+          ) {
+            return apiProxy.web(req, res);
+          }
+          next();
+        },
+      ],
     },
+    port: 3000,
+    open: false,
+    notify: false,
   });
   callback();
 }

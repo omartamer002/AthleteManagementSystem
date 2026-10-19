@@ -13,3 +13,5 @@ __pycache__/
 db.sqlite3
 .env
 backend/.env
+backend/staticfiles/
+backend/sqlite_dump.json

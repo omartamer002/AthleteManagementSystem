@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    @@include("../../partials/head/head-meta.html")
+    @@include("../../partials/head/head-meta.html", {"webRoot": "../.."})
     <title>Sign In | TIGER FIT</title>
-    @@include("../../partials/head/head-links.html")
+    @@include("../../partials/head/head-links.html", {"webRoot": "../.."})
   </head>
 
   <body>
@@ -15,7 +15,7 @@
             <div class="col-xl-4 offset-xl-4 col-md-12 col-12">
               <div class="text-center">
                 <a href="#!" class="fs-2 fw-bold d-flex align-items-center gap-2 justify-content-center mb-6">
-                  <img src="/assets/images/brand/logo/tigerfit-logo.png" alt="TIGER FIT" style="width: 40px; height: 40px;" />
+                  <img src="@@webRoot/assets/images/brand/logo/tigerfit-logo.png" alt="TIGER FIT" style="width: 40px; height: 40px;" />
                   <span style="color: white;">TIGER FIT</span>
                 </a>
                 <h1 class="mb-1">Welcome Back</h1>
@@ -100,19 +100,38 @@
       </div>
     </main>
 
-    @@include("../../partials/scripts.html")
+    @@include("../../partials/scripts.html", {"webRoot": "../.."})
     <script src="@@webRoot/assets/js/vendors/password.js"></script>
     <script>
       const API_BASE = '/api/auth';
 
       async function postJson(url, payload) {
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(data.detail || data.message || 'Request failed');
+        let res;
+        try {
+          res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } catch (netErr) {
+          throw new Error('Network error. Please check your internet connection or backend server status.');
+        }
+
+        const isJson = res.headers.get('content-type')?.includes('application/json');
+        let data = {};
+        if (isJson) {
+          data = await res.json().catch(() => ({}));
+        }
+
+        if (!res.ok) {
+          if (data.detail || data.message) {
+            throw new Error(data.detail || data.message);
+          }
+          if (res.status === 500) {
+            throw new Error('Server Error (500). This usually happens when the backend database is not configured correctly on Vercel, migrations haven\'t been run, or a read-only SQLite database is being used in a serverless environment. Please ensure DATABASE_URL is set in Vercel environment variables and migrations are run.');
+          }
+          throw new Error(data.detail || data.message || `Request failed with status ${res.status}`);
+        }
         return data;
       }
 
