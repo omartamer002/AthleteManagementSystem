@@ -9,9 +9,11 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+import os
 import json
 from urllib.request import urlopen, Request
 from urllib.error import URLError
+
 
 try:
     from google.oauth2 import id_token
@@ -60,8 +62,16 @@ class SignUpView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        user.set_password(password)
-        user.save()
+        try:
+            user.set_password(password)
+            user.save()
+        except Exception as exc:
+            import traceback
+            traceback.print_exc()
+            return Response(
+                {"detail": f"Database error during user registration: {str(exc)}", "error_type": type(exc).__name__},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
         return Response(
             {
@@ -70,6 +80,33 @@ class SignUpView(APIView):
             },
             status=status.HTTP_201_CREATED,
         )
+
+
+class HealthCheckView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        from django.db import connection
+        db_env_set = bool(os.environ.get("DATABASE_URL"))
+        db_vendor = connection.vendor
+        db_connected = False
+        db_error = None
+        user_count = 0
+        try:
+            user_count = User.objects.count()
+            db_connected = True
+        except Exception as e:
+            db_error = str(e)
+
+        return Response({
+            "status": "ok" if db_connected else "database_error",
+            "database_url_env_present": db_env_set,
+            "database_vendor": db_vendor,
+            "database_connected": db_connected,
+            "database_error": db_error,
+            "user_count": user_count,
+        })
+
 
 
 class SignInView(APIView):

@@ -7,7 +7,7 @@ from .views import (
 )
 from .auth_views import (
     SignUpView, SignInView, ForgotPasswordView, ResetPasswordView,
-    SocialSignUpView, SocialSignInView, LogoutView
+    SocialSignUpView, SocialSignInView, LogoutView, HealthCheckView
 )
 
 router = DefaultRouter()
@@ -22,7 +22,9 @@ router.register(r'attendance', AttendanceRecordViewSet)
 router.register(r'injuries', InjuryRecordViewSet)
 
 urlpatterns = [
+    path('health/', HealthCheckView.as_view(), name='health-check'),
     path('auth/signup/', SignUpView.as_view(), name='auth-signup'),
+
     path('auth/signin/', SignInView.as_view(), name='auth-signin'),
     path('auth/logout/', LogoutView.as_view(), name='auth-logout'),
     path('auth/forgot-password/', ForgotPasswordView.as_view(), name='auth-forgot-password'),
