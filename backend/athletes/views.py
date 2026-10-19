@@ -6,11 +6,16 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from datetime import datetime
 import os
-import markdown
+try:
+    import markdown
+except ImportError:
+    markdown = None
+
 try:
     from google import genai
 except ImportError:
     genai = None
+
 from .models import AthleteInfo, Owner, Fitness, Swimming, Basketball, Football, CrossFit, AttendanceRecord, InjuryRecord, PainLog
 from .report_service import ReportGeneratorService
 from .services import AssessmentInsightsService

@@ -90,10 +90,21 @@ WSGI_APPLICATION = 'ams_core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-# Use DATABASE_URL if provided, otherwise fall back to local sqlite
-DATABASES = {
-    'default': dj_database_url.config(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
-}
+_db_env = os.environ.get('DATABASE_URL', '')
+if _db_env:
+    import re
+    # Clean up channel_binding if present (avoids libpq compatibility errors in serverless)
+    _db_cleaned = re.sub(r'[?&]channel_binding=[^&]+', '', _db_env)
+    if '?' not in _db_cleaned and '&' in _db_cleaned:
+        _db_cleaned = _db_cleaned.replace('&', '?', 1)
+    DATABASES = {
+        'default': dj_database_url.parse(_db_cleaned, conn_max_age=600)
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
+    }
+
 
 
 # Password validation

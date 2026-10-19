@@ -25,15 +25,25 @@ import logging
 from datetime import datetime, timedelta
 from typing import Any
 
-import arabic_reshaper
-from bidi.algorithm import get_display
+try:
+    import arabic_reshaper
+    from bidi.algorithm import get_display
+    from reportlab.pdfgen import canvas as rl_canvas
+    from reportlab.lib.pagesizes import A4
+    from reportlab.lib import colors
+    from reportlab.lib.utils import ImageReader
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
+except ImportError:
+    arabic_reshaper = None
+    get_display = None
+    rl_canvas = None
+    A4 = None
+    colors = None
+    ImageReader = None
+    pdfmetrics = None
+    TTFont = None
 
-from reportlab.pdfgen import canvas as rl_canvas
-from reportlab.lib.pagesizes import A4
-from reportlab.lib import colors
-from reportlab.lib.utils import ImageReader
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
 
 # ── Django imports (unchanged from original) ────────────────────────────────
 try:

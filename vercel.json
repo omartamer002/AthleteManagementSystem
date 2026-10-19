@@ -16,7 +16,8 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist",
+        "installCommand": "npm install --include=dev"
       }
     }
   ],
@@ -28,6 +29,13 @@
     {
       "src": "/admin/(.*)",
       "dest": "backend/ams_core/wsgi.py"
+    },
+    {
+      "src": "/media/(.*)",
+      "dest": "backend/ams_core/wsgi.py"
+    },
+    {
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",

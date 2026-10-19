@@ -1,5 +1,10 @@
-import numpy as np
-from sklearn.linear_model import LinearRegression
+try:
+    import numpy as np
+    from sklearn.linear_model import LinearRegression
+except ImportError:
+    np = None
+    LinearRegression = None
+
 from datetime import timedelta
 import logging
 
@@ -8,11 +13,14 @@ logger = logging.getLogger(__name__)
 class PredictorService:
     @staticmethod
     def predict_business_revenue(owner_instance):
+        if np is None or LinearRegression is None:
+            return None
         from .models import Owner
         
         hist_data = Owner.objects.all().order_by('created_at')
         if hist_data.count() < 2:
             return None
+
         features = []
         targets = []
         for obj in hist_data:
@@ -63,11 +71,16 @@ class PredictorService:
             current_secs = swimming_instance.current_record.total_seconds()
             improvement_factor = 0.02 * (attendance_perc / 100.0)
             return timedelta(seconds=max(1.0, current_secs * (1 - improvement_factor)))
+        if np is None or LinearRegression is None:
+            current_secs = swimming_instance.current_record.total_seconds()
+            improvement_factor = 0.02 * (attendance_perc / 100.0)
+            return timedelta(seconds=max(1.0, current_secs * (1 - improvement_factor)))
         X = np.array(features)
         y = np.array(targets)
         try:
             model = LinearRegression()
             model.fit(X, y)
+
             current_features = np.array([[attendance_perc, swimming_instance.current_record.total_seconds()]])
             pred_seconds = max(1.0, model.predict(current_features)[0])
             return timedelta(seconds=pred_seconds)
