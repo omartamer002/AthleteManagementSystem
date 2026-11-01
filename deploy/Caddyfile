@@ -1,0 +1,19 @@
+{$DOMAIN} {
+    encode zstd gzip
+
+    handle /api/* {
+        reverse_proxy backend:8000
+    }
+
+    handle /admin/* {
+        reverse_proxy backend:8000
+    }
+
+    handle /media/* {
+        root * /srv
+        file_server
+    }
+
+    root * /srv/frontend
+    file_server
+}

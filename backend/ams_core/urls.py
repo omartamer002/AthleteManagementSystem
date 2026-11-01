@@ -26,3 +26,11 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
 
+# In the single-service Docker deployment, keep the frontend and API on the
+# same origin. This preserves the frontend's existing relative /api requests.
+if settings.FRONTEND_DIST.exists():
+    urlpatterns += [
+        path('', serve, {'path': 'index.html', 'document_root': settings.FRONTEND_DIST}),
+        re_path(r'^(?P<path>.+)$', serve, {'document_root': settings.FRONTEND_DIST}),
+    ]
+

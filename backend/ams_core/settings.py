@@ -15,10 +15,13 @@ import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Local settings are deliberately kept out of version control. A deployment
+# supplies DATABASE_URL through its environment instead.
+load_dotenv(BASE_DIR / '.env.local')
+load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
@@ -158,6 +161,11 @@ WHITENOISE_USE_FINDERS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# The Docker deployment bundles the compiled frontend here so Django can serve
+# it at the same origin as the API. Vercel continues to serve its own static
+# build before requests reach Django.
+FRONTEND_DIST = BASE_DIR.parent / 'dist'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
